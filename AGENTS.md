@@ -64,11 +64,7 @@ src/
 - **Set `SITE_URL` in the build environment** before a production deploy — `astro.config.mjs` falls
   back to the `https://example.com` placeholder, which feeds the sitemap and the canonical/OG URLs in
   `BaseHead.astro`. A production build (`DEPLOY_ENV=production`) throws on the placeholder.
-- **Hosting is Cloudflare Workers** (`@astrojs/cloudflare` + `wrangler.jsonc`). The wrangler `main`
-  must stay `@astrojs/cloudflare/entrypoints/server` — never a `dist/` path (it breaks `astro
-check`). Server secrets (the Resend keys) go through the `astro:env` schema in `astro.config.mjs`,
-  NOT `import.meta.env` — Workers runtime secrets never reach `import.meta.env`. Set them with
-  `pnpm wrangler secret put <NAME>`; local dev reads `.env` as usual.
+- **Hosting is GitHub Pages** (static site built to `dist/`). All pages prerender to static HTML.
 - **`vite.build.assetsInlineLimit: 0`** is intentional — inlined short scripts break under
   `<ClientRouter />` view transitions. Leave it at 0.
 - **Theme is set pre-paint** by an inline script in `BaseHead` (follows the device

@@ -14,16 +14,17 @@ export async function GET({ site }: APIContext): Promise<Response> {
   }
 
   const posts = await getSortedPosts();
+  const siteBase = new URL(import.meta.env.BASE_URL, site);
   const xml = renderRssFeed(
     {
       title: siteData.name,
-      link: new URL("/blog/", site).href,
+      link: new URL("blog/", siteBase).href,
       description: siteData.description,
       language: siteLocale,
     },
     posts.map((post) => ({
       title: post.data.title,
-      url: new URL(`/blog/${post.id}/`, site).href,
+      url: new URL(`blog/${post.id}/`, siteBase).href,
       description: post.data.description,
       pubDate: post.data.pubDate,
     })),

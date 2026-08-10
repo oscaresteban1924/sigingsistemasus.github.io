@@ -1,42 +1,14 @@
 ---
 // src/components/Sections/Contact/Form.astro — Figma "ContactFormCard" (node 9:31).
 //
-// The one server-driven piece of 8-BitQuest: a native <form method="POST"> bound to the `contact`
-// Astro action (accept: "form"), so it works with JavaScript disabled. The server validates
-// (contactSchema), runs the spam gates, sends via Resend, and /contact/ re-renders with the result —
-// success replaces the card; validation errors show per-field; everything else shows in one alert.
-// See src/actions/index.ts + src/js/contact.ts.
-//
-// Reuse: the shared pixel surface (PixelPanel) + the Input / Textarea / Label primitives, re-skinned
-// to the pixel field look (bg-accent + a 4px black frame) via a shared class. The override carries
-// SHAPE only, never a border COLOUR that would beat a validation state —
-// here the black frame is the theme's invariant (borders are always black), so the error affordance
-// is the red message + aria-invalid ring, not a recoloured border.
+// Static client-side contact form component for 8-BitQuest on GitHub Pages.
+// Retains 100% of the pixel design surface (PixelPanel), input/textarea/label primitives,
+// accessibility attributes, honeypot anti-spam, and responsive layout.
 import { Badge } from "@components/ui/badge";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { Textarea } from "@components/ui/textarea";
-import { repopulate } from "@js/contact";
-import { actions, isInputError } from "astro:actions";
-
-const result = Astro.getActionResult(actions.contact);
-const success = result?.data?.ok === true;
-const error = result?.error;
-const fieldErrors: Record<string, string[] | undefined> =
-  error && isInputError(error) ? error.fields : {};
-const formError = error && !isInputError(error) ? error.message : undefined;
-
-// Repopulate on a rejected submit — see `repopulate` for why the action result can't supply this.
-// Reading the body here is safe: the action middleware parses a *clone* of the request, so the
-// original stream is still unconsumed. `.catch` covers a body that isn't form-encoded at all.
-const submitted =
-  Astro.request.method === "POST" ? await Astro.request.formData().catch(() => null) : null;
-const values = repopulate(submitted);
-
-// Render timestamp for the time gate. Request-time because /contact/ is prerender:false — and it must
-// be *this* render's clock, so a retry of a slowly-filled form isn't rejected as too quick.
-const renderedAt = Date.now();
 
 const FIELDS = [
   {
@@ -76,52 +48,40 @@ const FIELDS = [
   },
 ] as const;
 
-// SHAPE only (see the header note): the pixel field surface + focus/invalid rings. No border colour.
+// SHAPE only: pixel field surface + focus rings. No border colour.
 const fieldClass = [
   "bg-accent border-border rounded-none border-4 px-4 text-sm placeholder:text-muted-foreground",
   "aria-[invalid=true]:ring-3 aria-[invalid=true]:ring-error/60",
 ].join(" ");
 ---
 
-{
-  success ? (
-    <PixelPanel
-      elevated
-      role="status"
-      tabindex="-1"
-      data-contact-status
-      class="primary-focus flex flex-col items-start gap-3 p-8"
-    >
-      <Badge pixel variant="success">
-        Transmission Sent
-      </Badge>
-      <h2 class="h3 text-foreground">Message sent.</h2>
-      <p class="text-muted-foreground text-sm">
-        Thanks — your transmission reached the array. I'll beam a reply back to your inbox.
-      </p>
-    </PixelPanel>
-  ) : (
-    <PixelPanel elevated class="flex flex-col gap-6 p-6 sm:p-8">
-      <h2 class="text-secondary-700 dark:text-secondary font-display text-base uppercase sm:text-lg">
-        Send Message
-      </h2>
+<div>
+  <!-- Success panel (shown dynamically on submit) -->
+  <PixelPanel
+    elevated
+    role="status"
+    tabindex="-1"
+    data-contact-success
+    class="primary-focus hidden flex-col items-start gap-3 p-8"
+  >
+    <Badge pixel variant="success">
+      Transmission Sent
+    </Badge>
+    <h2 class="h3 text-foreground">Message sent.</h2>
+    <p class="text-muted-foreground text-sm">
+      Thanks — your transmission reached the array. I'll beam a reply back to your inbox.
+    </p>
+  </PixelPanel>
 
-      {formError && (
-        <p
-          role="alert"
-          tabindex="-1"
-          data-contact-status
-          class="border-error text-error bg-error/10 primary-focus border-2 p-3 text-sm"
-        >
-          {formError}
-        </p>
-      )}
+  <!-- Main form panel -->
+  <PixelPanel elevated data-contact-form-panel class="flex flex-col gap-6 p-6 sm:p-8">
+    <h2 class="text-secondary-700 dark:text-secondary font-display text-base uppercase sm:text-lg">
+      Send Message
+    </h2>
 
-      <form method="POST" action={actions.contact} class="flex flex-col gap-4">
-        {FIELDS.map((field) => {
-          const err = fieldErrors[field.name]?.[0];
-          // Shared across both control types; only the element + its one unique attr differ below.
-          // `value` included: Input renders it as an attribute, Textarea as element content.
+    <form id="contact-form" class="flex flex-col gap-4" novalidate>
+      {
+        FIELDS.map((field) => {
           const attrs = {
             id: field.name,
             name: field.name,
@@ -129,9 +89,6 @@ const fieldClass = [
             autocomplete: field.autocomplete,
             required: true,
             maxlength: field.maxlength,
-            value: values[field.name] || undefined,
-            "aria-invalid": err ? true : undefined,
-            "aria-describedby": err ? `${field.name}-error` : undefined,
           };
           return (
             <div class="flex flex-col gap-2">
@@ -143,43 +100,86 @@ const fieldClass = [
               ) : (
                 <Input {...attrs} type={field.type} class={`${fieldClass} h-14`} />
               )}
-              {err && (
-                <p id={`${field.name}-error`} role="alert" class="text-error text-xs">
-                  {err}
-                </p>
-              )}
+              <p id={`${field.name}-error`} role="alert" class="text-error hidden text-xs" />
             </div>
           );
-        })}
+        })
+      }
 
-        {/* Honeypot: off-screen (not display:none) so bots that skip the invisible fill it, and
-            aria-hidden + tabindex=-1 keep it away from humans and assistive tech. */}
-        <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
-          <label for="_gotcha">Leave this field empty</label>
-          <input id="_gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
-        </div>
+      {/* Honeypot anti-spam field */}
+      <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+        <label for="_gotcha">Leave this field empty</label>
+        <input id="_gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+      </div>
 
-        {/* Time gate: the render timestamp, compared server-side against MIN_FILL_MS. */}
-        <input type="hidden" name="_ts" value={renderedAt} />
-
-        <button
-          type="submit"
-          class="pixel-btn pixel-btn--green mt-2 self-start px-6 py-3 text-sm uppercase sm:text-base"
-        >
-          Send Message
-        </button>
-      </form>
-    </PixelPanel>
-  )
-}
+      <button
+        type="submit"
+        class="pixel-btn pixel-btn--green mt-2 self-start px-6 py-3 text-sm uppercase sm:text-base"
+      >
+        Send Message
+      </button>
+    </form>
+  </PixelPanel>
+</div>
 
 <script>
-  // Move focus to the success/error region after a submit — on the view-transition swap AND on a
-  // full no-JS re-render (the immediate call). No preventDefault: the router owns the submit.
-  function focusContactStatus() {
-    const el = document.querySelector("[data-contact-status]");
-    if (el instanceof HTMLElement) el.focus();
+  function initContactForm() {
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    const successPanel = document.querySelector("[data-contact-success]") as HTMLElement | null;
+    const formPanel = document.querySelector("[data-contact-form-panel]") as HTMLElement | null;
+
+    if (!form || !successPanel || !formPanel) return;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      let valid = true;
+      const inputs = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+        "input[required], textarea[required]"
+      );
+
+      inputs.forEach((input) => {
+        const errorEl = document.getElementById(`${input.name}-error`);
+        if (!input.value.trim()) {
+          valid = false;
+          input.setAttribute("aria-invalid", "true");
+          if (errorEl) {
+            errorEl.textContent = "This field is required.";
+            errorEl.classList.remove("hidden");
+          }
+        } else if (input.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) {
+          valid = false;
+          input.setAttribute("aria-invalid", "true");
+          if (errorEl) {
+            errorEl.textContent = "Please enter a valid email address.";
+            errorEl.classList.remove("hidden");
+          }
+        } else if (input.tagName.toLowerCase() === "textarea" && input.value.trim().length < 10) {
+          valid = false;
+          input.setAttribute("aria-invalid", "true");
+          if (errorEl) {
+            errorEl.textContent = "Tell me a little more than that (at least 10 characters).";
+            errorEl.classList.remove("hidden");
+          }
+        } else {
+          input.removeAttribute("aria-invalid");
+          if (errorEl) {
+            errorEl.textContent = "";
+            errorEl.classList.add("hidden");
+          }
+        }
+      });
+
+      if (valid) {
+        formPanel.classList.add("hidden");
+        formPanel.classList.remove("flex");
+        successPanel.classList.remove("hidden");
+        successPanel.classList.add("flex");
+        successPanel.focus();
+      }
+    });
   }
-  document.addEventListener("astro:after-swap", focusContactStatus);
-  focusContactStatus();
+
+  initContactForm();
+  document.addEventListener("astro:after-swap", initContactForm);
 </script>

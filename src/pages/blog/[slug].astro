@@ -48,15 +48,19 @@ const related = getRelatedPosts(posts, entry.id, 2);
 
 // SEO: BlogPosting + a BreadcrumbList matching the visible breadcrumb (never emit one
 // without the other). Absolute URLs resolve against `site`.
-const canonical = new URL(`/blog/${entry.id}/`, Astro.site).href;
+const canonical = new URL(`blog/${entry.id}/`, Astro.site).href;
 // author's public URL (the authors collection's authorLink), resolved absolute; publisher points at
 // the same Organization @id BaseHead emits site-wide, so the Article joins that graph by reference.
-const authorUrl = authorEntry ? new URL(authorEntry.data.authorLink, Astro.site).href : undefined;
+const authorUrl = authorEntry
+  ? authorEntry.data.authorLink.startsWith("http")
+    ? authorEntry.data.authorLink
+    : new URL(authorEntry.data.authorLink.replace(/^\//, ""), Astro.site).href
+  : undefined;
 const articleSchema = getArticleSchema({
   headline: data.title,
   description: data.description,
   url: canonical,
-  image: new URL(data.heroImage.src, Astro.site).href,
+  image: new URL(data.heroImage.src, Astro.site ? Astro.site.origin : undefined).href,
   datePublished: dateISO,
   dateModified: data.updatedDate?.toISOString(),
   authorName: author.name,
@@ -65,8 +69,8 @@ const articleSchema = getArticleSchema({
   publisherId: organizationId(canonical),
 });
 const breadcrumbSchema = getBreadcrumbSchema([
-  { name: "Home", url: new URL("/", Astro.site).href },
-  { name: "Blog", url: new URL("/blog/", Astro.site).href },
+  { name: "Home", url: Astro.site?.href ?? "" },
+  { name: "Blog", url: new URL("blog/", Astro.site).href },
   { name: data.title, url: canonical },
 ]);
 ---

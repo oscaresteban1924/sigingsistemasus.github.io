@@ -12,7 +12,7 @@ import type { APIRoute } from "astro";
  */
 export const GET: APIRoute = ({ site }) => {
   const { name, description } = siteData;
-  const base = site ?? new URL("https://example.com/");
+  const base = new URL(import.meta.env.BASE_URL, site ?? "https://example.com/");
 
   const body = [
     `# ${name}`,
