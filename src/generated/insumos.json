@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-08-11T00:32:55.504Z",
+  "totalArchivos": 4,
+  "totalBytes": 183476282,
+  "totalTamanoFormatted": "175 MB",
+  "archivos": [
+    {
+      "id": "semana-1-pptx-1",
+      "nombre": "Presentación Oficial de Clase — Semana 1",
+      "filename": "Semana 1.pptx",
+      "relativePath": "Semana 1.pptx",
+      "extension": ".pptx",
+      "extensionUpper": "PPTX",
+      "tipo": "PPTX",
+      "categoria": "Presentación",
+      "tamanoBytes": 45335970,
+      "tamano": "43 MB",
+      "semana": 1,
+      "slugSemana": "semana-01",
+      "url": "/insumos/Semana 1.pptx",
+      "mtime": "2026-08-09T16:03:48.688Z"
+    },
+    {
+      "id": "semana-2-pptx-2",
+      "nombre": "Presentación Oficial de Clase — Semana 2",
+      "filename": "Semana 2.pptx",
+      "relativePath": "Semana 2.pptx",
+      "extension": ".pptx",
+      "extensionUpper": "PPTX",
+      "tipo": "PPTX",
+      "categoria": "Presentación",
+      "tamanoBytes": 44230412,
+      "tamano": "42 MB",
+      "semana": 2,
+      "slugSemana": "semana-02",
+      "url": "/insumos/Semana 2.pptx",
+      "mtime": "2026-08-09T16:06:59.061Z"
+    },
+    {
+      "id": "semana-3-pptx-3",
+      "nombre": "Presentación Oficial de Clase — Semana 3",
+      "filename": "Semana 3.pptx",
+      "relativePath": "Semana 3.pptx",
+      "extension": ".pptx",
+      "extensionUpper": "PPTX",
+      "tipo": "PPTX",
+      "categoria": "Presentación",
+      "tamanoBytes": 46478219,
+      "tamano": "44 MB",
+      "semana": 3,
+      "slugSemana": "semana-03",
+      "url": "/insumos/Semana 3.pptx",
+      "mtime": "2026-08-09T16:10:11.816Z"
+    },
+    {
+      "id": "sistemas-de-informacion-geografica-pdf-0",
+      "nombre": "Texto Guía General — Sistemas de Información Geográfica",
+      "filename": "Sistemas.de.Informacion.Geografica.pdf",
+      "relativePath": "Sistemas.de.Informacion.Geografica.pdf",
+      "extension": ".pdf",
+      "extensionUpper": "PDF",
+      "tipo": "PDF",
+      "categoria": "Lectura",
+      "tamanoBytes": 47431681,
+      "tamano": "45 MB",
+      "semana": 0,
+      "slugSemana": "transversal",
+      "url": "/insumos/Sistemas.de.Informacion.Geografica.pdf",
+      "mtime": "2026-08-09T13:54:38.655Z"
+    }
+  ]
+}

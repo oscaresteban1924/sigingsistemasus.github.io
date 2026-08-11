@@ -1,0 +1,121 @@
+---
+// src/components/Sections/Contact/InsumosInventory.astro — Inventario completo de insumos de clase.
+import { PixelIcon } from "@components/svg/pixel-icons";
+import { Badge } from "@components/ui/badge";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import { type InsumoItem, getInsumosManifest } from "@js/insumosData";
+
+const manifest = getInsumosManifest();
+const { totalArchivos, totalTamanoFormatted, archivos } = manifest;
+
+// Group items by week / transversal
+const porSemana = new Map<number, InsumoItem[]>();
+archivos.forEach((item) => {
+  const key = item.semana > 0 ? item.semana : 0;
+  if (!porSemana.has(key)) {
+    porSemana.set(key, []);
+  }
+  porSemana.get(key)!.push(item);
+});
+
+// Sort keys: 1, 2, 3... then 0 (Transversal)
+const semanaKeys = Array.from(porSemana.keys()).sort((a, b) => {
+  if (a === 0) return 1;
+  if (b === 0) return -1;
+  return a - b;
+});
+---
+
+<PixelPanel
+  as="section"
+  aria-labelledby="insumos-inventory-heading"
+  class="flex flex-col gap-6 p-6 sm:p-8"
+>
+  <div class="border-border flex flex-wrap items-center justify-between gap-3 border-b-4 pb-4">
+    <div class="flex items-center gap-3">
+      <PixelIcon name="package" class="text-info size-6" />
+      <h2 id="insumos-inventory-heading" class="h2 text-foreground uppercase">
+        Inventario de Insumos SIG
+      </h2>
+    </div>
+    <div class="flex items-center gap-2">
+      <Badge pixel variant="success">{totalArchivos} Archivos</Badge>
+      <Badge pixel variant="secondary">{totalTamanoFormatted}</Badge>
+    </div>
+  </div>
+
+  <p class="text-muted-foreground text-sm leading-relaxed">
+    Este inventario se compila automáticamente en <strong>build-time</strong> escaneando los insumos docentes
+    del curso. Todos los archivos están alojados de forma estática en GitHub Pages.
+  </p>
+
+  <div class="flex flex-col gap-8">
+    {
+      semanaKeys.map((semNum) => {
+        const items = porSemana.get(semNum) || [];
+        const tituloGrupo =
+          semNum > 0
+            ? `Semana ${String(semNum).padStart(2, "0")}`
+            : "Recursos Transversales del Curso";
+
+        return (
+          <div class="flex flex-col gap-4">
+            <div class="border-border flex items-center justify-between border-b-2 pb-2">
+              <h3 class="font-display text-info text-xs uppercase">{tituloGrupo}</h3>
+              <span class="text-muted-foreground text-[10px] font-bold">
+                {items.length} Insumo(s)
+              </span>
+            </div>
+
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {items.map((item) => (
+                <div class="bg-accent border-border flex flex-col justify-between gap-3 border-2 p-4">
+                  <div class="flex flex-col gap-2">
+                    <div class="flex items-center justify-between gap-2">
+                      <Badge pixel variant="primary">
+                        {item.tipo}
+                      </Badge>
+                      <span class="text-muted-foreground text-[10px] font-bold">{item.tamano}</span>
+                    </div>
+
+                    <h4 class="font-display text-foreground line-clamp-2 text-xs uppercase">
+                      {item.nombre}
+                    </h4>
+
+                    <p class="text-muted-foreground text-[10px]">
+                      Archivo: <code class="text-foreground">{item.filename}</code>
+                    </p>
+
+                    <div class="flex items-center gap-2 pt-1">
+                      <span class="bg-background text-foreground border-border border px-2 py-0.5 text-[9px] font-bold uppercase">
+                        {item.categoria}
+                      </span>
+                      {item.semana > 0 && (
+                        <a
+                          href={`/semanas/${item.slugSemana}/`}
+                          class="text-info hover:text-success text-[10px] font-bold uppercase underline"
+                        >
+                          Ir a Semana ➔
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <a
+                    href={item.url}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="pixel-btn pixel-btn--blue mt-2 justify-center px-3 py-2 text-center text-xs uppercase"
+                  >
+                    Descargar {item.extensionUpper} ⬇
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</PixelPanel>

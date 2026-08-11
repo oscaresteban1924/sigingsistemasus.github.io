@@ -10,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "@components/ui/breadcrumb";
 import { PixelPanel } from "@components/ui/pixel-panel";
+import { getInsumosBySemana } from "@js/insumosData";
 import { type AdjacentSemanaLink, estadoBadgeMeta } from "@js/semanasData";
 import type { CollectionEntry } from "astro:content";
 
@@ -42,6 +43,29 @@ const {
 
 const numFormatted = String(numero).padStart(2, "0");
 const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
+
+// Combine frontmatter materiales with build-time manifest insumos for this week
+const manifestInsumos = getInsumosBySemana(numero);
+const allMaterialesMap = new Map();
+
+(materiales || []).forEach((m) => {
+  allMaterialesMap.set(m.url.toLowerCase(), m);
+});
+
+manifestInsumos.forEach((insumo) => {
+  const normUrl = insumo.url.toLowerCase();
+  if (!allMaterialesMap.has(normUrl)) {
+    allMaterialesMap.set(normUrl, {
+      nombre: insumo.nombre,
+      tipo: insumo.tipo,
+      url: insumo.url,
+      descripcion: `Insumo detectado automáticamente (${insumo.filename}).`,
+      tamano: insumo.tamano,
+    });
+  }
+});
+
+const allMateriales = Array.from(allMaterialesMap.values());
 ---
 
 <div class="flex flex-col gap-8">
@@ -171,14 +195,14 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
 
     <!-- Material de Clase -->
     {
-      materiales && materiales.length > 0 && (
+      allMateriales && allMateriales.length > 0 && (
         <PixelPanel class="flex flex-col gap-4 p-6">
           <div class="flex items-center gap-3">
             <PixelIcon name="package" class="text-info size-5" />
             <h2 class="h3 text-foreground">Material de Clase</h2>
           </div>
           <div class="flex flex-col gap-4">
-            {materiales.map((mat) => (
+            {allMateriales.map((mat) => (
               <div class="bg-accent border-border flex flex-col justify-between gap-3 border-2 p-4">
                 <div class="flex flex-col gap-2">
                   <div class="flex items-center justify-between gap-2">

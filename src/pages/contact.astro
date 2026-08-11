@@ -6,16 +6,19 @@ import Faq from "@components/Sections/Contact/Faq.astro";
 import Form from "@components/Sections/Contact/Form.astro";
 import Hero from "@components/Sections/Contact/Hero.astro";
 import InfoCards from "@components/Sections/Contact/InfoCards.astro";
+import InsumosInventory from "@components/Sections/Contact/InsumosInventory.astro";
 import siteData from "@config/siteData.json";
 import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
   title={`Recursos — ${siteData.name}`}
-  description="Recursos, canales de atención docente, preguntas frecuentes y formulario de consultas académicas para el curso Sistemas de Información Geográfica."
+  description="Inventario de insumos del curso, canales de atención docente, preguntas frecuentes y formulario de consultas académicas para Sistemas de Información Geográfica."
 >
   <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
     <Hero />
+
+    <InsumosInventory />
 
     {/* Figma FormAndInfoContainer: form grows, info column is a fixed 340px — stacks below lg. */}
     <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">

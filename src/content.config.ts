@@ -165,9 +165,85 @@ const semanasCollection = defineCollection({
     }),
 });
 
+const laboratoriosCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/laboratorios" }),
+  schema: ({ image }) =>
+    z.object({
+      numero: z.number(),
+      titulo: z.string(),
+      subtitulo: z.string(),
+      descripcion: z.string(),
+      modulo: z.string(),
+      dificultad: z.enum(["Principiante", "Intermedio", "Avanzado"]),
+      estado: z.enum(["Disponible", "Próximamente", "En construcción"]),
+      semanaAsociada: z.number(),
+      duracionEstimada: z.string().optional(),
+      problema: z.string(),
+      fundamentoTeorico: z.string(),
+      objetivo: z.string(),
+      datosEntrada: z
+        .array(
+          z.object({
+            nombre: z.string(),
+            formato: z.string(),
+            descripcion: z.string(),
+            url: z.string().optional(),
+          }),
+        )
+        .default([]),
+      pasos: z
+        .array(
+          z.object({
+            paso: z.number(),
+            fase: z.enum([
+              "CONCEPTO",
+              "REPRESENTACIÓN",
+              "ALGORITMO",
+              "CÓDIGO",
+              "RESULTADO",
+              "INTERPRETACIÓN",
+            ]),
+            titulo: z.string(),
+            descripcion: z.string(),
+            codigo: z.string().optional(),
+            lenguaje: z.string().optional(),
+            resultadoEsperado: z.string().optional(),
+          }),
+        )
+        .default([]),
+      preguntasAnalisis: z
+        .array(
+          z.object({
+            pregunta: z.string(),
+            orientacion: z.string(),
+          }),
+        )
+        .default([]),
+      reto: z
+        .object({
+          titulo: z.string(),
+          descripcion: z.string(),
+          pistas: z.array(z.string()).default([]),
+        })
+        .optional(),
+      erroresComunes: z
+        .array(
+          z.object({
+            error: z.string(),
+            solucion: z.string(),
+          }),
+        )
+        .default([]),
+      heroImage: image().optional(),
+      heroImageAlt: z.string().optional(),
+      draft: z.boolean().optional(),
+    }),
+});
+
 export const collections = {
   blog: blogCollection,
   authors: authorsCollection,
   projects: projectsCollection,
   semanas: semanasCollection,
+  laboratorios: laboratoriosCollection,
 };

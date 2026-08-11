@@ -8,15 +8,18 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "build:manifest": "node ./scripts/generate-insumos-manifest.mjs",
+    "prebuild": "pnpm build:manifest",
+    "predev": "pnpm build:manifest",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "astro build",
+    "deploy": "pnpm build",
     "astro": "astro",
     "check": "astro check",
     "lint": "eslint .",
     "format": "eslint . --fix && prettier -w \"**/*\" --ignore-unknown --cache",
-    "test": "node ./scripts/test.mjs"
+    "test": "pnpm build:manifest && node ./scripts/test.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.3",
