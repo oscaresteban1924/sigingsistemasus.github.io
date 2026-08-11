@@ -2,6 +2,7 @@
 // src/components/Sections/Home/LatestPosts.astro — Semanas Destacadas en la Portada.
 import CardGrid from "@components/Sections/Global/CardGrid.astro";
 import defaultHeroImage from "@images/demo/post-css-grid.jpg";
+import { semanaPath } from "@js/paths";
 import { estadoBadgeMeta, getSortedSemanas } from "@js/semanasData";
 
 const semanas = (await getSortedSemanas()).slice(0, 3);
@@ -10,7 +11,7 @@ const items = semanas.map((semana) => {
   const { label, variant } = estadoBadgeMeta(data.estado);
   const numFormatted = String(data.numero).padStart(2, "0");
   return {
-    href: `/semanas/${semana.id}/`,
+    href: semanaPath(semana.id),
     image: data.heroImage ?? defaultHeroImage,
     imageAlt: data.heroImageAlt ?? data.titulo,
     badgeLabel: label,

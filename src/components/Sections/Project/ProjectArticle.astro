@@ -12,6 +12,7 @@
 import { PixelIcon } from "@components/svg/pixel-icons";
 import { Badge } from "@components/ui/badge";
 import { PixelPanel } from "@components/ui/pixel-panel";
+import { sitePath } from "@js/paths";
 import { statusMeta } from "@js/projectCards";
 import type { CollectionEntry } from "astro:content";
 
@@ -28,8 +29,8 @@ const { label: statusLabel, variant: statusVariant } = statusMeta(status);
 <div class="flex flex-col gap-8">
   <!-- Back Nav (node 72:208) -->
   <a
-    href="/projects/"
-    class="primary-focus text-info hover:text-success inline-flex w-fit items-center gap-2 text-xs font-bold tracking-wide uppercase transition-colors"
+    href={sitePath("/projects/")}
+    class="text-info hover:text-success inline-flex items-center gap-2 text-xs font-bold uppercase transition-colors motion-reduce:transition-none"
   >
     <PixelIcon name="arrow-left" class="size-3.5" />
     Volver a Laboratorios

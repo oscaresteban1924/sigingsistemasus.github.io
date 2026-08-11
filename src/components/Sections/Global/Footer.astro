@@ -20,6 +20,7 @@
 import { PixelIcon, type PixelIconName } from "@components/svg/pixel-icons";
 import siteData from "@config/siteData.json";
 import { socialLink } from "@config/socialData.json";
+import { sitePath } from "@js/paths";
 
 const year = new Date().getFullYear();
 const copyright = `© ${year} — ${siteData.name}`;
@@ -29,15 +30,15 @@ const copyright = `© ${year} — ${siteData.name}`;
 type SocialLink = { name: PixelIconName; label: string; href: string; external?: boolean };
 const socialLinks: readonly SocialLink[] = [
   { ...socialLink("linkedin"), external: true },
-  { name: "rss", label: "RSS feed", href: "/rss.xml" },
+  { name: "rss", label: "Canal RSS", href: sitePath("/rss.xml") },
   { ...socialLink("youtube"), external: true },
-  { name: "email", label: "Email", href: `mailto:${siteData.author.email}` },
+  { name: "email", label: "Correo electrónico", href: `mailto:${siteData.author.email}` },
 ];
 
 // Legal row (Figma 5:103). Trailing slashes match astro.config `trailingSlash: "always"`.
 const legalLinks = [
-  { label: "Privacidad", href: "/privacy/" },
-  { label: "Términos", href: "/terms/" },
+  { label: "Privacidad", href: sitePath("/privacy/") },
+  { label: "Términos", href: sitePath("/terms/") },
 ] as const;
 ---
 

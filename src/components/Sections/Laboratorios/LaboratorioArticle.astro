@@ -11,6 +11,7 @@ import {
 } from "@components/ui/breadcrumb";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { type AdjacentLabLink, dificultadBadgeMeta, faseBadgeMeta } from "@js/laboratoriosData";
+import { sitePath } from "@js/paths";
 import { estadoBadgeMeta } from "@js/semanasData";
 import type { CollectionEntry } from "astro:content";
 
@@ -49,10 +50,11 @@ const { label: badgeDif, variant: variantDif } = dificultadBadgeMeta(dificultad)
 <div class="flex flex-col gap-8">
   <!-- Breadcrumbs -->
   <Breadcrumb>
-    <BreadcrumbItem><BreadcrumbLink href="/">Inicio</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbItem><BreadcrumbLink href={sitePath("/")}>Inicio</BreadcrumbLink></BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem
-      ><BreadcrumbLink href="/laboratorios/">Laboratorios</BreadcrumbLink></BreadcrumbItem
+      ><BreadcrumbLink href={sitePath("/laboratorios/")}>Laboratorios</BreadcrumbLink
+      ></BreadcrumbItem
     >
     <BreadcrumbSeparator />
     <BreadcrumbItem><BreadcrumbPage>Lab {numFormatted}</BreadcrumbPage></BreadcrumbItem>

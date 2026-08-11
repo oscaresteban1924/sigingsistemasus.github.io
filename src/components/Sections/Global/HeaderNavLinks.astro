@@ -7,6 +7,7 @@
 import { NavItem, NavLink } from "@components/ui/nav";
 import { navItems } from "@config/navData.json";
 import { isActive } from "@js/nav";
+import { sitePath } from "@js/paths";
 
 interface Props {
   /** current route, for the aria-current active check. */
@@ -22,9 +23,9 @@ const { pathname, fullWidth = false } = Astro.props as Props;
     <NavItem class={fullWidth ? "w-full" : undefined}>
       <NavLink
         variant="retro"
-        href={item.href}
+        href={sitePath(item.href)}
         class={fullWidth ? "w-full" : undefined}
-        aria-current={isActive(pathname, item.href) ? "page" : undefined}
+        aria-current={isActive(pathname, sitePath(item.href)) ? "page" : undefined}
       >
         <svg
           class="fill-success pointer-events-none absolute top-1/2 left-1.5 h-3.5 w-2.5 -translate-y-1/2 opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-aria-[current=page]:opacity-100"

@@ -19,7 +19,9 @@
     "check": "astro check",
     "lint": "eslint .",
     "format": "eslint . --fix && prettier -w \"**/*\" --ignore-unknown --cache",
-    "test": "pnpm build:manifest && node ./scripts/test.mjs"
+    "test": "pnpm build:manifest && node ./scripts/test.mjs",
+    "check:links": "node ./scripts/check-internal-links.mjs",
+    "verify": "pnpm lint && pnpm check && pnpm build && pnpm check:links && pnpm test"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.3",

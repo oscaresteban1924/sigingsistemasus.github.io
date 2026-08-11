@@ -3,6 +3,7 @@
 import CardGrid from "@components/Sections/Global/CardGrid.astro";
 import defaultHeroImage from "@images/demo/project-pixel-art.png";
 import { dificultadBadgeMeta, getSortedLaboratorios } from "@js/laboratoriosData";
+import { laboratorioPath } from "@js/paths";
 
 const labs = (await getSortedLaboratorios()).slice(0, 3);
 const items = labs.map((lab) => {
@@ -10,7 +11,7 @@ const items = labs.map((lab) => {
   const { label, variant } = dificultadBadgeMeta(data.dificultad);
   const numFormatted = String(data.numero).padStart(2, "0");
   return {
-    href: `/laboratorios/${lab.id}/`,
+    href: laboratorioPath(lab.id),
     image: data.heroImage ?? defaultHeroImage,
     imageAlt: data.heroImageAlt ?? data.titulo,
     badgeLabel: label,

@@ -15,6 +15,7 @@
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
 import Scoreboard from "@components/Sections/Global/Scoreboard.astro";
 import portfolioData from "@config/portfolioData.json";
+import { sitePath } from "@js/paths";
 
 const { tagline, heading, bio } = portfolioData.profile;
 
@@ -42,10 +43,13 @@ const strip = portfolioData.stats.profile.map((text, i) => ({
   </div>
 
   <div class="flex flex-col gap-4 pt-1 sm:flex-row">
-    <a href="/projects/" class="pixel-btn pixel-btn--blue px-5 py-4 text-sm uppercase sm:text-base">
+    <a
+      href={sitePath("/laboratorios/")}
+      class="pixel-btn pixel-btn--blue px-5 py-4 text-sm uppercase sm:text-base"
+    >
       Ver Laboratorios
     </a>
-    <a href="/contact/" class="pixel-btn px-5 py-4 text-sm uppercase sm:text-base">
+    <a href={sitePath("/contact/")} class="pixel-btn px-5 py-4 text-sm uppercase sm:text-base">
       Recursos y Consultas
     </a>
   </div>

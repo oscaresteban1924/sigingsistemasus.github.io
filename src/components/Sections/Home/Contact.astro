@@ -13,6 +13,7 @@ import { Reveal } from "@components/ui/reveal";
 import portfolioData from "@config/portfolioData.json";
 import siteData from "@config/siteData.json";
 import { socialLink } from "@config/socialData.json";
+import { sitePath } from "@js/paths";
 
 import PixelChip from "./PixelChip.astro";
 
@@ -32,7 +33,7 @@ const socials = [socialLink("github"), socialLink("twitter"), socialLink("linked
       >
         Correo Docente
       </a>
-      <a href="/contact/" class="pixel-btn px-5 py-4 text-sm uppercase sm:text-base">
+      <a href={sitePath("/contact/")} class="pixel-btn px-5 py-4 text-sm uppercase sm:text-base">
         Recursos y Consultas
       </a>
     </div>

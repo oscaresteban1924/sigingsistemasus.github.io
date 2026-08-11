@@ -9,6 +9,7 @@ import RelatedPosts from "@components/Sections/Blog/RelatedPosts.astro";
 import siteData from "@config/siteData.json";
 import { siteLocale } from "@config/siteSettings.json";
 import { getSortedPosts } from "@js/blogData";
+import { sitePath } from "@js/paths";
 import { getAdjacentPosts, getRelatedPosts } from "@js/postCards";
 import { readingTime } from "@js/readingTime";
 import { getArticleSchema, getBreadcrumbSchema, organizationId } from "@js/schema";
@@ -43,7 +44,9 @@ const dateLabel = data.pubDate
   .toUpperCase();
 const dateISO = data.pubDate.toISOString();
 
-const { prev, next } = getAdjacentPosts(posts, entry.id);
+const rawAdj = getAdjacentPosts(posts, entry.id);
+const prev = rawAdj.prev ? { ...rawAdj.prev, href: sitePath(rawAdj.prev.href) } : undefined;
+const next = rawAdj.next ? { ...rawAdj.next, href: sitePath(rawAdj.next.href) } : undefined;
 const related = getRelatedPosts(posts, entry.id, 2);
 
 // SEO: BlogPosting + a BreadcrumbList matching the visible breadcrumb (never emit one

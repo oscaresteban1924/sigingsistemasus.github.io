@@ -4,6 +4,7 @@ import { PixelIcon } from "@components/svg/pixel-icons";
 import { Badge } from "@components/ui/badge";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { Reveal } from "@components/ui/reveal";
+import { semanaPath } from "@js/paths";
 import { estadoBadgeMeta } from "@js/semanasData";
 import type { CollectionEntry } from "astro:content";
 
@@ -100,7 +101,7 @@ const { semanas } = Astro.props as Props;
 
                 {isAvailable ? (
                   <a
-                    href={`/semanas/${semana.id}/`}
+                    href={semanaPath(semana.id)}
                     class="pixel-btn pixel-btn--blue px-4 py-2.5 text-xs uppercase"
                   >
                     Estudiar semana ➔

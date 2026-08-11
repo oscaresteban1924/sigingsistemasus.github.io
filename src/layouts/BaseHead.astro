@@ -8,6 +8,7 @@ import siteData from "@config/siteData.json";
 import { siteLocale, siteSettings } from "@config/siteSettings.json";
 import pressStart2p from "@fontsource/press-start-2p/files/press-start-2p-latin-400-normal.woff2";
 import spaceMono from "@fontsource/space-mono/files/space-mono-latin-400-normal.woff2";
+import { sitePath } from "@js/paths";
 import { getSiteSchema, type SeoProps, serializeJsonLd } from "@js/schema";
 import { ClientRouter } from "astro:transitions";
 
@@ -57,15 +58,15 @@ const jsonLd = serializeJsonLd([...siteNodes, ...(schema ?? [])]);
 <link rel="preload" href={spaceMono} as="font" type="font/woff2" crossorigin="anonymous" />
 
 <!-- favicons (replace the defaults in /public) -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/svg+xml" href={sitePath("/favicon.svg")} />
+<link rel="icon" href={sitePath("/favicon.ico")} sizes="any" />
 
-<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="sitemap" href={sitePath("/sitemap-index.xml")} />
 <link
   rel="alternate"
   type="application/rss+xml"
   title={`${siteData.name} — Blog`}
-  href="/rss.xml"
+  href={sitePath("/rss.xml")}
 />
 
 <!-- SEO -->

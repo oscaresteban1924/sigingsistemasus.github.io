@@ -2,6 +2,7 @@
 // Detail route shell for a week entry (/semanas/<slug>/).
 import SemanaArticle from "@components/Sections/Semanas/SemanaArticle.astro";
 import siteData from "@config/siteData.json";
+import { sitePath } from "@js/paths";
 import { getAdjacentSemanas, getSortedSemanas } from "@js/semanasData";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { type CollectionEntry, render } from "astro:content";
@@ -21,7 +22,9 @@ interface Props {
 
 const { entry, sorted } = Astro.props as Props;
 const { Content } = await render(entry);
-const { prev, next } = getAdjacentSemanas(sorted, entry.id);
+const rawAdj = getAdjacentSemanas(sorted, entry.id);
+const prev = rawAdj.prev ? { ...rawAdj.prev, href: sitePath(rawAdj.prev.href) } : undefined;
+const next = rawAdj.next ? { ...rawAdj.next, href: sitePath(rawAdj.next.href) } : undefined;
 
 const numFormatted = String(entry.data.numero).padStart(2, "0");
 const title = `Semana ${numFormatted}: ${entry.data.titulo} — ${siteData.name}`;

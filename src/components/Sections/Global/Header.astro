@@ -16,6 +16,7 @@ import { Sheet } from "@components/ui/sheet";
 import { ThemeToggle } from "@components/ui/theme-toggle";
 import siteData from "@config/siteData.json";
 import heroAvatar from "@images/hero-avatar.jpg";
+import { sitePath } from "@js/paths";
 
 const pathname = Astro.url.pathname;
 ---
@@ -31,7 +32,7 @@ const pathname = Astro.url.pathname;
     <!-- Brand: pixel avatar + wordmark, links home. The link's accessible name is the wordmark. On a
          narrow phone the brand (min-w-0) shrinks and the wordmark truncates before the row overflows. -->
     <a
-      href="/"
+      href={sitePath("/")}
       class="primary-focus flex min-w-0 items-center gap-3 sm:gap-4"
       aria-label={`${siteData.name} — inicio`}
     >

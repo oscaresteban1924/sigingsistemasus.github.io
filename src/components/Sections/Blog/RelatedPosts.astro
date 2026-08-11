@@ -7,6 +7,7 @@
 import PixelCardLink from "@components/Cards/PixelCardLink.astro";
 import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
 import { Reveal } from "@components/ui/reveal";
+import { sitePath } from "@js/paths";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -24,7 +25,7 @@ const { posts } = Astro.props as Props;
         {posts.map((post) => (
           <li>
             <PixelCardLink
-              href={`/blog/${post.id}/`}
+              href={sitePath(`/blog/${post.id}/`)}
               image={post.data.heroImage}
               imageAlt={post.data.heroImageAlt}
             >

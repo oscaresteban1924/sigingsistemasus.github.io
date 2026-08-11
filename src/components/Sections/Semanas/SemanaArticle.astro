@@ -11,6 +11,7 @@ import {
 } from "@components/ui/breadcrumb";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { getInsumosBySemana } from "@js/insumosData";
+import { laboratorioPath, sitePath } from "@js/paths";
 import { type AdjacentSemanaLink, estadoBadgeMeta } from "@js/semanasData";
 import type { CollectionEntry } from "astro:content";
 
@@ -71,9 +72,11 @@ const allMateriales = Array.from(allMaterialesMap.values());
 <div class="flex flex-col gap-8">
   <!-- Breadcrumbs -->
   <Breadcrumb>
-    <BreadcrumbItem><BreadcrumbLink href="/">Inicio</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbItem><BreadcrumbLink href={sitePath("/")}>Inicio</BreadcrumbLink></BreadcrumbItem>
     <BreadcrumbSeparator />
-    <BreadcrumbItem><BreadcrumbLink href="/semanas/">Semanas</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbItem
+      ><BreadcrumbLink href={sitePath("/semanas/")}>Semanas</BreadcrumbLink></BreadcrumbItem
+    >
     <BreadcrumbSeparator />
     <BreadcrumbItem><BreadcrumbPage>Semana {numFormatted}</BreadcrumbPage></BreadcrumbItem>
   </Breadcrumb>
@@ -220,7 +223,7 @@ const allMateriales = Array.from(allMaterialesMap.values());
                 </div>
                 <div class="flex flex-wrap gap-2 pt-2">
                   <a
-                    href={mat.url}
+                    href={sitePath(mat.url)}
                     download
                     target="_blank"
                     rel="noopener noreferrer"
@@ -229,7 +232,7 @@ const allMateriales = Array.from(allMaterialesMap.values());
                     Descargar presentación de clase ⬇
                   </a>
                   <a
-                    href={mat.url}
+                    href={sitePath(mat.url)}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="pixel-btn flex-1 px-3 py-2 text-center text-xs uppercase"
@@ -370,7 +373,7 @@ const allMateriales = Array.from(allMaterialesMap.values());
                 {lab.descripcion && <p class="text-muted-foreground text-xs">{lab.descripcion}</p>}
                 {lab.slug && (
                   <a
-                    href={`/projects/${lab.slug}/`}
+                    href={`${laboratorioPath(lab.slug)}`}
                     class="text-info hover:text-success text-xs font-bold uppercase transition-colors"
                   >
                     Ver Laboratorio ➔

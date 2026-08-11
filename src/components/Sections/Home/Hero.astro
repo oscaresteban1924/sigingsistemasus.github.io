@@ -9,17 +9,23 @@
 // READ BLOG / SAY HI CTAs point at the real /blog/ and /contact/ routes.
 import HeroPanel from "@components/Sections/Global/HeroPanel.astro";
 import portfolioData from "@config/portfolioData.json";
+import { sitePath } from "@js/paths";
 
 const { tagline, heading, intro } = portfolioData.home;
 ---
 
 <HeroPanel headingId="hero-heading" tagline={tagline} heading={heading} intro={intro}>
   <div class="flex flex-col gap-4 pt-2 sm:flex-row">
-    <a href="/about/" class="pixel-btn pixel-btn--blue px-5 py-4 text-sm uppercase sm:text-base">
+    <a
+      href={sitePath("/about/")}
+      class="pixel-btn pixel-btn--blue px-5 py-4 text-sm uppercase sm:text-base"
+    >
       Ver Curso
     </a>
-    <a href="/semanas/" class="pixel-btn px-5 py-4 text-sm uppercase sm:text-base"> Ver Semanas </a>
-    <a href="/laboratorios/" class="pixel-btn px-5 py-4 text-sm uppercase sm:text-base">
+    <a href={sitePath("/semanas/")} class="pixel-btn px-5 py-4 text-sm uppercase sm:text-base">
+      Ver Semanas
+    </a>
+    <a href={sitePath("/laboratorios/")} class="pixel-btn px-5 py-4 text-sm uppercase sm:text-base">
       Laboratorios
     </a>
   </div>

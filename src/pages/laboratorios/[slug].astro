@@ -3,6 +3,7 @@
 import LaboratorioArticle from "@components/Sections/Laboratorios/LaboratorioArticle.astro";
 import siteData from "@config/siteData.json";
 import { getAdjacentLaboratorios, getSortedLaboratorios } from "@js/laboratoriosData";
+import { sitePath } from "@js/paths";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { type CollectionEntry, render } from "astro:content";
 
@@ -21,7 +22,9 @@ interface Props {
 
 const { entry, sorted } = Astro.props as Props;
 const { Content } = await render(entry);
-const { prev, next } = getAdjacentLaboratorios(sorted, entry.id);
+const rawAdj = getAdjacentLaboratorios(sorted, entry.id);
+const prev = rawAdj.prev ? { ...rawAdj.prev, href: sitePath(rawAdj.prev.href) } : undefined;
+const next = rawAdj.next ? { ...rawAdj.next, href: sitePath(rawAdj.next.href) } : undefined;
 
 const numFormatted = String(entry.data.numero).padStart(2, "0");
 const title = `Lab ${numFormatted}: ${entry.data.titulo} — ${siteData.name}`;

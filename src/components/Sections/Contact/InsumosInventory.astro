@@ -4,6 +4,7 @@ import { PixelIcon } from "@components/svg/pixel-icons";
 import { Badge } from "@components/ui/badge";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { getInsumosManifest, type InsumoItem } from "@js/insumosData";
+import { semanaPath, sitePath } from "@js/paths";
 
 const manifest = getInsumosManifest();
 const { totalArchivos, totalTamanoFormatted, archivos } = manifest;
@@ -92,7 +93,7 @@ const semanaKeys = Array.from(porSemana.keys()).sort((a, b) => {
                       </span>
                       {item.semana > 0 && (
                         <a
-                          href={`/semanas/${item.slugSemana}/`}
+                          href={semanaPath(item.slugSemana)}
                           class="text-info hover:text-success text-[10px] font-bold uppercase underline"
                         >
                           Ir a Semana ➔
@@ -102,7 +103,7 @@ const semanaKeys = Array.from(porSemana.keys()).sort((a, b) => {
                   </div>
 
                   <a
-                    href={item.url}
+                    href={sitePath(item.url)}
                     download
                     target="_blank"
                     rel="noopener noreferrer"

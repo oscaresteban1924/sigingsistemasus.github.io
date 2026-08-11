@@ -13,7 +13,7 @@ export const pagination = tv({
 const { class: className, ...rest } = Astro.props;
 ---
 
-<nav aria-label="Pagination" data-slot="pagination" {...rest}>
+<nav aria-label="Paginación" data-slot="pagination" {...rest}>
   <ul class={pagination({ class: className })}>
     <slot />
   </ul>

@@ -2,6 +2,7 @@
 // src/components/Sections/About/Achievements.astro — Unidades Temáticas del Curso.
 import { type ContentCardProps } from "@components/Cards/ContentCard.astro";
 import CardGrid from "@components/Sections/Global/CardGrid.astro";
+import { sitePath } from "@js/paths";
 
 import { demoThumbs } from "./demoThumbs";
 
@@ -10,7 +11,7 @@ const achievements: readonly ContentCardProps[] = [
     ...demoThumbs.cliQuest,
     title: "Módulo 1: Fundamentos SIG & Modelos",
     description: "Abstracción de datos vectoriales (puntos, líneas, polígonos) y matrices raster.",
-    href: "/semanas/",
+    href: sitePath("/semanas/"),
     badgeLabel: "Módulo 1",
     badgeVariant: "success",
     cta: "Ver",
@@ -20,7 +21,7 @@ const achievements: readonly ContentCardProps[] = [
     title: "Módulo 2: Coordenadas y CRS",
     description:
       "Geodesia, elipsoides, datums, proyecciones cartográficas y transformaciones EPSG.",
-    href: "/semanas/",
+    href: sitePath("/semanas/"),
     badgeLabel: "Módulo 2",
     badgeVariant: "success",
     cta: "Ver",
@@ -30,7 +31,7 @@ const achievements: readonly ContentCardProps[] = [
     title: "Módulo 3: Spatial SQL & PostGIS",
     description:
       "Bases de datos relacionales espaciales, predicados topológicos e índices GiST R-Tree.",
-    href: "/semanas/",
+    href: sitePath("/semanas/"),
     badgeLabel: "Módulo 3",
     badgeVariant: "success",
     cta: "Ver",
@@ -40,7 +41,7 @@ const achievements: readonly ContentCardProps[] = [
     title: "Módulo 4: Geoprocesamiento Python",
     description:
       "Scripting automatizado con GeoPandas, Shapely y GDAL para análisis territorial masivo.",
-    href: "/semanas/",
+    href: sitePath("/semanas/"),
     badgeLabel: "Módulo 4",
     badgeVariant: "success",
     cta: "Ver",
@@ -49,7 +50,7 @@ const achievements: readonly ContentCardProps[] = [
     ...demoThumbs.pixelArt,
     title: "Módulo 5: Servicios Web OGC",
     description: "Publicación de mapas e información geográfica con estándares WMS, WFS y WCS.",
-    href: "/semanas/",
+    href: sitePath("/semanas/"),
     badgeLabel: "Módulo 5",
     badgeVariant: "success",
     cta: "Ver",
@@ -58,7 +59,7 @@ const achievements: readonly ContentCardProps[] = [
     ...demoThumbs.floppyDisk,
     title: "Módulo 6: Desarrollo Web GIS",
     description: "Creación de visores interactivos con Leaflet, MapLibre y consumo de APIs REST.",
-    href: "/semanas/",
+    href: sitePath("/semanas/"),
     badgeLabel: "Módulo 6",
     badgeVariant: "success",
     cta: "Ver",
