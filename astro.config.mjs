@@ -60,9 +60,7 @@ export default defineConfig({
        * Do not expose development/example or 404 pages
        * through the sitemap.
        */
-      filter: (page) =>
-        !page.includes("/examples/") &&
-        !page.includes("/404/"),
+      filter: (page) => !page.includes("/examples/") && !page.includes("/404/"),
     }),
   ],
 

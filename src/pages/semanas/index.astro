@@ -1,0 +1,20 @@
+---
+// Semanas (/semanas/). Ruta principal de la estructura académica semanal del curso SIG.
+import SemanasHero from "@components/Sections/Semanas/SemanasHero.astro";
+import SemanaTimeline from "@components/Sections/Semanas/SemanaTimeline.astro";
+import siteData from "@config/siteData.json";
+import { getSortedSemanas } from "@js/semanasData";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const semanas = await getSortedSemanas();
+---
+
+<BaseLayout
+  title={`Semanas del Curso — ${siteData.name}`}
+  description="Ruta de aprendizaje estructurada semanalmente para el curso de Sistemas de Información Geográfica para Ingeniería de Sistemas. Presentaciones PPTX, PDFs y laboratorios."
+>
+  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
+    <SemanasHero />
+    <SemanaTimeline semanas={semanas} />
+  </div>
+</BaseLayout>

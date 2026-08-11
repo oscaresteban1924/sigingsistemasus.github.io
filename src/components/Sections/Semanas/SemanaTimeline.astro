@@ -1,0 +1,120 @@
+---
+// src/components/Sections/Semanas/SemanaTimeline.astro — Ruta de aprendizaje visual por semanas.
+import { PixelIcon } from "@components/svg/pixel-icons";
+import { Badge } from "@components/ui/badge";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import { Reveal } from "@components/ui/reveal";
+import { estadoBadgeMeta } from "@js/semanasData";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  semanas: readonly CollectionEntry<"semanas">[];
+}
+
+const { semanas } = Astro.props as Props;
+---
+
+<Reveal as="section" aria-labelledby="semanas-timeline-heading" class="flex flex-col gap-8">
+  <div class="border-border flex items-center justify-between border-b-4 pb-4">
+    <h2 id="semanas-timeline-heading" class="h2 text-foreground uppercase">
+      Ruta de Aprendizaje SIG
+    </h2>
+    <span class="font-display text-info text-xs uppercase">
+      {semanas.length} Semanas Programadas
+    </span>
+  </div>
+
+  <div class="relative flex flex-col gap-6">
+    {/* Línea conectora central de la ruta */}
+    <div
+      class="border-border absolute top-0 bottom-0 left-6 hidden border-l-4 border-dashed md:block"
+      aria-hidden="true"
+    >
+    </div>
+
+    {
+      semanas.map((semana) => {
+        const { data } = semana;
+        const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(data.estado);
+        const numFormatted = String(data.numero).padStart(2, "0");
+        const isAvailable = data.estado === "Disponible";
+
+        return (
+          <div class="relative flex flex-col gap-4 md:flex-row md:items-start md:pl-16">
+            {/* Indicador de nodo / hito en la ruta */}
+            <div
+              class="border-border bg-accent shadow-pixel absolute top-4 -left-2 hidden size-10 items-center justify-center border-4 md:flex"
+              aria-hidden="true"
+            >
+              <span class="font-display text-info text-xs">{numFormatted}</span>
+            </div>
+
+            <PixelPanel
+              elevated={isAvailable}
+              class="flex flex-1 flex-col justify-between gap-4 p-6"
+            >
+              <div class="flex flex-col gap-3">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="font-display text-info text-xs uppercase">
+                      SEMANA {numFormatted}
+                    </span>
+                    <span class="text-muted-foreground text-xs font-bold" aria-hidden="true">
+                      ──●──
+                    </span>
+                  </div>
+                  <Badge pixel variant={badgeVariant}>
+                    {badgeLabel}
+                  </Badge>
+                </div>
+
+                <h3 class="h3 text-foreground text-balance">{data.titulo}</h3>
+
+                <p class="text-muted-foreground line-clamp-2 text-sm">{data.descripcion}</p>
+
+                {data.conceptosClave && data.conceptosClave.length > 0 && (
+                  <ul class="flex flex-wrap gap-2 pt-1">
+                    {data.conceptosClave.map((concepto) => (
+                      <li class="bg-accent text-accent-foreground border-border border-2 px-2 py-0.5 text-[10px] font-bold uppercase">
+                        #{concepto}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <div class="border-border flex flex-wrap items-center justify-between gap-4 border-t-2 pt-4">
+                <div class="flex items-center gap-3 text-xs">
+                  {data.materiales && data.materiales.length > 0 ? (
+                    <span class="text-success inline-flex items-center gap-1 font-bold">
+                      <PixelIcon name="package" class="size-4" />
+                      {data.materiales.length} Insumo(s) Disponible(s)
+                    </span>
+                  ) : (
+                    <span class="text-muted-foreground font-bold">Insumos en preparación</span>
+                  )}
+                  {data.duracionEstimada && (
+                    <span class="text-muted-foreground">· {data.duracionEstimada}</span>
+                  )}
+                </div>
+
+                {isAvailable ? (
+                  <a
+                    href={`/semanas/${semana.id}/`}
+                    class="pixel-btn pixel-btn--blue px-4 py-2.5 text-xs uppercase"
+                  >
+                    Estudiar semana ➔
+                  </a>
+                ) : (
+                  <span class="bg-accent text-muted-foreground border-border border-2 px-3 py-2 text-xs font-bold uppercase">
+                    Contenido en preparación
+                  </span>
+                )}
+              </div>
+            </PixelPanel>
+          </div>
+        );
+      })
+    }
+  </div>
+</Reveal>

@@ -63,11 +63,11 @@ together.
 Collections are defined in `src/content.config.ts` (Zod), so bad frontmatter fails the build with the
 entry named. Entries live one folder deep and the folder name is the slug.
 
-| Collection | Location             | Ships with     | Holds                                                                                                                                           |
-| :--------- | :------------------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `blog`     | `src/data/blog/`     | **6 posts**    | `title`, `description`, `authors[]` (≥1), `pubDate`, `heroImage(+alt)`, `category`, `tags`, optional `updatedDate`, `draft`                     |
+| Collection | Location             | Ships with     | Holds                                                                                                                                                                                         |
+| :--------- | :------------------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `blog`     | `src/data/blog/`     | **6 posts**    | `title`, `description`, `authors[]` (≥1), `pubDate`, `heroImage(+alt)`, `category`, `tags`, optional `updatedDate`, `draft`                                                                   |
 | `projects` | `src/data/projects/` | **6 projects** | `title`, `description`, `tagline`, `status`, `moduleId`, `order`, `thumbnail(+alt)`, `tech[]`, `specs[]`, `features[]`, `archCaption`, `challenge`, `solution`, optional `cardTitle`, `draft` |
-| `authors`  | `src/data/authors/`  | `admin`        | `name`, `authorLink`, optional `avatar` — referenced by posts as the byline                                                                     |
+| `authors`  | `src/data/authors/`  | `admin`        | `name`, `authorLink`, optional `avatar` — referenced by posts as the byline                                                                                                                   |
 
 The samples are retro-flavoured placeholders; replace them with your own. A blog post's body is
 free-form MDX (rendered through `.blog-prose`); a project's overview is MDX while its spec/feature
@@ -226,7 +226,7 @@ See `.env.example`.
    drops 75 unused `@keyframes` (90 → 15).
 7. **`.claude/`** — harness settings plus two optional skills for working on the repo with Claude
    Code. Keep it if you use Claude; deleting it changes nothing at runtime.
-8. **Read [`THIRD-PARTY.md`](./THIRD-PARTY.md)** — the fonts, icon sets and code ports that are *not*
+8. **Read [`THIRD-PARTY.md`](./THIRD-PARTY.md)** — the fonts, icon sets and code ports that are _not_
    covered by [`LICENSE`](./LICENSE), including which trademarked brand marks the theme uses and the
    demo images whose provenance you need to settle before shipping commercially.
 

@@ -59,9 +59,7 @@ const fieldClass = [
     data-contact-success
     class="primary-focus hidden flex-col items-start gap-3 p-8"
   >
-    <Badge pixel variant="success">
-      Consulta Enviada
-    </Badge>
+    <Badge pixel variant="success"> Consulta Enviada </Badge>
     <h2 class="h3 text-foreground">Mensaje recibido.</h2>
     <p class="text-muted-foreground text-sm">
       Gracias — tu consulta ha sido registrada. La coordinación docente responderá a tu correo.
@@ -130,7 +128,7 @@ const fieldClass = [
 
       let valid = true;
       const inputs = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
-        "input[required], textarea[required]"
+        "input[required], textarea[required]",
       );
 
       inputs.forEach((input) => {
@@ -142,7 +140,10 @@ const fieldClass = [
             errorEl.textContent = "Este campo es obligatorio.";
             errorEl.classList.remove("hidden");
           }
-        } else if (input.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) {
+        } else if (
+          input.type === "email" &&
+          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())
+        ) {
           valid = false;
           input.setAttribute("aria-invalid", "true");
           if (errorEl) {

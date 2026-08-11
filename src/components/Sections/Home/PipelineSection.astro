@@ -21,7 +21,8 @@ const pipelineSteps = [
   <SectionHeading id="pipeline-heading" title="Cadena de Procesamiento Geoespacial" />
 
   <p class="text-muted-foreground text-sm leading-relaxed">
-    ¿Cómo representamos, almacenamos, procesamos, analizamos y servimos computacionalmente un problema que tiene una dimensión espacial?
+    ¿Cómo representamos, almacenamos, procesamos, analizamos y servimos computacionalmente un
+    problema que tiene una dimensión espacial?
   </p>
 
   <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-9">
@@ -29,12 +30,14 @@ const pipelineSteps = [
       pipelineSteps.map((step, index) => (
         <PixelPanel class="flex flex-col justify-between p-3 text-center">
           <div>
-            <span class="font-display text-info text-[10px] uppercase block">{step.stage}</span>
-            <span class="font-display text-foreground text-xs uppercase block mt-1">{step.name}</span>
+            <span class="font-display text-info block text-[10px] uppercase">{step.stage}</span>
+            <span class="font-display text-foreground mt-1 block text-xs uppercase">
+              {step.name}
+            </span>
           </div>
-          <span class="text-muted-foreground text-[10px] block mt-2">{step.desc}</span>
+          <span class="text-muted-foreground mt-2 block text-[10px]">{step.desc}</span>
           {index < pipelineSteps.length - 1 && (
-            <span class="text-secondary font-display text-xs mt-2 hidden lg:block">➔</span>
+            <span class="text-secondary font-display mt-2 hidden text-xs lg:block">➔</span>
           )}
         </PixelPanel>
       ))

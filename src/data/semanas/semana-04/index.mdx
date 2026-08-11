@@ -1,0 +1,29 @@
+---
+numero: 4
+titulo: "Bases de Datos Espaciales e Indización R-Tree en PostGIS"
+descripcion: "Modelado relacional espacial con PostgreSQL y PostGIS, indexación GiST R-Tree y optimización de Spatial SQL."
+objetivos:
+  - "Diseñar tablas relacionales con columnas de geometría espacial."
+  - "Construir índices espaciales R-Tree para aceleración de consultas."
+  - "Optimizar planes de ejecución en consultas topológicas complejas."
+conceptosClave:
+  - "PostGIS"
+  - "Spatial SQL"
+  - "R-Tree"
+  - "GiST"
+  - "Bounding Box"
+estado: "Próximamente"
+duracionEstimada: "6 horas"
+materiales:
+  - nombre: "Texto Guía General SIG"
+    tipo: "PDF"
+    url: "/insumos/Sistemas.de.Informacion.Geografica.pdf"
+    tamano: "47.4 MB"
+    descripcion: "Capítulo 4: Bases de Datos Espaciales."
+laboratorios:
+  - titulo: "Lab 4: Servidor OGC WMS/WFS"
+    slug: "observability-dashboard"
+    descripcion: "Publicación de datastores PostGIS sobre GeoServer."
+---
+
+Las bases de datos relacionales tradicionales utilizan índices B-Tree indexando valores en una sola dimensión. Para datos bidimensionales (X, Y), se requiere indexación R-Tree basada en Bounding Boxes (MBR).

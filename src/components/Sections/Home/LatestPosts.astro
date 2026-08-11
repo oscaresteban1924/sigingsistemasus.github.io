@@ -1,15 +1,25 @@
 ---
-// src/components/Sections/Home/LatestPosts.astro — Figma "Latest Posts Section" (node 5:31).
-//
-// Data-only section: the shared heading + 1/2/3-col card grid lives in <CardGrid>. This reads the
-// three most-recent posts from the `blog` collection (newest first) so the home grid and the /blog/
-// listing share ONE source and every link resolves — replacing the hardcoded placeholder list that
-// stood in until the blog route landed (the same rewire the Featured Projects section got).
+// src/components/Sections/Home/LatestPosts.astro — Semanas Destacadas en la Portada.
 import CardGrid from "@components/Sections/Global/CardGrid.astro";
-import { getSortedPosts } from "@js/blogData";
-import { toPostCard } from "@js/postCards";
+import defaultHeroImage from "@images/demo/post-css-grid.jpg";
+import { estadoBadgeMeta, getSortedSemanas } from "@js/semanasData";
 
-const posts = (await getSortedPosts()).slice(0, 3).map(toPostCard);
+const semanas = (await getSortedSemanas()).slice(0, 3);
+const items = semanas.map((semana) => {
+  const { data } = semana;
+  const { label, variant } = estadoBadgeMeta(data.estado);
+  const numFormatted = String(data.numero).padStart(2, "0");
+  return {
+    href: `/semanas/${semana.id}/`,
+    image: data.heroImage ?? defaultHeroImage,
+    imageAlt: data.heroImageAlt ?? data.titulo,
+    badgeLabel: label,
+    badgeVariant: variant,
+    title: `Semana ${numFormatted}: ${data.titulo}`,
+    description: data.descripcion,
+    cta: "Estudiar semana",
+  };
+});
 ---
 
-<CardGrid headingId="latest-posts-heading" title="Semanas y Contenidos" items={posts} />
+<CardGrid headingId="latest-posts-heading" title="Semanas del Curso" items={items} />

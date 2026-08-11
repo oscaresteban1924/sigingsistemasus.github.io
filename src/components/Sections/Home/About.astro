@@ -6,14 +6,46 @@ import { Reveal } from "@components/ui/reveal";
 import portfolioData from "@config/portfolioData.json";
 
 const steps = [
-  { step: "01", title: "Comprender", desc: "Abstracción del mundo real y sistemas de coordenadas (CRS/EPSG)." },
-  { step: "02", title: "Modelar", desc: "Estructuras de datos vectoriales (geometrías OGC) y matrices raster." },
-  { step: "03", title: "Consultar", desc: "Spatial SQL en PostGIS y predicados topológicos (ST_Intersects)." },
-  { step: "04", title: "Analizar", desc: "Geoprocesamiento, álgebra de mapas y algoritmos de distancia." },
-  { step: "05", title: "Programar", desc: "Automatización de pipelines geoespaciales en Python (GeoPandas)." },
-  { step: "06", title: "Integrar", desc: "Servicios web geoespaciales interoperables OGC (WMS/WFS/WCS)." },
-  { step: "07", title: "Publicar", desc: "Desarrollo de visores Web GIS interactivos (Leaflet/MapLibre)." },
-  { step: "08", title: "Arquitectura", desc: "Diseño de sistemas geoespaciales distribuidos de alto rendimiento." },
+  {
+    step: "01",
+    title: "Comprender",
+    desc: "Abstracción del mundo real y sistemas de coordenadas (CRS/EPSG).",
+  },
+  {
+    step: "02",
+    title: "Modelar",
+    desc: "Estructuras de datos vectoriales (geometrías OGC) y matrices raster.",
+  },
+  {
+    step: "03",
+    title: "Consultar",
+    desc: "Spatial SQL en PostGIS y predicados topológicos (ST_Intersects).",
+  },
+  {
+    step: "04",
+    title: "Analizar",
+    desc: "Geoprocesamiento, álgebra de mapas y algoritmos de distancia.",
+  },
+  {
+    step: "05",
+    title: "Programar",
+    desc: "Automatización de pipelines geoespaciales en Python (GeoPandas).",
+  },
+  {
+    step: "06",
+    title: "Integrar",
+    desc: "Servicios web geoespaciales interoperables OGC (WMS/WFS/WCS).",
+  },
+  {
+    step: "07",
+    title: "Publicar",
+    desc: "Desarrollo de visores Web GIS interactivos (Leaflet/MapLibre).",
+  },
+  {
+    step: "08",
+    title: "Arquitectura",
+    desc: "Diseño de sistemas geoespaciales distribuidos de alto rendimiento.",
+  },
 ] as const;
 ---
 
@@ -35,7 +67,9 @@ const steps = [
       {
         steps.map((item) => (
           <PixelPanel class="flex flex-col gap-2 p-4">
-            <span class="font-display text-secondary text-xs uppercase">{item.step}. {item.title}</span>
+            <span class="font-display text-secondary text-xs uppercase">
+              {item.step}. {item.title}
+            </span>
             <p class="text-muted-foreground text-xs">{item.desc}</p>
           </PixelPanel>
         ))

@@ -1,0 +1,248 @@
+---
+// src/components/Sections/Semanas/SemanaArticle.astro — Vista detallada de una semana académica.
+import { PixelIcon } from "@components/svg/pixel-icons";
+import { Badge } from "@components/ui/badge";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@components/ui/breadcrumb";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import { type AdjacentSemanaLink, estadoBadgeMeta } from "@js/semanasData";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  semana: CollectionEntry<"semanas">["data"];
+  prev?: AdjacentSemanaLink;
+  next?: AdjacentSemanaLink;
+}
+
+const { semana, prev, next } = Astro.props as Props;
+const {
+  numero,
+  titulo,
+  descripcion,
+  objetivos,
+  conceptosClave,
+  estado,
+  materiales,
+  laboratorios,
+  recursos,
+  reto,
+  duracionEstimada,
+} = semana;
+
+const numFormatted = String(numero).padStart(2, "0");
+const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
+---
+
+<div class="flex flex-col gap-8">
+  <!-- Breadcrumbs -->
+  <Breadcrumb>
+    <BreadcrumbItem><BreadcrumbLink href="/">Inicio</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem><BreadcrumbLink href="/semanas/">Semanas</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem><BreadcrumbPage>Semana {numFormatted}</BreadcrumbPage></BreadcrumbItem>
+  </Breadcrumb>
+
+  <!-- Hero Header Panel -->
+  <PixelPanel as="header" elevated class="flex flex-col gap-6 p-6 sm:p-8">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="font-display text-info text-sm uppercase">SEMANA {numFormatted}</span>
+        <Badge pixel variant={badgeVariant}>{badgeLabel}</Badge>
+      </div>
+      {
+        duracionEstimada && (
+          <span class="text-muted-foreground text-xs font-bold uppercase">
+            Duración: {duracionEstimada}
+          </span>
+        )
+      }
+    </div>
+
+    <h1 class="h1 text-foreground text-balance">{titulo}</h1>
+
+    <p class="text-muted-foreground text-base leading-relaxed">{descripcion}</p>
+
+    {
+      conceptosClave && conceptosClave.length > 0 && (
+        <div class="border-border flex flex-wrap items-center gap-2 border-t-2 pt-4">
+          <span class="text-info font-display text-xs uppercase">Conceptos Clave:</span>
+          {conceptosClave.map((concepto) => (
+            <span class="bg-accent text-accent-foreground border-border border-2 px-2.5 py-1 text-xs font-bold uppercase">
+              #{concepto}
+            </span>
+          ))}
+        </div>
+      )
+    }
+  </PixelPanel>
+
+  <!-- Grid de Objetivos y Reto -->
+  <div class="grid gap-6 lg:grid-cols-3">
+    <!-- Objetivos (2 cols) -->
+    <div class="flex flex-col gap-6 lg:col-span-2">
+      {
+        objetivos && objetivos.length > 0 && (
+          <PixelPanel class="flex flex-col gap-4 p-6">
+            <h2 class="h3 text-secondary-700 dark:text-secondary">Objetivos de Aprendizaje</h2>
+            <ul class="flex flex-col gap-3">
+              {objetivos.map((obj) => (
+                <li class="flex gap-3">
+                  <span class="bg-info mt-1.5 size-2 shrink-0" aria-hidden="true" />
+                  <p class="text-muted-foreground text-sm leading-relaxed">{obj}</p>
+                </li>
+              ))}
+            </ul>
+          </PixelPanel>
+        )
+      }
+
+      <!-- Materiales e Insumos -->
+      {
+        materiales && materiales.length > 0 && (
+          <PixelPanel class="flex flex-col gap-4 p-6">
+            <h2 class="h3 text-secondary-700 dark:text-secondary">Materiales e Insumos de Clase</h2>
+            <div class="grid gap-4 sm:grid-cols-2">
+              {materiales.map((mat) => (
+                <div class="bg-accent border-border flex flex-col justify-between gap-3 border-2 p-4">
+                  <div class="flex flex-col gap-2">
+                    <div class="flex items-center justify-between gap-2">
+                      <Badge pixel variant="primary">
+                        {mat.tipo}
+                      </Badge>
+                      {mat.tamano && (
+                        <span class="text-muted-foreground text-[10px] font-bold">
+                          {mat.tamano}
+                        </span>
+                      )}
+                    </div>
+                    <h3 class="font-display text-foreground text-xs uppercase">{mat.nombre}</h3>
+                    {mat.descripcion && (
+                      <p class="text-muted-foreground text-xs">{mat.descripcion}</p>
+                    )}
+                  </div>
+                  <a
+                    href={mat.url}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="pixel-btn pixel-btn--blue mt-1 justify-center px-3 py-2 text-center text-xs uppercase"
+                  >
+                    Descargar {mat.tipo} ⬇
+                  </a>
+                </div>
+              ))}
+            </div>
+          </PixelPanel>
+        )
+      }
+
+      <!-- Contenido MDX libre -->
+      <PixelPanel class="flex flex-col gap-4 p-6 sm:p-8">
+        <h2 class="h3 text-secondary-700 dark:text-secondary">Desarrollo Teórico y Guía</h2>
+        <div class="blog-prose">
+          <slot />
+        </div>
+      </PixelPanel>
+    </div>
+
+    <!-- Panel Lateral: Reto, Laboratorios & Recursos -->
+    <div class="flex flex-col gap-6">
+      {
+        reto && (
+          <PixelPanel class="border-secondary flex flex-col gap-3 p-6">
+            <Badge pixel variant="warning">
+              Reto Académico
+            </Badge>
+            <h2 class="h3 text-foreground">{reto.titulo}</h2>
+            <p class="text-muted-foreground text-xs leading-relaxed">{reto.descripcion}</p>
+          </PixelPanel>
+        )
+      }
+
+      {
+        laboratorios && laboratorios.length > 0 && (
+          <PixelPanel class="flex flex-col gap-4 p-6">
+            <h2 class="font-display text-info text-xs uppercase">Laboratorios Vinculados</h2>
+            <ul class="flex flex-col gap-3">
+              {laboratorios.map((lab) => (
+                <li class="bg-accent border-border flex flex-col gap-2 border-2 p-3">
+                  <span class="font-display text-foreground text-xs uppercase">{lab.titulo}</span>
+                  {lab.descripcion && (
+                    <p class="text-muted-foreground text-xs">{lab.descripcion}</p>
+                  )}
+                  {lab.slug && (
+                    <a
+                      href={`/projects/${lab.slug}/`}
+                      class="text-info hover:text-success text-xs font-bold uppercase transition-colors"
+                    >
+                      Ver Laboratorio ➔
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </PixelPanel>
+        )
+      }
+
+      {
+        recursos && recursos.length > 0 && (
+          <PixelPanel class="flex flex-col gap-4 p-6">
+            <h2 class="font-display text-info text-xs uppercase">Recursos de Consulta</h2>
+            <ul class="flex flex-col gap-2 text-xs">
+              {recursos.map((rec) => (
+                <li>
+                  <a
+                    href={rec.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-info hover:text-success font-bold underline transition-colors"
+                  >
+                    {rec.nombre} ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </PixelPanel>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- Navegación Prev / Next entre semanas -->
+  <PixelPanel as="footer" class="flex flex-wrap items-center justify-between gap-4 p-6">
+    {
+      prev ? (
+        <a
+          href={prev.href}
+          rel="prev"
+          class="primary-focus text-info hover:text-success inline-flex items-center gap-2 text-xs font-bold uppercase transition-colors"
+        >
+          <PixelIcon name="arrow-left" class="size-4" />
+          Semana {String(prev.numero).padStart(2, "0")}: {prev.title}
+        </a>
+      ) : (
+        <span />
+      )
+    }
+
+    {
+      next && (
+        <a
+          href={next.href}
+          rel="next"
+          class="primary-focus text-info hover:text-success ml-auto inline-flex items-center gap-2 text-xs font-bold uppercase transition-colors"
+        >
+          Semana {String(next.numero).padStart(2, "0")}: {next.title}
+          <PixelIcon name="arrow-right" class="size-4" />
+        </a>
+      )
+    }
+  </PixelPanel>
+</div>

@@ -23,7 +23,10 @@ export const contactSchema = z.object({
     .min(1, "Ingresa tu nombre completo.")
     .max(100, "El nombre es demasiado largo.")
     .refine(noLineBreaks, "No se permiten saltos de línea aquí."),
-  email: z.string().trim().pipe(z.email("Por favor ingresa un correo electrónico válido.").max(254)),
+  email: z
+    .string()
+    .trim()
+    .pipe(z.email("Por favor ingresa un correo electrónico válido.").max(254)),
   subject: z
     .string()
     .trim()

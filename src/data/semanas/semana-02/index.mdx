@@ -1,0 +1,46 @@
+---
+numero: 2
+titulo: "Modelos de Datos Espaciales: Vectorial y Raster"
+descripcion: "Estructuras de datos computacionales para representar entidades discretas (puntos, líneas, polígonos) y campos continuos (matrices raster)."
+objetivos:
+  - "Dominar la especificación Simple Features Schema de la OGC para modelos vectoriales."
+  - "Analizar las estructuras de almacenamiento de matrices raster y resolución espacial."
+  - "Evaluar el costo computacional entre algoritmos vectoriales y matriciales."
+conceptosClave:
+  - "Modelo Vectorial"
+  - "Modelo Raster"
+  - "Simple Features"
+  - "DEM / MDE"
+  - "GeoJSON"
+estado: "Disponible"
+duracionEstimada: "6 horas"
+materiales:
+  - nombre: "Presentación Oficial Semana 2"
+    tipo: "PPTX"
+    url: "/insumos/Semana 2.pptx"
+    tamano: "44.2 MB"
+    descripcion: "Diapositivas oficiales sobre estructuras de datos vectoriales y matriciales."
+  - nombre: "Texto Guía General SIG"
+    tipo: "PDF"
+    url: "/insumos/Sistemas.de.Informacion.Geografica.pdf"
+    tamano: "47.4 MB"
+    descripcion: "Capítulo 2: Representación del Espacio."
+laboratorios:
+  - titulo: "Lab 2: Consultas Espaciales en PostGIS"
+    slug: "monolith-to-aws"
+    descripcion: "Modelado relacional espacial y consultas topológicas."
+recursos:
+  - nombre: "GeoJSON Format Specification (RFC 7946)"
+    url: "https://datatracker.ietf.org/doc/html/rfc7946"
+    descripcion: "Estándar de codificación de datos vectoriales en JSON."
+reto:
+  titulo: "Reto 2: Conversión Vector a Raster"
+  descripcion: "Generar una matriz de densidad de puntos para análisis de cobertura urbana."
+---
+
+En la ingeniería de datos geoespaciales, la elección del modelo de datos determina el costo computacional de los algoritmos de consulta y análisis.
+
+## Modelo Vectorial vs Modelo Raster
+
+- **Modelo Vectorial:** Representa geometrías discretas con coordenadas precisas (Puntos, Líneas, Polígonos).
+- **Modelo Raster:** Divide el espacio en una cuadrícula regular de celdas (píxeles) asociadas a atributos numéricos continuos.

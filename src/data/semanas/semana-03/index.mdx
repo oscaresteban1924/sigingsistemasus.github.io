@@ -1,0 +1,47 @@
+---
+numero: 3
+titulo: "Sistemas de Referencia Espacial (CRS/EPSG) y Proyecciones Cartográficas"
+descripcion: "Matemáticas de la superficie terrestre, elipsoides, datums, proyecciones planas y códigos SRID/EPSG."
+objetivos:
+  - "Comprender la diferencia entre elipsoide, geoide y datum espacial."
+  - "Configurar correctamente transformaciones de coordenadas usando códigos EPSG."
+  - "Prevenir errores silenciosos en cálculos de distancia y área."
+conceptosClave:
+  - "CRS"
+  - "EPSG"
+  - "Datum"
+  - "WGS84"
+  - "MAGNA-SIRGAS"
+  - "Proyección UTM"
+estado: "Disponible"
+duracionEstimada: "6 horas"
+materiales:
+  - nombre: "Presentación Oficial Semana 3"
+    tipo: "PPTX"
+    url: "/insumos/Semana 3.pptx"
+    tamano: "46.4 MB"
+    descripcion: "Diapositivas oficiales sobre geodesia, datums y transformaciones EPSG."
+  - nombre: "Texto Guía General SIG"
+    tipo: "PDF"
+    url: "/insumos/Sistemas.de.Informacion.Geografica.pdf"
+    tamano: "47.4 MB"
+    descripcion: "Capítulo 3: Geodesia y Proyecciones."
+laboratorios:
+  - titulo: "Lab 3: Geoprocesamiento con Python"
+    slug: "open-source-cli"
+    descripcion: "Reproyección automatizada de capas con PyPROJ y GeoPandas."
+recursos:
+  - nombre: "EPSG Geodetic Parameter Dataset"
+    url: "https://epsg.org/"
+    descripcion: "Registro oficial de códigos de referencia espacial mundial."
+reto:
+  titulo: "Reto 3: Auditoría de SRID"
+  descripcion: "Detectar y corregir incompatibilidades de proyección en una capa municipal."
+---
+
+Transformar la superficie elipsoidal tridimensional de la Tierra a un plano bidimensional requiere modelos matemáticos rigurosos llamados proyecciones cartográficas.
+
+## Conceptos Clave en Sistemas de Coordenadas
+
+- **Elipsoide y Datum:** WGS84 (EPSG:4326) vs SIRGAS / MAGNA-SIRGAS (EPSG:3116 / Origen Nacional Colombia).
+- **Coordenadas Geográficas vs Proyectadas:** Medidas sexagesimales en grados vs cartesianas en metros.

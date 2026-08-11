@@ -13,7 +13,7 @@ import { type NavItemProps } from "./types/configDataTypes";
  */
 export const navItems = [
   { label: "Curso", href: "/about/" },
-  { label: "Semanas", href: "/blog/" },
+  { label: "Semanas", href: "/semanas/" },
   { label: "Laboratorios", href: "/projects/" },
   { label: "Recursos", href: "/contact/" },
 ] as const satisfies readonly NavItemProps[];

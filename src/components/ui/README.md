@@ -89,7 +89,7 @@ the contact submit, the 404. Apply it to a plain `<a>` or `<button>` and size it
 utilities at the call site. If you are adding a CTA to a page, this is the one you want.
 
 **`ui/button`** is the neutral stock primitive — rounded, token-coloured, `variant` + `size`, no pixel
-treatment. It is deliberately *not* used by any page in the theme; it appears only in the
+treatment. It is deliberately _not_ used by any page in the theme; it appears only in the
 `/examples/ui` catalog, like the other stock primitives. It stays in the library for two reasons: it
 is there for buyers who want a conventional button somewhere, and five primitives compose its exported
 `button` recipe rather than cloning it (**PaginationLink**, **InputNumber**, **DialogTrigger**,
@@ -103,7 +103,7 @@ Button · Input · Label · Textarea · Badge · Card (Image/Header/Title/Descri
 - **Textarea** takes its default value as a `value` prop, like Input, even though the underlying
   element carries its value as content rather than as an attribute — the primitive writes it with
   `set:text`. That is what keeps call sites safe: children spread over several lines would put those
-  newlines *inside* the element, where they become leading whitespace in the submitted value.
+  newlines _inside_ the element, where they become leading whitespace in the submitted value.
 
 ## Tier 2 (built)
 

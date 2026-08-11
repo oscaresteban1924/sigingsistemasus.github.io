@@ -23,4 +23,4 @@ puntos_en_barrios = gpd.sjoin(gdf_puntos, gdf_barrios, predicate="intersects")
 print(puntos_en_barrios.groupby("nombre_barrio").size())
 ```
 
-Este código ejecuta una unión espacial (*spatial join*) optimizada mediante estructuras R-Tree internas.
+Este código ejecuta una unión espacial (_spatial join_) optimizada mediante estructuras R-Tree internas.

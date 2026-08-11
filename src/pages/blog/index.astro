@@ -1,24 +1,25 @@
 ---
-// Blog listing (/blog/). Thin route shell: owns BaseLayout + SEO and composes the Figma
-// "blog-listing-page" frame (node 76:4) — the BlogHero panel + the shared CardGrid, fed from the
-// `blog` collection (newest first, drafts dropped). Same `.site-container` shell/rhythm as the other
-// pages. This is the page the header nav's BLOG link points at.
-import BlogHero from "@components/Sections/Blog/BlogHero.astro";
-import CardGrid from "@components/Sections/Global/CardGrid.astro";
+// Blog listing (/blog/) -> Redirección / alias a la ruta de Semanas (/semanas/).
 import siteData from "@config/siteData.json";
-import { getSortedPosts } from "@js/blogData";
-import { toPostCard } from "@js/postCards";
 import BaseLayout from "@layouts/BaseLayout.astro";
 
-const cards = (await getSortedPosts()).map(toPostCard);
+const semanasUrl = `${import.meta.env.BASE_URL}semanas/`;
 ---
 
 <BaseLayout
   title={`Semanas — ${siteData.name}`}
-  description="Semanas de clase y contenidos del curso Sistemas de Información Geográfica para Ingeniería de Sistemas."
+  description="Redirección a las semanas académicas del curso de Sistemas de Información Geográfica."
 >
-  <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
-    <BlogHero />
-    <CardGrid headingId="archive-modules-heading" title="Todas las Semanas" items={cards} />
+  <head slot="head">
+    <meta http-equiv="refresh" content={`0;url=${semanasUrl}`} />
+  </head>
+  <div class="site-container flex flex-col items-center justify-center gap-6 py-20 text-center">
+    <h1 class="h2 text-foreground">Redirigiendo a las Semanas del Curso...</h1>
+    <p class="text-muted-foreground text-sm">
+      Si la página no redirige automáticamente, haz clic abajo:
+    </p>
+    <a href={semanasUrl} class="pixel-btn pixel-btn--blue px-5 py-3 text-xs uppercase sm:text-base">
+      Ir a Semanas del Curso ➔
+    </a>
   </div>
 </BaseLayout>

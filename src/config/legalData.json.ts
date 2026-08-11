@@ -3,7 +3,8 @@ import { type LegalData } from "./types/configDataTypes";
 const legalData = {
   terms: {
     title: "Términos y Condiciones Académicos",
-    description: "Términos de uso de la plataforma académica del curso de Sistemas de Información Geográfica.",
+    description:
+      "Términos de uso de la plataforma académica del curso de Sistemas de Información Geográfica.",
     lastUpdated: "2026-08-10",
     intro:
       "Los siguientes términos y condiciones rigen el uso del material académico, guías de laboratorio y recursos proporcionados en esta plataforma del curso de Sistemas de Información Geográfica para la carrera de Ingeniería de Sistemas.",
@@ -30,7 +31,8 @@ const legalData = {
   },
   privacy: {
     title: "Política de Privacidad y Datos",
-    description: "Información sobre el tratamiento de datos y privacidad en la plataforma estudiantil.",
+    description:
+      "Información sobre el tratamiento de datos y privacidad en la plataforma estudiantil.",
     lastUpdated: "2026-08-10",
     intro:
       "Esta plataforma respeta la privacidad de los estudiantes y no recolecta información personal no autorizada.",

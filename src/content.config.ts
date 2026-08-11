@@ -72,7 +72,59 @@ const authorsCollection = defineCollection({
     z.object({
       name: z.string(),
       avatar: image().optional(),
-      authorLink: z.string(), // author's public URL — becomes the JSON-LD Article author.url
+      authorLink: z.string(),
+    }),
+});
+
+const semanasCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/semanas" }),
+  schema: ({ image }) =>
+    z.object({
+      numero: z.number(),
+      titulo: z.string(),
+      descripcion: z.string(),
+      objetivos: z.array(z.string()).default([]),
+      conceptosClave: z.array(z.string()).default([]),
+      estado: z.enum(["Disponible", "Próximamente", "En construcción"]),
+      materiales: z
+        .array(
+          z.object({
+            nombre: z.string(),
+            tipo: z.enum(["PPTX", "PDF", "ZIP", "Notebook", "Documento", "Dataset", "Otro"]),
+            url: z.string(),
+            descripcion: z.string().optional(),
+            tamano: z.string().optional(),
+          }),
+        )
+        .default([]),
+      laboratorios: z
+        .array(
+          z.object({
+            titulo: z.string(),
+            slug: z.string().optional(),
+            descripcion: z.string().optional(),
+          }),
+        )
+        .default([]),
+      recursos: z
+        .array(
+          z.object({
+            nombre: z.string(),
+            url: z.string(),
+            descripcion: z.string().optional(),
+          }),
+        )
+        .default([]),
+      reto: z
+        .object({
+          titulo: z.string(),
+          descripcion: z.string(),
+        })
+        .optional(),
+      duracionEstimada: z.string().optional(),
+      heroImage: image().optional(),
+      heroImageAlt: z.string().optional(),
+      draft: z.boolean().optional(),
     }),
 });
 
@@ -80,4 +132,5 @@ export const collections = {
   blog: blogCollection,
   authors: authorsCollection,
   projects: projectsCollection,
+  semanas: semanasCollection,
 };
