@@ -1,5 +1,5 @@
 ---
-// src/components/Sections/Semanas/SemanaArticle.astro — Vista detallada de una semana académica.
+// src/components/Sections/Semanas/SemanaArticle.astro — Vista detallada y Guía de Estudio de la Semana.
 import { PixelIcon } from "@components/svg/pixel-icons";
 import { Badge } from "@components/ui/badge";
 import {
@@ -31,6 +31,12 @@ const {
   laboratorios,
   recursos,
   reto,
+  preguntaDetonante,
+  antesDeComenzar,
+  preguntasParaPensar,
+  rutaAprendizaje,
+  importanciaIngSistemas,
+  conceptosDetallados,
   duracionEstimada,
 } = semana;
 
@@ -48,7 +54,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
     <BreadcrumbItem><BreadcrumbPage>Semana {numFormatted}</BreadcrumbPage></BreadcrumbItem>
   </Breadcrumb>
 
-  <!-- Hero Header Panel -->
+  <!-- Header Hero Panel -->
   <PixelPanel as="header" elevated class="flex flex-col gap-6 p-6 sm:p-8">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
@@ -82,140 +88,303 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
     }
   </PixelPanel>
 
-  <!-- Grid de Objetivos y Reto -->
-  <div class="grid gap-6 lg:grid-cols-3">
-    <!-- Objetivos (2 cols) -->
-    <div class="flex flex-col gap-6 lg:col-span-2">
-      {
-        objetivos && objetivos.length > 0 && (
-          <PixelPanel class="flex flex-col gap-4 p-6">
-            <h2 class="h3 text-secondary-700 dark:text-secondary">Objetivos de Aprendizaje</h2>
-            <ul class="flex flex-col gap-3">
-              {objetivos.map((obj) => (
-                <li class="flex gap-3">
-                  <span class="bg-info mt-1.5 size-2 shrink-0" aria-hidden="true" />
-                  <p class="text-muted-foreground text-sm leading-relaxed">{obj}</p>
-                </li>
-              ))}
-            </ul>
-          </PixelPanel>
-        )
-      }
+  <!-- Sección: ¿Qué vamos a resolver? -->
+  {
+    preguntaDetonante && (
+      <PixelPanel class="border-info flex flex-col gap-4 p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <PixelIcon name="help" class="text-info size-6" />
+          <h2 class="font-display text-info text-sm uppercase">¿Qué vamos a resolver?</h2>
+        </div>
+        <blockquote class="text-foreground text-base font-semibold italic leading-relaxed sm:text-lg">
+          "{preguntaDetonante}"
+        </blockquote>
+      </PixelPanel>
+    )
+  }
 
-      <!-- Materiales e Insumos -->
-      {
-        materiales && materiales.length > 0 && (
-          <PixelPanel class="flex flex-col gap-4 p-6">
-            <h2 class="h3 text-secondary-700 dark:text-secondary">Materiales e Insumos de Clase</h2>
-            <div class="grid gap-4 sm:grid-cols-2">
-              {materiales.map((mat) => (
-                <div class="bg-accent border-border flex flex-col justify-between gap-3 border-2 p-4">
-                  <div class="flex flex-col gap-2">
-                    <div class="flex items-center justify-between gap-2">
-                      <Badge pixel variant="primary">
-                        {mat.tipo}
-                      </Badge>
-                      {mat.tamano && (
-                        <span class="text-muted-foreground text-[10px] font-bold">
-                          {mat.tamano}
-                        </span>
-                      )}
-                    </div>
-                    <h3 class="font-display text-foreground text-xs uppercase">{mat.nombre}</h3>
-                    {mat.descripcion && (
-                      <p class="text-muted-foreground text-xs">{mat.descripcion}</p>
+  <!-- Sección: Resultados de Aprendizaje -->
+  {
+    objetivos && objetivos.length > 0 && (
+      <PixelPanel class="flex flex-col gap-6 p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <PixelIcon name="check-square" class="text-success size-6" />
+          <h2 class="h3 text-secondary-700 dark:text-secondary">Resultados de Aprendizaje</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {objetivos.map((obj, idx) => (
+            <div class="bg-accent border-border flex gap-3 border-2 p-4">
+              <span class="font-display text-info text-xs font-bold">0{idx + 1}.</span>
+              <p class="text-muted-foreground text-sm leading-relaxed">{obj}</p>
+            </div>
+          ))}
+        </div>
+      </PixelPanel>
+    )
+  }
+
+  <!-- Sección: Ruta de Aprendizaje de la Semana -->
+  {
+    rutaAprendizaje && rutaAprendizaje.length > 0 && (
+      <PixelPanel class="flex flex-col gap-6 p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <PixelIcon name="layers" class="text-info size-6" />
+          <h2 class="h3 text-secondary-700 dark:text-secondary">Ruta de Aprendizaje</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {rutaAprendizaje.map((bloque) => (
+            <div class="bg-accent border-border flex flex-col gap-2 border-2 p-4">
+              <span class="font-display text-info text-xs uppercase">Bloque {bloque.paso}</span>
+              <h3 class="font-display text-foreground text-xs uppercase">{bloque.titulo}</h3>
+              <p class="text-muted-foreground text-xs leading-relaxed">{bloque.descripcion}</p>
+            </div>
+          ))}
+        </div>
+      </PixelPanel>
+    )
+  }
+
+  <!-- Sección: Antes de Comenzar & Material de Clase (Grid 2 columnas) -->
+  <div class="grid gap-6 lg:grid-cols-2">
+    <!-- Antes de Comenzar -->
+    {
+      antesDeComenzar && antesDeComenzar.length > 0 && (
+        <PixelPanel class="flex flex-col gap-4 p-6">
+          <div class="flex items-center gap-3">
+            <PixelIcon name="info" class="text-warning size-5" />
+            <h2 class="h3 text-foreground">Antes de comenzar</h2>
+          </div>
+          <p class="text-muted-foreground text-xs">
+            Reflexiona sobre estas preguntas de activación conceptual antes de ingresar a la clase:
+          </p>
+          <ul class="flex flex-col gap-3">
+            {antesDeComenzar.map((preg) => (
+              <li class="bg-accent border-border flex gap-3 border-2 p-3">
+                <span class="text-warning font-bold">?</span>
+                <p class="text-foreground text-xs leading-relaxed">{preg}</p>
+              </li>
+            ))}
+          </ul>
+        </PixelPanel>
+      )
+    }
+
+    <!-- Material de Clase -->
+    {
+      materiales && materiales.length > 0 && (
+        <PixelPanel class="flex flex-col gap-4 p-6">
+          <div class="flex items-center gap-3">
+            <PixelIcon name="package" class="text-info size-5" />
+            <h2 class="h3 text-foreground">Material de Clase</h2>
+          </div>
+          <div class="flex flex-col gap-4">
+            {materiales.map((mat) => (
+              <div class="bg-accent border-border flex flex-col justify-between gap-3 border-2 p-4">
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-center justify-between gap-2">
+                    <Badge pixel variant="primary">
+                      {mat.tipo}
+                    </Badge>
+                    {mat.tamano && (
+                      <span class="text-muted-foreground text-[10px] font-bold">
+                        {mat.tamano}
+                      </span>
                     )}
                   </div>
+                  <h3 class="font-display text-foreground text-xs uppercase">{mat.nombre}</h3>
+                  {mat.descripcion && (
+                    <p class="text-muted-foreground text-xs">{mat.descripcion}</p>
+                  )}
+                </div>
+                <div class="flex flex-wrap gap-2 pt-2">
                   <a
                     href={mat.url}
                     download
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="pixel-btn pixel-btn--blue mt-1 justify-center px-3 py-2 text-center text-xs uppercase"
+                    class="pixel-btn pixel-btn--blue flex-1 px-3 py-2 text-center text-xs uppercase"
                   >
-                    Descargar {mat.tipo} ⬇
+                    Descargar presentación de clase ⬇
                   </a>
-                </div>
-              ))}
-            </div>
-          </PixelPanel>
-        )
-      }
-
-      <!-- Contenido MDX libre -->
-      <PixelPanel class="flex flex-col gap-4 p-6 sm:p-8">
-        <h2 class="h3 text-secondary-700 dark:text-secondary">Desarrollo Teórico y Guía</h2>
-        <div class="blog-prose">
-          <slot />
-        </div>
-      </PixelPanel>
-    </div>
-
-    <!-- Panel Lateral: Reto, Laboratorios & Recursos -->
-    <div class="flex flex-col gap-6">
-      {
-        reto && (
-          <PixelPanel class="border-secondary flex flex-col gap-3 p-6">
-            <Badge pixel variant="warning">
-              Reto Académico
-            </Badge>
-            <h2 class="h3 text-foreground">{reto.titulo}</h2>
-            <p class="text-muted-foreground text-xs leading-relaxed">{reto.descripcion}</p>
-          </PixelPanel>
-        )
-      }
-
-      {
-        laboratorios && laboratorios.length > 0 && (
-          <PixelPanel class="flex flex-col gap-4 p-6">
-            <h2 class="font-display text-info text-xs uppercase">Laboratorios Vinculados</h2>
-            <ul class="flex flex-col gap-3">
-              {laboratorios.map((lab) => (
-                <li class="bg-accent border-border flex flex-col gap-2 border-2 p-3">
-                  <span class="font-display text-foreground text-xs uppercase">{lab.titulo}</span>
-                  {lab.descripcion && (
-                    <p class="text-muted-foreground text-xs">{lab.descripcion}</p>
-                  )}
-                  {lab.slug && (
-                    <a
-                      href={`/projects/${lab.slug}/`}
-                      class="text-info hover:text-success text-xs font-bold uppercase transition-colors"
-                    >
-                      Ver Laboratorio ➔
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </PixelPanel>
-        )
-      }
-
-      {
-        recursos && recursos.length > 0 && (
-          <PixelPanel class="flex flex-col gap-4 p-6">
-            <h2 class="font-display text-info text-xs uppercase">Recursos de Consulta</h2>
-            <ul class="flex flex-col gap-2 text-xs">
-              {recursos.map((rec) => (
-                <li>
                   <a
-                    href={rec.url}
+                    href={mat.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-info hover:text-success font-bold underline transition-colors"
+                    class="pixel-btn flex-1 px-3 py-2 text-center text-xs uppercase"
                   >
-                    {rec.nombre} ↗
+                    Abrir en navegador ↗
                   </a>
-                </li>
-              ))}
-            </ul>
-          </PixelPanel>
-        )
-      }
-    </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </PixelPanel>
+      )
+    }
   </div>
 
-  <!-- Navegación Prev / Next entre semanas -->
+  <!-- Sección: Preguntas para Pensar -->
+  {
+    preguntasParaPensar && preguntasParaPensar.length > 0 && (
+      <PixelPanel class="flex flex-col gap-6 p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <PixelIcon name="help" class="text-info size-6" />
+          <h2 class="h3 text-secondary-700 dark:text-secondary">Preguntas para Pensar</h2>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          {preguntasParaPensar.map((item) => (
+            <div class="bg-accent border-border flex flex-col gap-3 border-2 p-4">
+              <h3 class="font-display text-foreground text-xs uppercase">{item.pregunta}</h3>
+              <p class="text-muted-foreground text-xs leading-relaxed font-normal">
+                {item.respuestaContextual}
+              </p>
+            </div>
+          ))}
+        </div>
+      </PixelPanel>
+    )
+  }
+
+  <!-- Sección: Conceptos Clave con Enfoque en Ingeniería de Sistemas -->
+  {
+    conceptosDetallados && conceptosDetallados.length > 0 && (
+      <PixelPanel class="flex flex-col gap-6 p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <PixelIcon name="code" class="text-secondary size-6" />
+          <h2 class="h3 text-secondary-700 dark:text-secondary">Conceptos Clave</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          {conceptosDetallados.map((item) => (
+            <div class="bg-accent border-border flex flex-col gap-3 border-2 p-5">
+              <div class="flex items-center justify-between border-b-2 border-border pb-2">
+                <h3 class="font-display text-info text-xs uppercase">{item.concepto}</h3>
+                <Badge pixel variant="secondary">
+                  Sistemas
+                </Badge>
+              </div>
+              <p class="text-foreground text-xs leading-relaxed">
+                <strong>Definición:</strong> {item.definicion}
+              </p>
+              <p class="text-muted-foreground text-xs leading-relaxed">
+                <strong>Contexto:</strong> {item.contexto}
+              </p>
+              <div class="border-border bg-background border-2 p-3">
+                <span class="font-display text-success text-[10px] uppercase">
+                  En Ingeniería de Sistemas:
+                </span>
+                <p class="text-muted-foreground text-xs leading-relaxed mt-1">
+                  {item.relacionIngSistemas}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </PixelPanel>
+    )
+  }
+
+  <!-- Sección: ¿Por qué esto importa en Ingeniería de Sistemas? -->
+  {
+    importanciaIngSistemas && importanciaIngSistemas.length > 0 && (
+      <PixelPanel class="border-success flex flex-col gap-6 p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <PixelIcon name="terminal" class="text-success size-6" />
+          <h2 class="h3 text-success">¿Por qué esto importa en Ingeniería de Sistemas?</h2>
+        </div>
+        <p class="text-muted-foreground text-xs sm:text-sm">
+          Un SIG no es un programa de dibujo cartográfico. Es un ecosistema informático distribuido
+          donde el mapa es únicamente la interfaz visual de salida (View), respaldado por un modelo
+          analítico computacional de alta precisión.
+        </p>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {importanciaIngSistemas.map((item) => (
+            <div class="bg-accent border-border flex flex-col gap-2 border-2 p-4">
+              <h3 class="font-display text-foreground text-xs uppercase">{item.concepto}</h3>
+              <p class="text-muted-foreground text-xs leading-relaxed">{item.aplicacion}</p>
+            </div>
+          ))}
+        </div>
+      </PixelPanel>
+    )
+  }
+
+  <!-- Sección: Reto de la Semana -->
+  {
+    reto && (
+      <PixelPanel class="border-warning flex flex-col gap-4 p-6 sm:p-8">
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <PixelIcon name="cpu" class="text-warning size-6" />
+            <h2 class="h3 text-warning">Reto de la Semana</h2>
+          </div>
+          <Badge pixel variant="warning">
+            System Design
+          </Badge>
+        </div>
+        <h3 class="font-display text-foreground text-sm uppercase">{reto.titulo}</h3>
+        <p class="text-muted-foreground text-xs sm:text-sm leading-relaxed">{reto.descripcion}</p>
+      </PixelPanel>
+    )
+  }
+
+  <!-- Desarrollo Teórico y Contenido MDX Libre -->
+  <PixelPanel class="flex flex-col gap-4 p-6 sm:p-8">
+    <h2 class="h3 text-secondary-700 dark:text-secondary">Desarrollo Teórico y Guía Completa</h2>
+    <div class="blog-prose">
+      <slot />
+    </div>
+  </PixelPanel>
+
+  <!-- Secciones adicionales (Laboratorios y Recursos de consulta) -->
+  <div class="grid gap-6 md:grid-cols-2">
+    {
+      laboratorios && laboratorios.length > 0 && (
+        <PixelPanel class="flex flex-col gap-4 p-6">
+          <h2 class="font-display text-info text-xs uppercase">Laboratorios Vinculados</h2>
+          <ul class="flex flex-col gap-3">
+            {laboratorios.map((lab) => (
+              <li class="bg-accent border-border flex flex-col gap-2 border-2 p-3">
+                <span class="font-display text-foreground text-xs uppercase">{lab.titulo}</span>
+                {lab.descripcion && <p class="text-muted-foreground text-xs">{lab.descripcion}</p>}
+                {lab.slug && (
+                  <a
+                    href={`/projects/${lab.slug}/`}
+                    class="text-info hover:text-success text-xs font-bold uppercase transition-colors"
+                  >
+                    Ver Laboratorio ➔
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </PixelPanel>
+      )
+    }
+
+    {
+      recursos && recursos.length > 0 && (
+        <PixelPanel class="flex flex-col gap-4 p-6">
+          <h2 class="font-display text-info text-xs uppercase">Recursos de Consulta</h2>
+          <ul class="flex flex-col gap-2 text-xs">
+            {recursos.map((rec) => (
+              <li>
+                <a
+                  href={rec.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-info hover:text-success font-bold underline transition-colors"
+                >
+                  {rec.nombre} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        </PixelPanel>
+      )
+    }
+  </div>
+
+  <!-- Navegación Continuar a Semana 2 / Anterior al Final -->
   <PixelPanel as="footer" class="flex flex-wrap items-center justify-between gap-4 p-6">
     {
       prev ? (
@@ -237,10 +406,9 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
         <a
           href={next.href}
           rel="next"
-          class="primary-focus text-info hover:text-success ml-auto inline-flex items-center gap-2 text-xs font-bold uppercase transition-colors"
+          class="pixel-btn pixel-btn--blue ml-auto px-5 py-3 text-xs uppercase sm:text-sm"
         >
-          Semana {String(next.numero).padStart(2, "0")}: {next.title}
-          <PixelIcon name="arrow-right" class="size-4" />
+          Continuar a Semana {String(next.numero).padStart(2, "0")} ➔
         </a>
       )
     }

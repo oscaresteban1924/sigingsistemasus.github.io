@@ -1,0 +1,96 @@
+=== SLIDE 1 (image1.png) ===
+problema resuelve un SIG? El contexto Io cambia todo. Necesitamos construir una nueva escuela para 500 niäos. Tenemos el OHacemos eI auego el proyecto? La localizaci6n, las relaciones espaciales y el contexto geogråfico cambian la respuesta.
+
+=== SLIDE 2 (image2.png) ===
+es realmente un SIG? SISTEMA] de informaciön, gestiön de bases de datos, infraestructura tecn016gica, procesos organizacionales. [GEOGRÅFICOI anclado a coordenadas espaciales, representaciön topolögica, basado en la realidad fisica. Un marco tecnolögico integrador que captura, almacena, analiza y representa datos georreferenciados para generar conocimiento y facilitar la toma de decisiones.
+
+=== SLIDE 3 (image3.png) ===
+La Gran Confusiön: Qué es y qué NO es un SIG. NO ES Sölo un mapa impreso o digitalizado. Google Maps o Waze (visores de consumo o motores de ruteo). Sölo un software de escritorio (ArcGIS Pro o QGIS son herramientas, no el ecosistema). si ES Una infraestructura robusta de datos. Una red interactiva (Base de Datos + Analitica + Presentaci6n). Un marco cientifico para la resoluciön de problemas espaciales.
+
+=== SLIDE 4 (image4.png) ===
+Del dato fisico al conocimiento espacial. La Transformaciön del Valor Fenömeno Captura Dato Almacenamiento Procesamiento Anålisis Representaci6n Decisiön
+
+=== SLIDE 5 (image5.png) ===
+El "ADN" del Dato Espacial: Oué Io hace diferente? Localizaciön Coordenadas absolutas (X, Y, Z). Dönde estå posicionado en el planeta? Contexto Factores demogråficos, entorno que Io envuelve. ("N/LJ Geometria Su dimensionalidad espacial (punto, linea, poligono). J)ué forma fisica adopta? Atributos Sus cualidades descriptivas puras (Nombre, capacidad, estado, temperatura). Topologia (Relaciones) ßon qué redes intersecta? &stå contenido dentro de Otro poligono? tiene al lado?
+
+=== SLIDE 6 (image6.png) ===
+Componentes de un SIG: El organismo vivo. DATOS Modelos es acia/ MÉTODOS Y PROCESOS El cerebro lögico. Reglas del negocio y modelos. Si eliminas un componente, eI sistema colapsa.
+
+=== SLIDE 7 (image7.png) ===
+El Enfoque Geogråfico: El interrogatorio espacial. iQué patrön existe? Distribuci6n y anomalias. iCömo cambia? Dinämica temporal. iDönde estå? Ubicaciön absoluta. El Problema iQué hay cerca? Åreas de influencia. iQué coincide? Superposiciön temåtica. Convertimos un problema convencional en un problema resoluble mediante el espacio.
+
+=== SLIDE 8 (image8.png) ===
+El SIG nivelado con la Empresa (ERP / CRM). Sistemas Empresariales Tradicionales (ej. Entrada de datos de texto Entrada de datos geométricos Base de Datos Relacional Tabular Reglas Lögicas de Negocio Sistema de Informaciön Geogråfica BASE DE DATOS ESPACIAL REGLAS TOPOLÖGICAS Y FiSlCAS CRM) Consultas SQL puras CONSULTAS ESPACIALES Reporte Estadistico CUADRO DE MANDO ESPACIAL Misma arquitectura conceptual, diferente naturaleza del motor y las reglas.
+
+=== SLIDE 9 (image9.png) ===
+Un Ecosistema Distribuido, no una aplicaci6n aislada. Clientes de Consumo (La Interfaz) Servicios Web & APIs REST (El Diålogo) Bases de Datos & Servidores (El Motor) Desktop GIS para Analistas Web GIS para Gerencia Apps Möviles para Campo
+
+=== SLIDE 10 (image10.png) ===
+Primera Sintesis: Un SIG no es un mapa. 5. Usuario 4. Visualizaciön 3. Aplicaci6n 2. Servicios y Reglas 1. Datos base "El mapa es apenas la interfaz; el SIG es el ecosistema profundo que Io hace posible." Bloque 2: Arquitectura y Ecosistemas GIS >>
+
+=== SLIDE 11 (image11.png) ===
+MODELO DE MADUREZ GIS: ASCENSO A LA ESCALABILIDAD Y LA INTEROPERABILIDAD I ESCALABILIDAD_EJNTEROPERABILIDAD _J PASO 1 Archivos locales (Shapefiles, CAD): Silos de informaciön {aislada. Trabajo individual.} : PASO 2 Geodatabase: {Centralizaciön relacional.: I El dato comienza a estructurarse corporativamente —000 ouoo- — 000 , 0000—000 PASO 3 Servidor / Servicios: Acceso concurrente y publicaciön mediante eständares OGC (WMS, WFS, WCS). PASO 4 Web GIS: Democratizaciån del acceso mediante clientes ligeros en navegadores. PASO 5 Cloud / Distributed GIS: Alta disponibilidad, microservicios, SaaS y anålisis elåstico a gran escala. PROJECT: MATURITY
+
+=== SLIDE 12 (image12.png) ===
+L GNSS & Posicionamiento: Precisiån satelital en terreno. S) Informaciön Administrativa: Catastro, registros notariales, censos. Sensores e IoT: Telemetria y datos ambientales en tiempo real. Dato Espacial APIs de Terceros: Consumo de servicios externos (clima, tråfico). Levantamientos y Trabajo de Campo: Estaciones totales, encuestas rnåviles. lmågenes y Sensores Remotos: Satélites (Landsat), drones, radar. L -l Bases de Datos -1 Corporativas: Integraciön con CRMs o o ERPs empresariales. MATURITY
+
+=== SLIDE 13 (image13.png) ===
+ARQUITECTURA GIS: FLUJO DE DATOS Y SERVICIOS 1. Fuentes de Datos: Adquisiciön continua Almacenamiento: Persistencia estructurada (Spatial DBMS) 3. Procesamiento: Transformaciön, limpieza y motores ETL 4. Servicios: Orquestaciön y publicaciön (Servidores de mapas WMS/WFS) 5. Aplicaciones: Interfaces de usuario (Web, Mövil, Desktop) 6. Usuarios: Consumo de informaci6n y toma de decisiones PROJECT: GIS MATURITY BLIICDDINT
+
+=== SLIDE 14 (image14.png) ===
+ARQUITECTURA GIS: PILA TECNOLÖGICA Web GIS: Visualizaci6n e interacciön en navegador I ligero sin instalaciön. Desktop GIS: Entorno robusto para creaciön, ediciön avanzada y anålisis espacial pesado. I espaciales en aplicaciones personalizadas. I provisiön de servicios web estandarizados. I transformaci6n de formatos y limpieza de topologia. Spatial DBMS: Motor de base de datos relacional con soporte nativo para geometrias e indices espaciales. PROJECT: GIS MATURITY BLUEPRINT
+
+=== SLIDE 15 (image15.png) ===
+ArcGIS Pro 9 Filosofia: Comercial (ESRI). Ecosistema cerrado altamente integrado. Fortalezas: Integraciön nativa con arquitecturas Cloud (ArcGIS Enterprise/0nline), soporte corporativo, flujos de trabajo estandarizados. Caso de Uso: Implementaciån de clasificaciones supervisadas avanzadas con firmas espectrales estandarizadas. QGIS Filosofia: C6digo Abierto (OSGeo). Independencia de proveedor. Fortalezas: Altamente extensible, integraci6n nativa con arquitecturas libres (PostGlS, GeoServer, Ubuntu). Caso de Uso: Preprocesamiento de imågenes Landsat 8/9 utilizando plugins especializados (Semi-Automatic Classification Plugin). PROJECT: GIS MATURITY BLUEPRINT
+
+=== SLIDE 16 (image18.png) ===
+VISUALIZACIÖN VS. ANÅLISIS ESPACIAL Visualizaci6n (Ver) iD6nde estån las cosas? Proyectar datos en un sistema de coordenadas para facilitar su interpretaciån visual. punto punto A Punto B Ruta 2 Terminal Anålisis Espacial (Resolver) æor qué estån ahi, c6mo interactüan y qué nuevo conocimiento generan? Aplicar matemåtica y topologia a las geometrias para descubrir relaciones ocultas y generar nueva informaciån. Intensidad Baja BUFFER Intensidad Espaciales Relaciones Espaciales INTERSECT UNION Anålisis de Riesgo Antensidad Media Intensidad Alta AREAS DE RIESGO CRiTlCO PROJECT. • GIS MATURITY Bl
+
+=== SLIDE 17 (image19.png) ===
+•ami•uuue CAPACIDADES DE ANÅLISIS ESPACIAL Proximidad: Anålisis de åreas de influencia y distancias. Superposici6n (Overlay): Intersecciön booleana de capas temäticas. Distribuciön: Anålisis de densidad y Accesibilidad: Modelado de costo-fricciön espacial considerando clüsteres espaciales. topograffa o barreras. Conectividad: Anålisis de redes, enrutamiento y rutas öptimas. Patrones: Identificaciön de tendencias y estadistica espacial. PROJECT: GIS MATURITY Bl 1
+
+=== SLIDE 18 (image20.png) ===
+APLICACIONES DE ANÅLISIS ESPACIAL ESTRATÉGICO Ambiente & Ecosistemas: Modelado batimétrico y zonificaciön de 155 paisajes marinos (Caso: INVEMAR, Caribe y Pacifico). Salud & Movilidad: Determinaciön de zonas de susceptibilidad respiratoria por emisiones de mon6xido de carbono (CO) en corredores de transporte (Caso: Popayån). Ordenamiento Territorial: Directorios nacionales de datos y consolidaciön de infraestructuras de datos espaciales (ICDE / Sistema SWAMI). 11 Ciencia de Suelos & Clima: Optimizaci6n de redes de muestreo usando algoritmos genéticos para monitorear carbono orgånico del suelo (COS). Gesti6n Püblica: Arquitecturas de tres capas para consultar infraestructura de salud, educaciön y demografia (Caso: SIG_Quindio). PROJECT: GIS MATURITY BLUEPRINT
+
+=== SLIDE 19 (image21.png) ===
+FUSION DISCIPLINAR: GEOGRAFIA + INGENIERiA INFORMÅTICA Bases de Datos: Transiciön de tablas planas a SQL Espacial (PostGlS) y almacenamiento top016gico (TopoJSON). Desarrollo y Arquitectura: Implementaciön de APIs Ingenieria REST, servicios web OGC Geografia y despliegues en Informåtica contenedores/microservicios (JEE, Servlets). Data Science: Aplicaci6n de Interoperabilidad: Disefio de Machine Learning espacial, metadatos estrictos y estadistica avanzada y modelado predictivo (R, python). eståndares de intercambio para Infraestructuras de Datos Espaciales (IDE). PROJECT: GIS MATURITY Bl 1
+
+=== SLIDE 20 (image22.png) ===
+RADAR DE HABILIDADES.• DEL CONSUMIDOR AL CONSTRUCTOR DE INFRAESTRUCTURA GIS Geospatial Data Spatial Data Engineer: GIS Administrator: Gestiön Scientist: Modelado Disefio de pipelines ETL, de servidores predictivo, geoestadistica, optimizaciön de topologia (GeoServer/ArcGIS Server), algoritmos genéticos y control de calidad en seguridad de accesos y rendimiento (Tuning). e IA espacial. bases de datos. CONSUMIDOR DE DATOS CONSTRUCTOR DE INFRASTRUCTURA • GIS Analyst: Enfocado en GIS Developer: Creaciön de GIS Architect: Disefio aplicaciones web/m6viles, global de la soluci6n, geoprocesamiento, anälisis espacial aplicado automatizaciön y consumo orquestaciön Cloud e y cartografia temética. de APIs (ej. integraciön Cliente- JavaScript/OpenLayers). Servidor-Base de Datos. PROJECT: GIS MATURITY Bl 1 lgDDINT
+
+=== SLIDE 21 (image23.png) ===
+ARQUITECTURA DE SOFTWARE GEOESPACIAL 3-CAPAS CAPA DE PRESENTACIÖN (CLIENTE) Navegadores Web (HTML/JS, Mapfish, OpenLayers) Desktop GIS Lögica de CAPA LOGICA (SERVIDOR DE APLICACIONES) web SIG CAPA DE PERSISTENCIA (BASE DE DATOS) Servidores de Mapas Negocio (GeoServer/ArcGlS Server publicando WMS/WFS) Motor relacional con extensiön espacial (ej. PostgreSQL + PostGlS) La infraestructura tecnolögica estå construida. Los datos fluyen. Ahora... iqué problema geogråfico vamos a resolver con ella? PROJECT: GIS MATURITY B' 1
+
+=== SLIDE 22 (image24.png) ===
+BLOQUE 3 Disefio Inicial de Sistemas GIS: De Ia Necesidad del Mundo Real a la Arquitectura Espacial Target_Audience: Futuros desarrolladores ingenieros de sistemas. Objective: Transformar el espacio fisico un modelo computacional estructurado.
+
+=== SLIDE 23 (image25.png) ===
+un problema realmente necesita [Dependencia_Espacia1] il-a soluciån cambia dråsticamente si eI evento ocurre en Ia coordenada X vs. [Correlaciön_Mu1tivariab1e] iNecesitas cruzar datos que solo tienen en comün su ubicaciön fisica (ej. ventas + clima)? [Topologia_y_Redes] amplica calcular rutas, conectividad, adyacencia o barreras fisicas? [Escala_de_lmpacto] a-as decisiones afectan territorios, jurisdicciones o radios de influencia medibles? si NO NOT REQUIRED si NO si NO NOT REQUIRED si NO CONSIDER ALTERNATIVES 2 si GIS REQUIRED Si tu problema se puede resolver ordenando una tabla REGLA DE ORO: de Excel por cödigo postal, NO necesitas un sistema GIS complejo.
+
+=== SLIDE 24 (image26.png) ===
+Ingenieria de Requisitos: EL ANTI-PATRÖN: Enfoque Novato Centrado prematuramente en la interfaz visual. [ERROR]. • "Necesitamos un mapa interactivo de clientes. ' [ERROR]: "Quiero un dashboard con pines de colores. " [ERROR] : "Hay que poner esta base de datos en Google Maps. " Jamås comiences el diseöo diciendo Problema vs. Soluci6n Tecn016gica EL ARQUITECTO ESPACIAL: Enfoque Técnico Centrado en el modelo analitico. [SUCCESS] : "Entender por qué caen Ias ventas en zonas de alta densidad vehicular. " [SUCCESS] : "Optimizar la distribuciön para reducir tiempos de entrega en un 15%. " [SUCCESS] : "Predecir åreas de riesgo de inundaciön para reubicar infraestructura. " "necesitamos un mapa". El mapa es solo una interfaz de salida; tü estås diseöando un modelo analitico computacional.
+
+=== SLIDE 25 (image27.png) ===
+Estructura de un Problema Geogråfico (El Stack) El objetivo central de negocio o L6: PREGUNTA investigaci6n que detona el sistema. L5: LI: [La_Res01uci6n] ESCALA [Los_Datos] VARIABLES [Los_Agentes] ACTORES [El_Evento] FENåMENO [El_Contenedor] TERRITORIO Nivel de detalle requerido (ej. Manzana, municipio, pais) . Atributos medibles (ej. Niveles de C02, densidad poblacional) . iQuiénes generan, sufren o gestionan el fenåmeno? (ej. Ciudadanos, autoridades) . iQué ocurre o cambia? (ej. Propagaciån de enfermedades, deforestacién) . Contexto fisico y fronteras (ej. Cuenca hidrogråfica, Comuna 4) .
+
+=== SLIDE 26 (image28.png) ===
+Clasificaci6n de las Preguntas Espaciales (Query Types) [XY_Coord] [CLUSTERING] [LOCALIZACIÖN] (06nde estå?) Inventario y posiciån absoluta. [DISTRIBUC1åN] QCuå1 es el patr6n?) Agrupamiento (Clustering) o dispersiån. [Capa_A] d=150m d=50m o [P nto_Centra1] [RUTA_OPTIMA] [PROXIMIDAD] (iQué estå cerca?) Zonas de influencia y distancia. [CONECTIVIDAD] QC6mo se relacionan?) Rutas, redes y topologia. [Capa_B] [SUPERPOSIC1åN] (iQué coincide?) Intersecci6n espacial de variables. 00 o o o [DISPERSIÖN] o [Nil [INTERSECC1åN: An B] [ESTADO: Til [ESTADO: T2] [ESTADO: T3] [CAMBIO TEMPORAL] QC6mo evoluciona?) Series de tiempo espacial.
+
+=== SLIDE 27 (image29.png) ===
+Diseäando el Modelo de Informaciån DATOS ESPACIALES (Geometrias) Ountos (postes) , Lineas (vias) o Poligonos (barrios)? iRåster o Vectorial? DATOS ALFANUMÉRICOS (Atlibutos) Tablas relacionales tradicionales asociadas a las geometrias (ej. IDs, nombres, costos) . CID] [Nombre] [Costo_USD] [Tipo] [Punto] o [XY_Coord] [Linea] [Segment] [001] [Poste A] [150] [002] [Via Norte] [2500] [Metal] [Asfalto] [Poligono] [Area_2D] Spatial_Data_0bject PROCEDENCIA (Linaje) Fuente original del dato. Define Ia confiabilidad y autoridad técnica. TEMPORALIDAD (Timestamps) iSon datos eståticos, hist6ricos, o telemetrfa en tiempo real (IoT/Streaming)? [T_Static] [T_Histårico] [timestamp] [log_history] [telemetry_stream] CALIDAD (Metadata) Tolerancia al error y precisi6n posicional. ilmportan centimetros o ki16metros? [data_origin] [Fuente_0rigina1] [data_01igin] [Procesamiento_ETL] [data_origin] [source_authority] [Autoridad_Técnica] [provenance_chain] [Precisiån] [Tolerancia] [error_margin] [positional_accuracy] [confidence_level]
+
+=== SLIDE 28 (image30.png) ===
+Matriz de Adquisici6n (Trade-offs Arquitect6nicos) FUENTE DE DATOS [Datos Propios] [Datos Abiertos (Open Data)] [Sensores / IoT] [APIs de Terceros] [Servicios OGC (WMS/WFS)] [Informaci6n Institucional] CARACTERfSTICA TÉCNICA MÉTRICAS (Control / Costo / Integraci6n) Levantamiento in-house/campo. OSM, Portales de gobierno. Estaciones climåticas, telemetria. Google Maps, Mapbox. Infraestructuras de Datos Espaciales. Catastros, Institutos (IGAC) . [Control: Alto] [Control: Bajo] [Tiempo Real: Sf] [Costo: Alto] [Costo: Bajo] [Complejidad: Alta] [Escalabilidad: Alta] [Esfuerzo: Bajo] [Integraci6n: Media] [Integraci6n: Media] [Volumen: Masivo] [Dependencia: Alta] [Interoperabilidad: Nativa] [Fiabilidad: Måxima] [Integraci6n: Directa] [Acceso: Burocråtico]
+
+=== SLIDE 29 (image31.png) ===
+El Motor de Procesamiento (Spatial Filter(SQL) [Consulta] Seleccionar datos por atributos (ej. SELECT escuelas WHERE Geocode(Address) [Geocodificaci6n] Convertir texto en coordenadas espaciales (X, Y) . Buffer(Entity, Distance) Toolkit) capacity > 500) . [Proximidad] Generar poligonos de zona de influencia (ej. 100m alrededor de un rio). Intersect (Layer_A, Layer_B) [Overlay] Unir capas para hallar coincidencias (ej. Zonas escolares intersectadas con Route(Node_A, Node_B) [Conectividad] Algoritmos de grafos (Dijkstra) para determinar caminos 6ptimos. Aggregate(Points, Polygon) [Agregaci6n Espacial] Resumir entidades (ej. Conteo de incidentes por municipio) . ooo Input Output Textstring Input (X, Y) Output Distance Input Output Laye r —A Input rutas) . Layer_B Output Input Input Output 00 Output
+
+=== SLIDE 30 (image32.png) ===
+Eligiendo la Interfaz de Salida DASHBOARD GEOGRÅFICO Mapas + KPIs interactivos. Para tomadores de decisiones. APLICACIÖN WEB (WebMap) Exploraci6n libre o crowdsourcing. -l MAPA ESTÅTICO / INFOGRAFfA Mensaje directo. Ideal para reportes. Usuario Final (Püblico) Interactivo / Exploratorio MODELO ANALfTICO (Jupyter/Scripts) Predicciones complejas para Data Scientists. SERVICIOS (WMS/WFS) / API ESPACIAL Soluciones Headless. Para que otros sistemas consuman Ia 16gica. El producto tecn016gico se acopla al usuario y al problema, Usuario Técnico (Devs) nunca a tu framework favorito.
+
+=== SLIDE 31 (image33.png) ===
+Arquitectura End-to-End: (Caso Popayån) Emisiones Urbanas PIPELINE DE OPERACIONES (The Engine) co PROBLEMA son los corredores con exposici6n critica a emisiones de CO por transporte püblico? DATOS INGESTADOS Malla vial (Vector) Rutas de buses (Atlibutos de frecuencia) Mediciones de CO (Sensores/GPS) Geocodificaciån (Rutas) Buffer (Zona influencia 126m 126m) Rasterizaci6n (Dispersiön espacial) Supezposici6n (Mapa base + Zonas) Reclasificaci6n (indices: Aceptable, Regular, Malo, Critico) PRODUCTO FINAL Modelo Analitico (Zonificaci6n) para Autoridades Ambientales . (Zonificaciön de riesgo de exposiciön)
+
+=== SLIDE 32 (image34.png) ===
+Reto de Arquitectura Colaborativa (System Design) Misi6n: Como equipo de ingenieria, diseäen la arquitectura 16gica para un nuevo sistema geoespacial. [1] FORMULAC1åN Define el problema geogråfico usando el framework de capas. [4] QUERIES Formula 2 preguntas espaciales clave (ej . proximidad, conectividad) . [2] JUSTIFICAC1åN qué este problema exige GIS y no una base de datos relacional eståndar? [5] MODELO DE DATOS Lista 3 datasets vitales (Especificando fuentes, formato y atributos). [3] USUARIOS Identifica roles especificos de consumo. [6] PRODUCTO Propån y justifica la interfaz tecn016gica de salida. No escribiremos c6digo hoy. Hoy somos arquitectos de sistemas. Abran el link en el chat y comiencen a diseäar.
+

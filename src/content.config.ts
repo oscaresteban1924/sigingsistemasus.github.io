@@ -121,6 +121,43 @@ const semanasCollection = defineCollection({
           descripcion: z.string(),
         })
         .optional(),
+      preguntaDetonante: z.string().optional(),
+      antesDeComenzar: z.array(z.string()).default([]),
+      preguntasParaPensar: z
+        .array(
+          z.object({
+            pregunta: z.string(),
+            respuestaContextual: z.string(),
+          }),
+        )
+        .default([]),
+      rutaAprendizaje: z
+        .array(
+          z.object({
+            paso: z.number(),
+            titulo: z.string(),
+            descripcion: z.string(),
+          }),
+        )
+        .default([]),
+      importanciaIngSistemas: z
+        .array(
+          z.object({
+            concepto: z.string(),
+            aplicacion: z.string(),
+          }),
+        )
+        .default([]),
+      conceptosDetallados: z
+        .array(
+          z.object({
+            concepto: z.string(),
+            definicion: z.string(),
+            contexto: z.string(),
+            relacionIngSistemas: z.string(),
+          }),
+        )
+        .default([]),
       duracionEstimada: z.string().optional(),
       heroImage: image().optional(),
       heroImageAlt: z.string().optional(),
