@@ -14,11 +14,11 @@ const cards = (await getSortedPosts()).map(toPostCard);
 ---
 
 <BaseLayout
-  title={`Latest Posts — ${siteData.name}`}
-  description="Dev Dispatches — field notes from the code frontier: web operations, vintage architectures, and unconventional full-stack builds, cataloged as retro archive modules."
+  title={`Semanas — ${siteData.name}`}
+  description="Semanas de clase y contenidos del curso Sistemas de Información Geográfica para Ingeniería de Sistemas."
 >
   <div class="site-container flex flex-col gap-10 py-8 md:gap-12 md:py-12">
     <BlogHero />
-    <CardGrid headingId="archive-modules-heading" title="Archive Modules" items={cards} />
+    <CardGrid headingId="archive-modules-heading" title="Todas las Semanas" items={cards} />
   </div>
 </BaseLayout>

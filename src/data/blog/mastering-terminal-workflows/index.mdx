@@ -1,26 +1,22 @@
 ---
-title: "Mastering Terminal Workflows"
-description: "Boost your productivity with custom shell scripts, terminal multiplexers, helpful aliases, and tmux configurations."
+title: "Semana 4: Bases de Datos Espaciales e Indización R-Tree en PostGIS"
+description: "Modelado relacional con la extensión PostGIS, indexación espacial GiST R-Tree y optimización de Spatial SQL."
 authors: ["admin"]
-pubDate: "2026-06-29"
-heroImage: "../../../assets/images/demo/project-cli-quest.png"
-heroImageAlt: "A pixel-art command-line terminal glowing on a retro desk"
-category: "Guide"
-tags: ["terminal", "productivity"]
+pubDate: "2026-07-05"
+heroImage: "../../../assets/images/demo/post-css-grid.jpg"
+heroImageAlt: "Consultas espaciales PostGIS en terminal SQL"
+category: "Práctica"
+tags: ["postgis", "sql", "r-tree"]
 ---
 
-The terminal is the highest-bandwidth interface you own. A little configuration turns it from a
-prompt into a cockpit.
+Las bases de datos relacionales tradicionales utilizan índices B-Tree indexando valores en una sola dimensión. Para datos bidimensionales (X, Y), se requiere indexación R-Tree basada en Bounding Boxes (MBR).
 
-## tmux + Aliases
+## Consultas Espaciales en PostGIS
 
-Two changes pay for themselves within a day:
+```sql
+SELECT nombre, ST_Distance(geom, ST_MakePoint(-75.567, 6.248)::geography) AS distancia_m
+FROM capas_infraestructura
+WHERE ST_DWithin(geom, ST_MakePoint(-75.567, 6.248)::geography, 5000);
+```
 
-- **tmux:** persistent, splittable sessions that survive a dropped SSH connection — detach, reconnect,
-  and resume exactly where you left off.
-- **Aliases + functions:** collapse the commands you type fifty times a day into two keystrokes. `gs`
-  for `git status`, `gp` for `git push`, a `mkcd` that makes a directory and enters it.
-
-Layer in a fuzzy finder for history search and directory jumps and navigation stops being a chore.
-The goal is not speed for its own sake — it is keeping your attention on the problem instead of the
-plumbing.
+El uso de `USING GIST (geom)` permite resolver consultas espaciales en milisegundos sobre millones de registros.

@@ -15,19 +15,21 @@ import { Reveal } from "@components/ui/reveal";
 import PixelChip from "./PixelChip.astro";
 
 const stack: readonly { label: string; icon: PixelIconName }[] = [
-  { label: "JavaScript", icon: "code" },
-  { label: "React", icon: "component" },
-  { label: "Node.js", icon: "server" },
-  { label: "Python", icon: "flash" },
+  { label: "PostGIS", icon: "server" },
+  { label: "QGIS", icon: "component" },
+  { label: "Python (GeoPandas)", icon: "code" },
+  { label: "GDAL / OGR", icon: "package" },
+  { label: "GeoJSON / GML", icon: "type" },
+  { label: "Servicios OGC (WMS/WFS)", icon: "globe" },
+  { label: "OpenStreetMap", icon: "globe" },
+  { label: "TypeScript / Web GIS", icon: "code" },
   { label: "Docker", icon: "package" },
-  { label: "AWS", icon: "globe" },
-  { label: "Git", icon: "git-branch" },
-  { label: "TypeScript", icon: "type" },
+  { label: "Spatial SQL", icon: "flash" },
 ];
 ---
 
 <Reveal as="section" aria-labelledby="tech-stack-heading" class="flex flex-col gap-6">
-  <SectionHeading id="tech-stack-heading" title="Tech Stack" />
+  <SectionHeading id="tech-stack-heading" title="Ecosistema Tecnológico Geoespacial" />
 
   <ul class="flex flex-wrap gap-3 sm:gap-4">
     {

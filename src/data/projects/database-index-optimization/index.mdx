@@ -1,35 +1,33 @@
 ---
-title: "Database Index Optimization"
-description: "Analyzing nested query plans, rebuilding indexes, and reducing latency for write-heavy high-traffic database engines."
-tagline: "A deep tuning pass on a write-heavy engine — reading query plans by hand and rebuilding indexes until the tail latency collapsed."
+title: "Lab 6: Optimización de Índices Espaciales R-Tree y Benchmark"
+cardTitle: "Lab 6: Optimización e Índices R-Tree"
+description: "Evaluación comparativa de rendimiento en consultas espaciales con índices GiST, BRIN y mallas H3."
+tagline: "Benchmark avanzado de estructuras de datos espaciales y estrategias de indexación multidimensional."
 status: "in-progress"
-moduleId: "#06_DB"
+moduleId: "#06_BENCHMARK"
 order: 6
-thumbnail: "../../../assets/images/demo/post-css-grid.jpg"
-thumbnailAlt: "A glowing sword rising from a pedestal in a crystal cave"
-tech: ["PostgreSQL", "Redis", "SQL", "Database"]
+thumbnail: "../../../assets/images/demo/project-pixel-art.png"
+thumbnailAlt: "Pruebas de rendimiento e índices espaciales R-Tree"
+tech: ["PostGIS", "R-Tree", "GiST", "H3"]
 specs:
-  - { label: "Engine", value: "PostgreSQL" }
-  - { label: "Cache", value: "Redis" }
-  - { label: "Language", value: "SQL" }
-  - { label: "Workload", value: "Write-Heavy" }
+  - { label: "Index Types", value: "GiST / SP-GiST / BRIN" }
+  - { label: "Discrete Index", value: "Uber H3 Spatial Index" }
+  - { label: "Dataset Size", value: "1,000,000 Geometrías" }
+  - { label: "Metric", value: "Execution Time (ms)" }
 features:
-  - lead: "Plan analysis"
-    text: "EXPLAIN output is parsed to flag sequential scans on hot paths."
-  - lead: "Index rebuilds"
-    text: "Partial and covering indexes replace bloated B-trees on the busiest tables."
-  - lead: "Cache offload"
-    text: "Redis absorbs read spikes that would otherwise thrash the write path."
-archCaption: "[Query Planner]"
+  - lead: "Pruebas EXPLAIN ANALYZE"
+    text: "Inspección de planes de ejecución de consultas espaciales complejas."
+  - lead: "Indexación Discreta H3"
+    text: "Conversión de puntos lat/lon a índices de hexágonos H3 para agregación ultra rápida."
+  - lead: "Benchmark de Distancia"
+    text: "Comparación entre funciones geometry vs geography en búsquedas k-NN (k-Nearest Neighbors)."
+archCaption: "[Motor de Indexación Multidimensional]"
 challenge:
-  title: "Threat: Write Amplification"
-  body: "Every new index sped reads but taxed the write path, and this table was overwhelmingly write-heavy."
+  title: "Reto: Alto Consumo de Disco por Índices GiST"
+  body: "Los índices GiST sobre tablas gigantescas consumían más espacio de disco que los propios datos de atributos."
 solution:
-  title: "Remedy: Selective Indexing"
-  body: "Partial indexes cover only the queried subset, cutting write overhead while keeping reads fast. (Tuning ongoing.)"
+  title: "Solución: Índices BRIN e Indexación Jerárquica H3"
+  body: "Uso de índices BRIN en datos ordenados físicamente y almacenamiento de identificadores enteros H3 de 64 bits."
 ---
 
-A write-heavy Postgres engine was missing its latency budget under load. We read the query plans by
-hand, replaced bloated indexes with partial and covering ones, and moved read spikes onto a Redis
-cache so they no longer competed with writes. Tail latency is already down sharply, with further
-tuning in progress.
+En el laboratorio final, los estudiantes evalúan técnicas avanzadas de optimización de bases de datos espaciales a escala masiva.

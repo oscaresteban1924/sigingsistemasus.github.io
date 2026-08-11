@@ -1,25 +1,22 @@
 ---
-title: "Building the Ultimate CSS Grid"
-description: "A deep dive into constructing robust, responsive layouts using native CSS grid, without relying on external frameworks."
+title: "Semana 1: Introducción a los Sistemas de Información Geográfica"
+description: "Fundamentos computacionales de los SIG, arquitectura de datos espaciales y su aplicación en la Ingeniería de Sistemas."
 authors: ["admin"]
 pubDate: "2026-07-20"
 heroImage: "../../../assets/images/demo/post-css-grid.jpg"
-heroImageAlt: "A glowing sword rising from a pedestal in a crystal cave"
-category: "Quest"
-tags: ["css", "webdev"]
+heroImageAlt: "Modelado computacional del territorio"
+category: "Teoría"
+tags: ["gis", "introduccion", "sistemas"]
 ---
 
-Native CSS Grid finally makes complex, two-dimensional layouts trivial — no float hacks, no framework
-tax, no twelve-column mental model imported from another era.
+Un Sistema de Información Geográfica (SIG) desde la perspectiva de la Ingeniería de Sistemas no es simplemente un software cartográfico, sino un sistema de información distribuido diseñado para la captura, almacenamiento, manipulación, análisis y representación de datos espacialmente referenciados.
 
-## Why Native Grid Wins
+## La Dimensión Espacial en la Computación
 
-Grid lets you describe a layout the way you would sketch it: rows, columns, and named areas. The
-browser handles the rest, reflowing responsibly as the viewport changes.
+A diferencia de los sistemas de información tradicionales donde los atributos son alfa-numéricos, los SIG introducen la geometría y la topología como tipos de datos primarios de primer nivel.
 
-- **Fewer wrappers:** one container replaces a nest of rows and columns.
-- **Intrinsic sizing:** `minmax()` and `fr` units size tracks from content, not magic numbers.
-- **Named areas:** `grid-template-areas` reads like ASCII art — the layout is legible at a glance.
+- **Representación Geométrica:** Puntos, líneas, polígonos y mallas tridimensionales.
+- **Relaciones Topológicas:** Adyacencia, contención, intersección y conectividad.
+- **Interoperabilidad de Datos:** Estándares OGC (Open Geospatial Consortium) para intercambio de información.
 
-Start with `repeat(auto-fit, minmax(16rem, 1fr))` and you have a responsive card wall in a single
-line. Everything else is refinement.
+Comprender la abstracción del mundo real a modelos de objetos y campos es la base para diseñar arquitecturas de software geoespaciales escalables.

@@ -32,7 +32,7 @@ const { label: statusLabel, variant: statusVariant } = statusMeta(status);
     class="primary-focus text-info hover:text-success inline-flex w-fit items-center gap-2 text-xs font-bold tracking-wide uppercase transition-colors"
   >
     <PixelIcon name="arrow-left" class="size-3.5" />
-    Back to Project Log
+    Volver a Laboratorios
   </a>
 
   <!-- Hero Panel (node 72:211) -->
@@ -46,7 +46,7 @@ const { label: statusLabel, variant: statusVariant } = statusMeta(status);
       <div class="flex flex-wrap items-center justify-between gap-3">
         <Badge pixel variant={statusVariant}>{statusLabel}</Badge>
         <span class="text-muted-foreground text-xs font-bold tracking-wide uppercase">
-          Module_ID: {moduleId}
+          Módulo_ID: {moduleId}
         </span>
       </div>
 
@@ -61,7 +61,7 @@ const { label: statusLabel, variant: statusVariant } = statusMeta(status);
     <div class="flex flex-col gap-6 lg:col-span-2">
       <!-- Overview Card — heading + the rendered MDX body (node 72:220) -->
       <PixelPanel class="flex flex-col gap-4 p-6 sm:p-7">
-        <h2 class="h3 text-secondary-700 dark:text-secondary">Project Overview</h2>
+        <h2 class="h3 text-secondary-700 dark:text-secondary">Descripción del Laboratorio</h2>
         <div class="text-muted-foreground space-y-4 text-base leading-relaxed">
           <slot />
         </div>
@@ -69,7 +69,7 @@ const { label: statusLabel, variant: statusVariant } = statusMeta(status);
 
       <!-- Key Features Card (node 72:223) -->
       <PixelPanel class="flex flex-col gap-4 p-6 sm:p-7">
-        <h2 class="h3 text-secondary-700 dark:text-secondary">System Features</h2>
+        <h2 class="h3 text-secondary-700 dark:text-secondary">Funcionalidades y Componentes</h2>
         <ul class="flex flex-col gap-4">
           {
             features.map((feature) => (
@@ -88,7 +88,7 @@ const { label: statusLabel, variant: statusVariant } = statusMeta(status);
     <div class="flex flex-col gap-6">
       <!-- Tech Specs Card (node 72:236) — label/value grid, values in success green -->
       <PixelPanel class="flex flex-col gap-4 p-6">
-        <h2 class="font-display text-info text-xs uppercase sm:text-sm">SYS_SPECS</h2>
+        <h2 class="font-display text-info text-xs uppercase sm:text-sm">ESPECIFICACIONES</h2>
         <dl
           class="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-2 text-xs font-bold uppercase sm:text-sm"
         >
@@ -106,7 +106,7 @@ const { label: statusLabel, variant: statusVariant } = statusMeta(status);
       <!-- Architecture Card (node 72:251) — a framed diagram box: a fixed decorative glyph + the
            per-project caption (which carries the differentiation). -->
       <PixelPanel class="flex flex-col gap-4 p-6">
-        <h2 class="font-display text-info text-xs uppercase sm:text-sm">ARC_MAP</h2>
+        <h2 class="font-display text-info text-xs uppercase sm:text-sm">MAPA_ARQUITECTURA</h2>
         <div
           class="border-border text-muted-foreground flex flex-col items-center justify-center gap-3 border-2 p-8"
         >
@@ -124,7 +124,7 @@ const { label: statusLabel, variant: statusVariant } = statusMeta(status);
     class="flex flex-col gap-6 p-6 sm:p-7"
   >
     <h2 id="challenges-heading" class="h3 text-secondary-700 dark:text-secondary">
-      Challenges &amp; Solutions
+      Desafíos y Soluciones Computacionales
     </h2>
     <div class="grid gap-6 md:grid-cols-2">
       <div class="flex flex-col gap-2">

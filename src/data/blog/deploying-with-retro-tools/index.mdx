@@ -1,25 +1,26 @@
 ---
-title: "Deploying with Retro Tools"
-description: "How we maintain a modern CI/CD pipeline while pretending it's 1995. A look into our unconventional devops setup."
+title: "Semana 2: Modelos de Datos Espaciales (Vectorial vs Raster)"
+description: "Estructuras de datos computacionales para representar entidades discretas y continuas en el territorio."
 authors: ["admin"]
-pubDate: "2026-07-06"
+pubDate: "2026-07-15"
 heroImage: "../../../assets/images/demo/post-retro-deploy.jpg"
-heroImageAlt: "An isometric illustration of a green-lit server room"
-category: "Tech"
-tags: ["devops", "ci"]
+heroImageAlt: "Modelado vectorial y raster geoespacial"
+category: "Teoría"
+tags: ["vector", "raster", "estructuras-de-datos"]
 ---
 
-You can run a thoroughly modern pipeline while keeping the aesthetic firmly in 1995 — green phosphor,
-ASCII banners, and all.
+En la ingeniería de datos geoespaciales, la elección del modelo de datos determina el costo computacional de los algoritmos de consulta y análisis.
 
-## The Pipeline
+## Modelo Vectorial
 
-Under the retro veneer it is boringly current: commits trigger a build, tests gate the merge, and a
-green deploy promotes to production. What we changed is the _feel_ — every log line prints in a
-monospace terminal palette, and a successful ship renders an ANSI victory screen.
+Representa el espacio mediante geometrías discretas bien definidas (Simple Features Schema de la OGC):
 
-- **Immutable artifacts:** every build is a versioned, reproducible bundle.
-- **Fast rollback:** the previous release is one command away.
-- **Loud feedback:** the terminal cheers when the deploy is green.
+- **Puntos (0D):** Coordenadas (X, Y) aisladas (ej. estaciones de monitoreo).
+- **Líneas (1D):** Secuencias ordenadas de vértices (ej. redes viales, tuberías).
+- **Polígonos (2D):** Anillos cerrados de coordenadas (ej. predios, municipios).
 
-Nostalgia is a UI layer. The engineering underneath stays honest.
+## Modelo Raster
+
+Representa el espacio como una matriz o cuadrícula continua de celdas (píxeles), donde cada celda almacena un valor atributo (ej. elevación DEM, imágenes satelitales).
+
+La elección entre vector y raster depende del problema computacional: análisis topológico vs geoprocesamiento matricial.

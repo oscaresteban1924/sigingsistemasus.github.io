@@ -1,22 +1,20 @@
 ---
-title: "History of the Floppy Disk"
-description: "Exploring the rise and fall of the iconic storage medium that shaped a generation of computing and gaming."
+title: "Semana 3: Sistemas de Referencia Espacial y Proyecciones (CRS/EPSG)"
+description: "Matemáticas de la transformación geoespacial, elipsoides, datums y códigos SRID/EPSG."
 authors: ["admin"]
-pubDate: "2026-07-13"
+pubDate: "2026-07-10"
 heroImage: "../../../assets/images/demo/post-floppy-disk.jpg"
-heroImageAlt: "A retro CRT monitor showing a pixel-art game menu"
-category: "Lore"
-tags: ["retro", "hardware"]
+heroImageAlt: "Proyecciones cartográficas y coordenadas EPSG"
+category: "Algoritmos"
+tags: ["crs", "epsg", "matematicas"]
 ---
 
-Before the cloud, before USB, an 8-inch magnetic square held the entire state of a machine — and
-taught a generation what "saving" meant.
+Transformar la superficie elipsoidal tridimensional de la Tierra a un plano bidimensional requiere modelos matemáticos rigurosos llamados proyecciones cartográficas.
 
-## From 8-Inch to 3.5
+## Conceptos Clave en Sistemas de Coordenadas
 
-The floppy shrank from 8 inches, to 5.25, to the rigid 3.5-inch shell that outlived them all.
-Capacity crept from a few hundred kilobytes to a "high density" 1.44 MB — a figure burned into the
-memory of anyone who ever shipped software in a cardboard box.
+- **Elipsoide y Datum:** WGS84 (EPSG:4326) vs SIRGAS / MAGNA-SIRGAS.
+- **Coordenadas Geográficas:** Latitud y Longitud medidas en grados sexagesimales.
+- **Coordenadas Proyectadas:** UTM o Transverse Mercator medidas en metros (ej. EPSG:3857 Web Mercator, EPSG:3116 / Origen Nacional Colombia).
 
-Its greatest legacy is a glyph: the save icon. Millions of people tap a picture of a device they have
-never physically held. The medium is dead; its silhouette is immortal.
+En desarrollo de software geoespacial, mezclar geometrías con diferentes SRID genera errores silenciosos en las consultas espaciales `ST_Distance` y `ST_Intersects`.

@@ -22,7 +22,7 @@ import siteData from "@config/siteData.json";
 import { socialLink } from "@config/socialData.json";
 
 const year = new Date().getFullYear();
-const copyright = `© ${year} — Game Over`;
+const copyright = `© ${year} — ${siteData.name}`;
 
 // Social row (Figma 5:96, glyphs swapped to the pixel set). `name` is validated against the
 // pixel-icon registry. Which platforms appear is this section's call; how one resolves is not.
@@ -36,8 +36,8 @@ const socialLinks: readonly SocialLink[] = [
 
 // Legal row (Figma 5:103). Trailing slashes match astro.config `trailingSlash: "always"`.
 const legalLinks = [
-  { label: "Privacy", href: "/privacy/" },
-  { label: "Terms", href: "/terms/" },
+  { label: "Privacidad", href: "/privacy/" },
+  { label: "Términos", href: "/terms/" },
 ] as const;
 ---
 
@@ -67,7 +67,7 @@ const legalLinks = [
     </ul>
 
     <!-- Legal links (Figma 5:103): tiny grey Press Start 2P → green on hover. -->
-    <nav aria-label="Legal">
+    <nav aria-label="Información Legal">
       <ul class="flex items-center gap-4">
         {
           legalLinks.map((link) => (

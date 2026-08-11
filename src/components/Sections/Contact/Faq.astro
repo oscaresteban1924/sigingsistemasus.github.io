@@ -1,14 +1,5 @@
 ---
-// src/components/Sections/Contact/Faq.astro — Figma "FaqSection" (node 9:75).
-//
-// The shared "Heading 2 + dashed rule" motif over a pixel box of disclosure rows. Reuses the zero-JS
-// Accordion primitive (native <details>) inside the shared PixelPanel; only the trigger row is
-// bespoke — a retro pixel +/− marker (two token-coloured bars, the vertical one fades when open) to
-// match the mock's "+", where the primitive's default trigger draws a chevron. Below the fold →
-// <Reveal> (auto-gated on useAnimations + reduced-motion by the primitive). Tokens only.
-//
-// CONTENT: the three Q&A are the mock's copy verbatim — editorial placeholder (retro flavour). Edit
-// them for your project; a filled honeypot / real support policy is your call, not lorem to keep.
+// src/components/Sections/Contact/Faq.astro — Preguntas Frecuentes del Curso.
 import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
 import { Accordion, AccordionContent, AccordionItem } from "@components/ui/accordion";
 import { PixelPanel } from "@components/ui/pixel-panel";
@@ -16,22 +7,22 @@ import { Reveal } from "@components/ui/reveal";
 
 const faqs = [
   {
-    q: "Q: Can I submit my own guest post / devlog?",
-    a: "YES! I am always looking for fellow developers and historians to write about retro tech. Send me a pitch with your outline, and I'll check your specs.",
+    q: "¿Qué software libre necesito instalar para el laboratorio?",
+    a: "Requerimos QGIS 3.34 LTR, PostgreSQL 16 con la extensión PostGIS 3.4 y Python 3.11 con GeoPandas, Shapely y GDAL.",
   },
   {
-    q: "Q: Where can I find the code for your projects?",
-    a: "All my active pipelines, game engines, and retro devops pipelines are hosted on my GitHub repository. Pull requests are welcome, hero.",
+    q: "¿Dónde encuentro las guías y los datasets de los laboratorios?",
+    a: "Todos los datasets y guías están organizados por semana en la sección Laboratorios de esta plataforma y en el repositorio oficial de GitHub.",
   },
   {
-    q: "Q: How often are new quests published?",
-    a: "New devlogs and tutorials are released every alternate Tuesday. Subscribe to my Discord transmissions to get live ping alerts.",
+    q: "¿Cómo se evalúan los proyectos computacionales?",
+    a: "Cada laboratorio incluye entregables de código SQL/Python, archivos GeoJSON y una breve sustentación del modelo computacional implementado.",
   },
 ] as const;
 ---
 
 <Reveal as="section" aria-labelledby="faq-heading" class="flex flex-col gap-6">
-  <SectionHeading id="faq-heading" title="Frequently Asked System Questions" />
+  <SectionHeading id="faq-heading" title="Preguntas Frecuentes del Curso" />
 
   <PixelPanel elevated class="px-6 py-2 sm:px-8">
     <Accordion class="border-t-0">

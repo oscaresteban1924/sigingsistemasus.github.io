@@ -8,8 +8,8 @@ import type { CollectionEntry } from "astro:content";
 import { statusMeta, toProjectCard } from "./projectCards.ts";
 
 // statusMeta: both branches, exhaustively.
-assert.deepEqual(statusMeta("complete"), { label: "[Complete]", variant: "success" });
-assert.deepEqual(statusMeta("in-progress"), { label: "[In Progress]", variant: "warning" });
+assert.deepEqual(statusMeta("complete"), { label: "[Completado]", variant: "success" });
+assert.deepEqual(statusMeta("in-progress"), { label: "[En Desarrollo]", variant: "warning" });
 
 // toProjectCard: a minimal stub entry (only the fields the mapper reads). The cast is compile-time
 // only — Node strips it, leaving a plain object at runtime.
@@ -33,9 +33,9 @@ assert.equal(
   "href builds from the entry id + trailing slash",
 );
 assert.equal(card.title, "Building a Real-Time Chat App", "cardTitle wins over title when present");
-assert.equal(card.badgeLabel, "[Complete]");
+assert.equal(card.badgeLabel, "[Completado]");
 assert.equal(card.badgeVariant, "success");
-assert.equal(card.cta, "View");
+assert.equal(card.cta, "Ver Laboratorio");
 assert.deepEqual(card.tags, ["React", "Node.js"]);
 
 // cardTitle absent → falls back to the canonical title.
@@ -57,7 +57,7 @@ assert.equal(
   "Database Index Optimization",
   "falls back to title when cardTitle is omitted",
 );
-assert.equal(card2.badgeLabel, "[In Progress]");
+assert.equal(card2.badgeLabel, "[En Desarrollo]");
 assert.equal(card2.badgeVariant, "warning");
 
 console.log("projectCards.test.ts — all assertions passed");

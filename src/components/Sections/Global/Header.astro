@@ -33,7 +33,7 @@ const pathname = Astro.url.pathname;
     <a
       href="/"
       class="primary-focus flex min-w-0 items-center gap-3 sm:gap-4"
-      aria-label={`${siteData.name} — home`}
+      aria-label={`${siteData.name} — inicio`}
     >
       <span
         class="bg-accent border-border flex size-9 shrink-0 items-center justify-center overflow-clip border-4 p-1 sm:size-10"
@@ -66,7 +66,7 @@ const pathname = Astro.url.pathname;
       <!-- `lg:contents` dissolves the wrapper on desktop so <Nav> flexes with its siblings; below lg
            the whole nav landmark is display:none (not just visually hidden). -->
       <div class="hidden lg:contents">
-        <Nav aria-label="Primary" class="gap-6 xl:gap-8">
+        <Nav aria-label="Navegación principal" class="gap-6 xl:gap-8">
           <HeaderNavLinks pathname={pathname} />
         </Nav>
       </div>
@@ -84,7 +84,7 @@ const pathname = Astro.url.pathname;
         aria-controls="site-menu"
         class="pixel-btn h-9 shrink-0 px-3 text-[10px] leading-none uppercase lg:hidden"
       >
-        Menu
+        Menú
       </button>
     </div>
   </div>
@@ -93,17 +93,17 @@ const pathname = Astro.url.pathname;
        is the Sheet's own `_dialog` hook (Escape + backdrop dismiss are automatic). -->
   <Sheet id="site-menu" side="right" aria-labelledby="site-menu-title" class="w-72 gap-6">
     <div class="flex items-center justify-between">
-      <span id="site-menu-title" class="font-display text-foreground text-sm uppercase">Menu</span>
+      <span id="site-menu-title" class="font-display text-foreground text-sm uppercase">Menú</span>
       <button
         type="button"
         data-dialog-close
         class="pixel-btn h-9 shrink-0 px-3 text-[10px] leading-none uppercase"
       >
-        Close
+        Cerrar
       </button>
     </div>
 
-    <Nav orientation="vertical" aria-label="Primary" class="gap-2">
+    <Nav orientation="vertical" aria-label="Navegación principal" class="gap-2">
       <HeaderNavLinks pathname={pathname} fullWidth />
     </Nav>
   </Sheet>

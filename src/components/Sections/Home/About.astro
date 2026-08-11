@@ -1,56 +1,45 @@
 ---
-// src/components/Sections/Home/About.astro — Figma "About Me Section" (node 14:116).
-//
-// Section heading + a pixel avatar tile beside a bio and a LOCATION / ROLE / FAVORITE meta list.
-// One desktop frame → the avatar sits above the bio on phones, beside it from sm. Below-the-fold →
-// <Reveal>. The meta is a real <dl> (label→value pairs). Tokens only.
-//
-// CONTENT: the bio + meta VALUES come from portfolioData.profile (buyer-editable); the meta LABELS
-// (Location/Role/Favorite) are presentational and stay here. Avatar is a demo asset (plain <img>, no Sharp).
+// src/components/Sections/Home/About.astro — Progresión de Ingeniería Geoespacial.
 import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
 import { Reveal } from "@components/ui/reveal";
 import portfolioData from "@config/portfolioData.json";
-import avatar from "@images/about-avatar.png";
 
-const { shortBio, meta: profileMeta } = portfolioData.profile;
-const meta = [
-  { label: "Location", value: profileMeta.location },
-  { label: "Role", value: profileMeta.role },
-  { label: "Favorite", value: profileMeta.favorite },
+const steps = [
+  { step: "01", title: "Comprender", desc: "Abstracción del mundo real y sistemas de coordenadas (CRS/EPSG)." },
+  { step: "02", title: "Modelar", desc: "Estructuras de datos vectoriales (geometrías OGC) y matrices raster." },
+  { step: "03", title: "Consultar", desc: "Spatial SQL en PostGIS y predicados topológicos (ST_Intersects)." },
+  { step: "04", title: "Analizar", desc: "Geoprocesamiento, álgebra de mapas y algoritmos de distancia." },
+  { step: "05", title: "Programar", desc: "Automatización de pipelines geoespaciales en Python (GeoPandas)." },
+  { step: "06", title: "Integrar", desc: "Servicios web geoespaciales interoperables OGC (WMS/WFS/WCS)." },
+  { step: "07", title: "Publicar", desc: "Desarrollo de visores Web GIS interactivos (Leaflet/MapLibre)." },
+  { step: "08", title: "Arquitectura", desc: "Diseño de sistemas geoespaciales distribuidos de alto rendimiento." },
 ] as const;
 ---
 
-<Reveal as="section" aria-labelledby="about-heading" class="flex flex-col gap-6">
-  <SectionHeading id="about-heading" title="About Me" />
+<Reveal as="section" aria-labelledby="progression-heading" class="flex flex-col gap-6">
+  <SectionHeading id="progression-heading" title="Perspectiva de Ingeniería de Sistemas" />
 
-  <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
-    <div
-      class="bg-accent border-border shadow-pixel size-32 shrink-0 overflow-clip border-4 sm:size-40"
-    >
-      <img
-        src={avatar.src}
-        width={avatar.width}
-        height={avatar.height}
-        alt="Pixel-art portrait of the site author"
-        loading="lazy"
-        decoding="async"
-        class="size-full object-cover"
-      />
+  <div class="flex flex-col gap-4">
+    <p class="text-muted-foreground text-base leading-relaxed">
+      {portfolioData.profile.shortBio}
+    </p>
+
+    <div class="bg-accent border-border border-4 p-4 text-center">
+      <span class="font-display text-info text-xs uppercase sm:text-sm">
+        Ruta del Estudiante: Consumidor de Mapas ➔ Constructor de Sistemas Geoespaciales
+      </span>
     </div>
 
-    <div class="flex flex-1 flex-col gap-4">
-      <p class="text-muted-foreground text-base leading-relaxed">{shortBio}</p>
-
-      <dl class="flex flex-col gap-2 text-sm">
-        {
-          meta.map((row) => (
-            <div class="flex items-center justify-between gap-4">
-              <dt class="text-foreground font-bold uppercase">{row.label}</dt>
-              <dd class="text-muted-foreground uppercase">{row.value}</dd>
-            </div>
-          ))
-        }
-      </dl>
+    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        steps.map((item) => (
+          <PixelPanel class="flex flex-col gap-2 p-4">
+            <span class="font-display text-secondary text-xs uppercase">{item.step}. {item.title}</span>
+            <p class="text-muted-foreground text-xs">{item.desc}</p>
+          </PixelPanel>
+        ))
+      }
     </div>
   </div>
 </Reveal>

@@ -15,8 +15,8 @@ import avatar from "@images/about-avatar.png";
 
 const { role, years, skills } = portfolioData.profile;
 const specs = [
-  { label: "Role", value: role, valueClass: "text-foreground" },
-  { label: "Yrs", value: years, valueClass: "text-success" },
+  { label: "Programa", value: role, valueClass: "text-foreground" },
+  { label: "Duración", value: years, valueClass: "text-success" },
 ] as const;
 
 // Skill bars: label + percentage (from portfolioData). The track is the fixed black pixel surface
@@ -26,7 +26,7 @@ const bars = skills;
 ---
 
 <section aria-labelledby="dev-profile-heading" class="flex flex-col gap-6">
-  <SectionHeading id="dev-profile-heading" title="Dev Profile" />
+  <SectionHeading id="dev-profile-heading" title="Ficha del Curso" />
 
   <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
     <div

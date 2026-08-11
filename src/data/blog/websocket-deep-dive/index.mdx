@@ -1,27 +1,26 @@
 ---
-title: "WebSocket Deep Dive"
-description: "Real-time communication patterns, scaling node architectures, Redis pub/sub backends, and critical production gotchas."
+title: "Semana 6: Geometría Computacional y Análisis Espacial con Python"
+description: "Algoritmos para intersección de polígonos, cálculo de convex hull y geoprocesamiento automatizado con GeoPandas."
 authors: ["admin"]
-pubDate: "2026-06-15"
-heroImage: "../../../assets/images/demo/project-retro-chat.png"
-heroImageAlt: "A pixel-art chat application interface labelled Chatting App v1.0"
-category: "Tech"
-tags: ["websockets", "backend"]
+pubDate: "2026-06-20"
+heroImage: "../../../assets/images/demo/post-floppy-disk.jpg"
+heroImageAlt: "Geometría computacional y algoritmos espaciales"
+category: "Tutorial"
+tags: ["python", "geopandas", "shapely", "algoritmos"]
 ---
 
-HTTP asks and waits. WebSockets hold the line open — a true duplex channel where the server is free
-to speak first.
+El geoprocesamiento automatizado permite ejecutar pipeline de análisis de datos a escala sobre conjuntos de datos masivos usando bibliotecas como Shapely, GeoPandas y GDAL.
 
-## Scaling the Socket
+## Pipeline de Análisis con GeoPandas
 
-A single node handles thousands of connections happily. The interesting problems start when you need
-_many_ nodes to feel like one.
+```python
+import geopandas as gpd
 
-- **Sticky routing vs. shared state:** pin a client to a node, or make every node stateless behind a
-  shared backplane.
-- **Redis pub/sub:** the pragmatic backplane — publish an event once and every subscribed node fans
-  it out to its own clients.
-- **Backpressure:** a slow client must never stall the broadcast; queue, coalesce, or drop
-  deliberately.
+gdf_puntos = gpd.read_file("estaciones.geojson")
+gdf_barrios = gpd.read_file("barrios.geojson")
 
-Get those three right and horizontal scaling becomes a config change, not a rewrite.
+puntos_en_barrios = gpd.sjoin(gdf_puntos, gdf_barrios, predicate="intersects")
+print(puntos_en_barrios.groupby("nombre_barrio").size())
+```
+
+Este código ejecuta una unión espacial (*spatial join*) optimizada mediante estructuras R-Tree internas.

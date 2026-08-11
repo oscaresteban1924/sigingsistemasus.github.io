@@ -1,9 +1,5 @@
 ---
-// src/components/Sections/Contact/Form.astro — Figma "ContactFormCard" (node 9:31).
-//
-// Static client-side contact form component for 8-BitQuest on GitHub Pages.
-// Retains 100% of the pixel design surface (PixelPanel), input/textarea/label primitives,
-// accessibility attributes, honeypot anti-spam, and responsive layout.
+// src/components/Sections/Contact/Form.astro — Formulario de consultas en Spanish.
 import { Badge } from "@components/ui/badge";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
@@ -13,8 +9,8 @@ import { Textarea } from "@components/ui/textarea";
 const FIELDS = [
   {
     name: "name",
-    label: "Your Name",
-    placeholder: "e.g. ALEX CHEN",
+    label: "Tu Nombre Completo",
+    placeholder: "Ej. MARÍA RODRÍGUEZ",
     as: "input",
     type: "text",
     autocomplete: "name",
@@ -22,8 +18,8 @@ const FIELDS = [
   },
   {
     name: "email",
-    label: "Email Address",
-    placeholder: "e.g. PLAYER1@GENESIS.COM",
+    label: "Correo Electrónico Institucional",
+    placeholder: "Ej. ESTUDIANTE@INSTITUCION.EDU.CO",
     as: "input",
     type: "email",
     autocomplete: "email",
@@ -31,8 +27,8 @@ const FIELDS = [
   },
   {
     name: "subject",
-    label: "Subject",
-    placeholder: "e.g. TUTORIAL INQUIRY",
+    label: "Asunto de la Consulta",
+    placeholder: "Ej. CONSULTA POSTGIS LAB 2",
     as: "input",
     type: "text",
     autocomplete: "off",
@@ -40,15 +36,14 @@ const FIELDS = [
   },
   {
     name: "message",
-    label: "Message Transmission",
-    placeholder: "TYPE YOUR TRANSMISSION HERE...",
+    label: "Mensaje o Inquietud",
+    placeholder: "ESCRIBE TU CONSULTA AQUÍ...",
     as: "textarea",
     autocomplete: "off",
     maxlength: 5000,
   },
 ] as const;
 
-// SHAPE only: pixel field surface + focus rings. No border colour.
 const fieldClass = [
   "bg-accent border-border rounded-none border-4 px-4 text-sm placeholder:text-muted-foreground",
   "aria-[invalid=true]:ring-3 aria-[invalid=true]:ring-error/60",
@@ -65,18 +60,18 @@ const fieldClass = [
     class="primary-focus hidden flex-col items-start gap-3 p-8"
   >
     <Badge pixel variant="success">
-      Transmission Sent
+      Consulta Enviada
     </Badge>
-    <h2 class="h3 text-foreground">Message sent.</h2>
+    <h2 class="h3 text-foreground">Mensaje recibido.</h2>
     <p class="text-muted-foreground text-sm">
-      Thanks — your transmission reached the array. I'll beam a reply back to your inbox.
+      Gracias — tu consulta ha sido registrada. La coordinación docente responderá a tu correo.
     </p>
   </PixelPanel>
 
   <!-- Main form panel -->
   <PixelPanel elevated data-contact-form-panel class="flex flex-col gap-6 p-6 sm:p-8">
     <h2 class="text-secondary-700 dark:text-secondary font-display text-base uppercase sm:text-lg">
-      Send Message
+      Enviar Consulta Docente
     </h2>
 
     <form id="contact-form" class="flex flex-col gap-4" novalidate>
@@ -116,7 +111,7 @@ const fieldClass = [
         type="submit"
         class="pixel-btn pixel-btn--green mt-2 self-start px-6 py-3 text-sm uppercase sm:text-base"
       >
-        Send Message
+        Enviar Consulta
       </button>
     </form>
   </PixelPanel>
@@ -144,21 +139,21 @@ const fieldClass = [
           valid = false;
           input.setAttribute("aria-invalid", "true");
           if (errorEl) {
-            errorEl.textContent = "This field is required.";
+            errorEl.textContent = "Este campo es obligatorio.";
             errorEl.classList.remove("hidden");
           }
         } else if (input.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) {
           valid = false;
           input.setAttribute("aria-invalid", "true");
           if (errorEl) {
-            errorEl.textContent = "Please enter a valid email address.";
+            errorEl.textContent = "Por favor ingresa un correo electrónico válido.";
             errorEl.classList.remove("hidden");
           }
         } else if (input.tagName.toLowerCase() === "textarea" && input.value.trim().length < 10) {
           valid = false;
           input.setAttribute("aria-invalid", "true");
           if (errorEl) {
-            errorEl.textContent = "Tell me a little more than that (at least 10 characters).";
+            errorEl.textContent = "Por favor escribe al menos 10 caracteres.";
             errorEl.classList.remove("hidden");
           }
         } else {

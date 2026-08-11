@@ -1,35 +1,33 @@
 ---
-title: "Web Observability Dashboard"
-description: "Integrating Prometheus metrics, Grafana visualization, and custom alerting rules for high-concurrency API performance tracking."
-tagline: "A live control room for a high-traffic API — streaming metrics, traces, and alert state onto one pixel-perfect grid."
+title: "Lab 4: Servidor Geoespacial OGC con GeoServer y MapProxy"
+cardTitle: "Lab 4: Servidor OGC WMS/WFS"
+description: "Despliegue de GeoServer en contenedor Docker, publicación de servicios WMS/WFS y aceleración con MapProxy."
+tagline: "Arquitectura de backend espacial distribuyendo estándares abiertos de la OGC sobre contenedores."
 status: "in-progress"
-moduleId: "#04_OBS"
+moduleId: "#04_GEOSERVER"
 order: 4
-thumbnail: "../../../assets/images/demo/project-pixel-art.png"
-thumbnailAlt: "A pixel-art sprite editor with a colour palette and canvas grid"
-tech: ["React", "Prometheus", "Grafana", "Go"]
+thumbnail: "../../../assets/images/demo/project-retro-chat.png"
+thumbnailAlt: "Panel de control de GeoServer y servicios WMS/WFS"
+tech: ["GeoServer", "WMS", "WFS", "Docker"]
 specs:
-  - { label: "Frontend", value: "React" }
-  - { label: "Metrics", value: "Prometheus" }
-  - { label: "Dashboards", value: "Grafana" }
-  - { label: "Collector", value: "Go" }
+  - { label: "Server", value: "GeoServer 2.24" }
+  - { label: "Cache", value: "MapProxy / GeoWebCache" }
+  - { label: "Container", value: "Docker / Compose" }
+  - { label: "Security", value: "Basic Auth / CORS" }
 features:
-  - lead: "Live metrics"
-    text: "Prometheus scrapes stream into a React grid refreshed on a sub-second tick."
-  - lead: "Custom alerts"
-    text: "A rule builder compiles thresholds into Prometheus alerting expressions."
-  - lead: "Trace drill-down"
-    text: "Click any spike to open the correlated request trace."
-archCaption: "[Metrics Pipeline]"
+  - lead: "Publicación de datastores PostGIS"
+    text: "Conexión directa entre la base de datos relacional y las capas del servidor de mapas."
+  - lead: "Estilizado SLD / OGC Symbology"
+    text: "Creación de archivos Styled Layer Descriptor (SLD) para renderizado temático."
+  - lead: "Aceleración de Tiles"
+    text: "Configuración de caché WMTS para peticiones masivas de teselas de mapa."
+archCaption: "[Arquitectura Servidor Geoespacial]"
 challenge:
-  title: "Threat: Cardinality Explosion"
-  body: "High-dimensional labels ballooned the metric series count until dashboard queries timed out."
+  title: "Reto: Bloqueo por CORS en Clientes Web"
+  body: "Las aplicaciones frontend bloqueaban las peticiones WFS desde orígenes cruzados."
 solution:
-  title: "Remedy: Label Budgets"
-  body: "A recording-rule layer pre-aggregates hot queries and caps label cardinality at ingest."
+  title: "Solución: Configuración de Cabeceras CORS y Reverse Proxy"
+  body: "Habilitación del filtro CORS en la configuración de Nginx y Tomcat dentro del contenedor Docker."
 ---
 
-This dashboard is the single pane of glass for a high-concurrency API. A Go collector fans out
-Prometheus scrapes, a rule engine turns plain-language thresholds into alerting expressions, and a
-React front end renders the whole system state on a retro grid. Trace drill-down ties every latency
-spike back to the request that caused it. _(In active development.)_
+Los estudiantes despliegan un servidor espacial empresarial, aprendiendo a publicar capas de datos conforme a los estándares internacionales de interoperabilidad.

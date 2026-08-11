@@ -20,7 +20,7 @@ const { page } = Astro.props as Props;
   <header class="border-border flex flex-col gap-3 border-b pb-8">
     <h1 class="h1 text-balance"><span class="main-text-gradient">{page.title}</span></h1>
     <p class="text-muted-foreground text-sm">
-      Last updated:{" "}
+      Última actualización:{" "}
       <time datetime={page.lastUpdated}>{formatDate(page.lastUpdated)}</time>
     </p>
   </header>

@@ -7,41 +7,42 @@ import { type PortfolioDataProps } from "./types/configDataTypes";
 // portfolio) — keep it consistent if you rewrite.
 const portfolioData = {
   profile: {
-    tagline: "Dev 01",
-    heading: "The Full-Stack Dev",
-    role: "Full-Stack",
-    years: "8+",
+    tagline: "INGENIERÍA DE SISTEMAS",
+    heading: "Laboratorio Computacional Geoespacial",
+    role: "Ing. de Sistemas",
+    years: "16 Semanas",
     bio: [
-      "Welcome to the mainframe. I'm a full-stack developer with 8+ years of experience building scalable web applications, APIs, and tools. This profile serves as a chronological log of my projects, open-source contributions, and the systems I've shipped.",
-      "I'm passionate about clean code, automated testing, and shipping fast. I write about modern frontend patterns, backend architecture, and the tools that keep my workflow efficient.",
+      "Bienvenido al entorno computacional de Sistemas de Información Geográfica. Esta plataforma académica está diseñada para estudiantes de Ingeniería de Sistemas que abordan el territorio como un sistema de información complejo.",
+      "Aprenderás a modelar datos vectoriales y raster, gestionar bases de datos espaciales con PostGIS, implementar algoritmos de geometría computacional y construir servicios web geoespaciales interoperables.",
     ],
     shortBio:
-      "I'm a developer who builds things with pixels, code, and a healthy dose of nostalgia. I write about the tech I use, the tools I love, and the retro systems that still inspire me.",
+      "Entorno de aprendizaje especializado en geometría computacional, bases de datos espaciales (PostGIS), servicios OGC, análisis geográfico y desarrollo de aplicaciones web geoespaciales.",
     meta: {
-      location: "The Internet",
-      role: "Full Stack Dev",
-      favorite: "8-Bit Chiptunes",
+      location: "Facultad de Ingeniería",
+      role: "Plataforma SIG",
+      favorite: "Spatial SQL & PostGIS",
     },
     skills: [
-      { label: "Frontend", pct: 95 },
-      { label: "Backend", pct: 90 },
+      { label: "Bases de Datos Espaciales", pct: 95 },
+      { label: "Desarrollo Web GIS", pct: 90 },
     ],
   },
 
   stats: {
-    home: ["Posts: 42", "Years: 03", "Coffee: 9000+"],
-    profile: ["Class: Full-Stack Dev", "Lvl: 8+", "XP: 8.5K", "Stars: 2.1K"],
+    home: ["SEMANAS: 16", "LABORATORIOS: 06", "MÓDULOS: 04"],
+    profile: ["Programa: Ing. Sistemas", "Curso: SIG", "Créditos: 3", "Horas: 96h"],
   },
 
   home: {
-    tagline: "Player 1",
-    heading: "Welcome, Player One",
+    tagline: "INGENIERÍA DE SISTEMAS",
+    heading: "Sistemas de Información Geográfica",
     intro:
-      "Level up your knowledge with my latest dev logs, tutorials, and retro tech explorations. Press start to begin your journey.",
+      "Aprende a modelar el territorio como un sistema computacional. Datos espaciales, bases de datos, APIs, interoperabilidad, análisis geográfico y desarrollo de aplicaciones geoespaciales.",
   },
 
   contact: {
-    prompt: "Want to chat about a project, a retro build, or just share a favorite game?",
+    prompt:
+      "¿Tienes dudas sobre los temas del curso, consultas sobre el entorno de desarrollo o inquietudes sobre los laboratorios?",
   },
 } satisfies PortfolioDataProps;
 

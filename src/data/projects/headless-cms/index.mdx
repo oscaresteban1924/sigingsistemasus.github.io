@@ -1,35 +1,33 @@
 ---
-title: "Headless CMS with Next.js"
-description: "Built a lightning fast portfolio blog platform using server components, incremental static generation, and edge caching."
-tagline: "A content platform where editors publish to the edge — server components and incremental static generation keep every page instant."
-status: "complete"
-moduleId: "#05_CMS"
+title: "Lab 5: Desarrollo de Visor Web GIS con Leaflet y MapLibre GL"
+cardTitle: "Lab 5: Visor Web GIS Interactivo"
+description: "Desarrollo de cliente web liviano para consumo de capas WMS, GeoJSON interactivos y controles de mapa."
+tagline: "Construcción de interfaz de usuario frontend consumiendo apis REST y servicios espaciales OGC."
+status: "in-progress"
+moduleId: "#05_WEBGIS"
 order: 5
-thumbnail: "../../../assets/images/demo/post-floppy-disk.jpg"
-thumbnailAlt: "A retro CRT monitor showing a pixel-art game menu"
-tech: ["Next.js", "Vercel", "GraphQL", "Tailwind"]
+thumbnail: "../../../assets/images/demo/project-cli-quest.png"
+thumbnailAlt: "Visor web GIS interactivo con Leaflet"
+tech: ["JavaScript", "Leaflet", "MapLibre", "API"]
 specs:
-  - { label: "Framework", value: "Next.js" }
-  - { label: "Hosting", value: "Vercel" }
-  - { label: "Content API", value: "GraphQL" }
-  - { label: "Styling", value: "Tailwind" }
+  - { label: "Framework", value: "HTML5 / JS / TS" }
+  - { label: "Map Engine", value: "Leaflet 1.9 / MapLibre" }
+  - { label: "Format", value: "GeoJSON / Vector Tiles" }
+  - { label: "Style", value: "Tailwind CSS" }
 features:
-  - lead: "Server components"
-    text: "Content renders on the server and streams to the client with no hydration cost."
-  - lead: "Incremental builds"
-    text: "Only changed pages rebuild on publish, keeping deploys seconds long."
-  - lead: "Edge caching"
-    text: "Rendered pages sit at the edge, served from the region nearest each reader."
-archCaption: "[Render Pipeline]"
+  - lead: "Control de Capas Dinámico"
+    text: "Alternancia de mapa base OpenStreetMap y capas temáticas WMS de GeoServer."
+  - lead: "Popups e Información Atributiva"
+    text: "Peticiones GetFeatureInfo en tiempo real al hacer clic sobre elementos geográficos."
+  - lead: "Filtro Cliente GeoJSON"
+    text: "Filtrado en tiempo real en el navegador mediante funciones lambda de JavaScript."
+archCaption: "[Cliente Web GIS]"
 challenge:
-  title: "Threat: Stale Content"
-  body: "Aggressive edge caching served yesterday's copy long after editors hit publish."
+  title: "Reto: Degradación de Rendimiento con 10,000 Marcadores"
+  body: "Renderizar miles de objetos DOM individuales provocaba congelamiento de pantalla durante el zoom."
 solution:
-  title: "Remedy: Tag Invalidation"
-  body: "Publishes emit cache tags that purge exactly the affected routes at the edge, and nothing more."
+  title: "Solución: Leaflet MarkerCluster y Vector Tiles"
+  body: "Implementación del algoritmo de clustering dinámico y migración a renderizado Canvas / WebGL."
 ---
 
-Editors needed a fast, headless workflow without babysitting deploys. Content flows through a GraphQL
-API into Next.js server components; incremental static generation rebuilds only what changed, and
-tag-based invalidation purges the edge the instant a page is published. The result is a
-portfolio-grade blog that loads instantly and updates in seconds.
+Los estudiantes construyen una aplicación web completa capaces de consultar y visualizar mapas interactivos de alto rendimiento desde el navegador.

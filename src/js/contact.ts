@@ -20,21 +20,21 @@ export const contactSchema = z.object({
   name: z
     .string()
     .trim()
-    .min(1, "Enter your name, player.")
-    .max(100, "That name is too long.")
-    .refine(noLineBreaks, "Line breaks are not allowed here."),
-  email: z.string().trim().pipe(z.email("Please enter a valid email address.").max(254)),
+    .min(1, "Ingresa tu nombre completo.")
+    .max(100, "El nombre es demasiado largo.")
+    .refine(noLineBreaks, "No se permiten saltos de línea aquí."),
+  email: z.string().trim().pipe(z.email("Por favor ingresa un correo electrónico válido.").max(254)),
   subject: z
     .string()
     .trim()
-    .min(1, "Give your transmission a subject.")
-    .max(150, "That subject is too long.")
-    .refine(noLineBreaks, "Line breaks are not allowed here."),
+    .min(1, "Ingresa el asunto de tu consulta.")
+    .max(150, "El asunto es demasiado largo.")
+    .refine(noLineBreaks, "No se permiten saltos de línea aquí."),
   message: z
     .string()
     .trim()
-    .min(10, "Tell me a little more than that.")
-    .max(5000, "That transmission is too long."),
+    .min(10, "Escribe tu consulta (mínimo 10 caracteres).")
+    .max(5000, "El mensaje es demasiado largo."),
   /** Honeypot — permissive on purpose, so a filled value becomes a readable form-level rejection. */
   _gotcha: z.string().optional(),
   /** Render timestamp for the time gate; coerced from the hidden field's string. */

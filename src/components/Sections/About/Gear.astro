@@ -1,26 +1,20 @@
 ---
-// src/components/Sections/About/Gear.astro — Figma "Equipment Section" (node 25:215).
-//
-// Section heading + a single pixel card holding a five-row spec list (EDITOR / TERMINAL / MONITOR /
-// KEYBOARD / FUEL). The same label→value row as the Dev Profile card, so it's a plain <dl>. Below
-// the fold → <Reveal>. Tokens only.
-//
-// CONTENT: the mock's demo gear (retro flavour, typed local) — swap for a real setup.
+// src/components/Sections/About/Gear.astro — Entorno de Desarrollo y Software.
 import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
 import { PixelPanel } from "@components/ui/pixel-panel";
 import { Reveal } from "@components/ui/reveal";
 
 const gear = [
-  { label: "Editor", value: "VS Code" },
-  { label: "Terminal", value: "Zsh + Tmux" },
-  { label: "Monitor", value: "Ultrawide 4K" },
-  { label: "Keyboard", value: "Mechanical KB" },
-  { label: "Fuel", value: "Black Coffee" },
+  { label: "GIS Desktop", value: "QGIS 3.34 LTR" },
+  { label: "Motor DB", value: "PostgreSQL 16 + PostGIS 3.4" },
+  { label: "Lenguajes", value: "Python 3.11 / TypeScript" },
+  { label: "Librerías", value: "GeoPandas / GDAL / Shapely" },
+  { label: "Web GIS", value: "Leaflet / MapLibre GL JS" },
 ] as const;
 ---
 
 <Reveal as="section" aria-labelledby="gear-heading" class="flex flex-col gap-6">
-  <SectionHeading id="gear-heading" title="Setup / Gear" />
+  <SectionHeading id="gear-heading" title="Entorno de Desarrollo y Software" />
 
   <PixelPanel as="dl" class="flex flex-col gap-3 p-5 sm:p-6">
     {

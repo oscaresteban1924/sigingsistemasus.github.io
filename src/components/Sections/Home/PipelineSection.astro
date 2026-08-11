@@ -1,0 +1,43 @@
+---
+// src/components/Sections/Home/PipelineSection.astro — Cadena de Procesamiento Geoespacial.
+import SectionHeading from "@components/Sections/Global/SectionHeading.astro";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import { Reveal } from "@components/ui/reveal";
+
+const pipelineSteps = [
+  { stage: "01", name: "Mundo Real", desc: "Fenómenos del territorio" },
+  { stage: "02", name: "Datos Espaciales", desc: "Captura GPS / Satélite" },
+  { stage: "03", name: "Modelo", desc: "Vectorial / Raster OGC" },
+  { stage: "04", name: "Base de Datos", desc: "PostGIS Spatial SQL" },
+  { stage: "05", name: "Procesamiento", desc: "Algoritmos Python/GDAL" },
+  { stage: "06", name: "Análisis", desc: "Geoprocesamiento & R-Tree" },
+  { stage: "07", name: "Servicios", desc: "WMS / WFS / REST API" },
+  { stage: "08", name: "Aplicación", desc: "Visor Web GIS" },
+  { stage: "09", name: "Decisión", desc: "Inteligencia Territorial" },
+] as const;
+---
+
+<Reveal as="section" aria-labelledby="pipeline-heading" class="flex flex-col gap-6">
+  <SectionHeading id="pipeline-heading" title="Cadena de Procesamiento Geoespacial" />
+
+  <p class="text-muted-foreground text-sm leading-relaxed">
+    ¿Cómo representamos, almacenamos, procesamos, analizamos y servimos computacionalmente un problema que tiene una dimensión espacial?
+  </p>
+
+  <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-9">
+    {
+      pipelineSteps.map((step, index) => (
+        <PixelPanel class="flex flex-col justify-between p-3 text-center">
+          <div>
+            <span class="font-display text-info text-[10px] uppercase block">{step.stage}</span>
+            <span class="font-display text-foreground text-xs uppercase block mt-1">{step.name}</span>
+          </div>
+          <span class="text-muted-foreground text-[10px] block mt-2">{step.desc}</span>
+          {index < pipelineSteps.length - 1 && (
+            <span class="text-secondary font-display text-xs mt-2 hidden lg:block">➔</span>
+          )}
+        </PixelPanel>
+      ))
+    }
+  </div>
+</Reveal>

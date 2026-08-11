@@ -1,36 +1,33 @@
 ---
-title: "Real-Time Chat Application"
-cardTitle: "Building a Real-Time Chat App"
-description: "Implemented WebSockets, Redis pub/sub, and automated testing for a production retro chat platform."
-tagline: "A high-frequency websocket terminal built to emulate instant packet switching. Powering sub-10ms packet broadcasts across memory clusters with zero lost frames."
+title: "Lab 1: Configuración de Entorno SIG y Análisis Vectorial con QGIS"
+cardTitle: "Lab 1: Entorno QGIS y Datos Vectoriales"
+description: "Construcción del entorno de desarrollo GIS, importación de fuentes OpenStreetMap y manipulación de capas vectoriales."
+tagline: "Laboratorio introductorio de modelado espacial vectorial en QGIS, filtrado por atributos y simbología temática."
 status: "complete"
-moduleId: "#01_CHAT"
+moduleId: "#01_QGIS"
 order: 1
 thumbnail: "../../../assets/images/demo/project-retro-chat.png"
-thumbnailAlt: "A pixel-art chat application interface labelled Chatting App v1.0"
-tech: ["React", "Node.js", "WebSockets", "Redis"]
+thumbnailAlt: "Interfaz de QGIS y análisis de datos vectoriales"
+tech: ["QGIS", "GeoJSON", "Shapefile", "OSM"]
 specs:
-  - { label: "Frontend", value: "React" }
-  - { label: "Backend", value: "Node.js" }
-  - { label: "Transport", value: "WebSocket" }
-  - { label: "Routing", value: "Redis Pub/Sub" }
+  - { label: "Software", value: "QGIS 3.34" }
+  - { label: "Formato", value: "GeoJSON / GeoPackage" }
+  - { label: "Fuente", value: "OpenStreetMap" }
+  - { label: "CRS", value: "MAGNA-SIRGAS / WGS84" }
 features:
-  - lead: "Bi-directional pipelines"
-    text: "Node.js WS modules serving instant client-to-server frames."
-  - lead: "Redis backplane"
-    text: "Event broadcasting across memory segments to sustain system integrity."
-  - lead: "Full test suite"
-    text: "Automated mock loops asserting system state over high stress simulations."
-archCaption: "[Packet Switching Engine]"
+  - lead: "Carga de capas urbanas"
+    text: "Importación de mallas viales y límites prediales en formato GeoPackage."
+  - lead: "Filtrado por Spatial SQL"
+    text: "Ejecución de filtros alfanuméricos y espaciales básicos en el administrador de capas."
+  - lead: "Exportación multiformato"
+    text: "Conversión de Shapefiles antiguos a estándares abiertos GeoJSON y GeoPackage."
+archCaption: "[Flujo de Análisis Vectorial]"
 challenge:
-  title: "Threat: Buffer Congestion"
-  body: "High-frequency clients broadcasting at excessive speeds can congest socket descriptors, leading to system memory blockages or socket drops."
+  title: "Reto: Inconsistencia de Sistemas de Coordenadas (CRS)"
+  body: "La superposición de capas en WGS84 y coordenadas proyectadas planas causaba desalineación en el lienzo."
 solution:
-  title: "Remedy: Redis Backplane"
-  body: "Decoupled system connections via a pub/sub layer. Messages queue and route through asynchronous Redis buffers, maintaining low memory footprints."
+  title: "Solución: Reproyección OTF y Transformación de Datum"
+  body: "Configuración del CRS del proyecto en MAGNA-SIRGAS Origen Nacional y reproyección explícita de capas vectoriales."
 ---
 
-The ultimate objective was building an instantly reactive networking terminal. Combining React
-custom hooks with Node.js WebSocket protocol handlers, we bypass HTTP overhead for true duplex
-datastreams. Redis pub/sub operates as the backplane event router, letting us scale to thousands of
-concurrent guest nodes seamlessly.
+El primer laboratorio establece la infraestructura de software necesaria para el curso. Los estudiantes exploran el manejo de archivos vectoriales, la inspección de tablas de atributos, el cálculo de métricas geométricas (área y perímetro) y la generación de composiciones cartográficas temáticas.

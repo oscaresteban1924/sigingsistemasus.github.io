@@ -46,9 +46,9 @@ const {
 <div class="flex flex-col gap-8">
   <!-- Breadcrumbs (node 5:130) -->
   <Breadcrumb>
-    <BreadcrumbItem><BreadcrumbLink href="/">Home</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbItem><BreadcrumbLink href="/">Inicio</BreadcrumbLink></BreadcrumbItem>
     <BreadcrumbSeparator />
-    <BreadcrumbItem><BreadcrumbLink href="/blog/">Blog</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbItem><BreadcrumbLink href="/blog/">Semanas</BreadcrumbLink></BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem><BreadcrumbPage>{title}</BreadcrumbPage></BreadcrumbItem>
   </Breadcrumb>
@@ -79,7 +79,7 @@ const {
           )
         }
         <p class="text-muted-foreground text-xs font-bold tracking-wide uppercase">
-          <time datetime={dateISO}>{dateLabel}</time> · {readMinutes} Min Read · By {author.name}
+          <time datetime={dateISO}>{dateLabel}</time> · Lectura {readMinutes} Min · Por {author.name}
         </p>
       </div>
     </header>
@@ -126,7 +126,7 @@ const {
               class="primary-focus text-info hover:text-success inline-flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase transition-colors"
             >
               <PixelIcon name="arrow-left" class="size-3.5" />
-              Prev
+              Anterior
             </a>
           )
         }
@@ -137,7 +137,7 @@ const {
               rel="next"
               class="primary-focus text-info hover:text-success inline-flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase transition-colors"
             >
-              Next
+              Siguiente
               <PixelIcon name="arrow-right" class="size-3.5" />
             </a>
           )

@@ -18,6 +18,11 @@ export interface CategoryMeta {
 
 /** category (lower-cased) → tone. LORE has no semantic token, so it takes a fixed maroon `class`. */
 const CATEGORY_TONES: Record<string, Pick<CategoryMeta, "variant" | "class">> = {
+  teoría: { variant: "primary" },
+  práctica: { variant: "success" },
+  algoritmos: { variant: "warning" },
+  arquitectura: { variant: "info" },
+  tutorial: { variant: "secondary" },
   quest: { variant: "success" },
   tech: { variant: "primary" },
   guide: { variant: "warning" },
@@ -56,7 +61,7 @@ export function toPostCard(entry: CollectionEntry<"blog">): ContentCardProps {
     badgeClass,
     title: data.title,
     description: data.description,
-    cta: "Read",
+    cta: "Leer",
   };
 }
 
