@@ -1,0 +1,80 @@
+---
+numero: 3
+titulo: "Reproyección y Geoprocesamiento con Python y GeoPandas"
+subtitulo: "Transformación de coordenadas (CRS/EPSG) y automatización de análisis espacial"
+descripcion: "Scripting en Python para reproyección de capas espaciales entre datums (WGS84 -> MAGNA-SIRGAS), geocodificación de direcciones y cálculo de áreas con GeoPandas, Shapely y PyPROJ."
+modulo: "MOD-03_PYTHON_GEOPROCESSING"
+dificultad: "Intermedio"
+estado: "Disponible"
+semanaAsociada: 3
+duracionEstimada: "3 horas"
+problema: "Un dataset de estaciones meteorológicas viene en coordenadas geográficas WGS84 (EPSG:4326), pero la capa de municipios colombianos está en MAGNA-SIRGAS Origen Nacional (EPSG:9377). Se requiere calcular el área de intersección precisa en metros cuadrados."
+fundamentoTeorico: "Los cálculos de distancia y superficie requieren proyecciones planas que conserven áreas (equivalentes) o ángulos (conformes). PyPROJ ejecuta las ecuaciones geodésicas de transformación de datums."
+objetivo: "Escribir un pipeline ETL en Python que reproyecte capas vectoriales y ejecute análisis espacial con GeoPandas."
+datosEntrada:
+  - nombre: "estaciones.geojson"
+    formato: "GeoJSON (EPSG:4326)"
+    descripcion: "Puntos de estaciones ambientales."
+  - nombre: "municipios.gpkg"
+    formato: "GeoPackage (EPSG:9377)"
+    descripcion: "Límites municipales oficiales."
+pasos:
+  - paso: 1
+    fase: "CONCEPTO"
+    titulo: "Inspección de Sistemas de Referencia Espacial (CRS)"
+    descripcion: "Verificar las propiedades `.crs` de cada GeoDataFrame para detectar incompatibilidades de proyección."
+  - paso: 2
+    fase: "REPRESENTACIÓN"
+    titulo: "Carga de Capas con GeoPandas"
+    descripcion: "Lectura de archivos vectoriales en estructuras de datos de tipo GeoDataFrame."
+  - paso: 3
+    fase: "ALGORITMO"
+    titulo: "Reproyección On-The-Fly con `.to_crs()`"
+    descripcion: "Transformar la capa de estaciones al CRS métrico proyectado objetivo (EPSG:9377)."
+  - paso: 4
+    fase: "CÓDIGO"
+    titulo: "Pipeline de Reproyección y Geoprocesamiento"
+    descripcion: "Script Python completo con GeoPandas."
+    lenguaje: "python"
+    codigo: |
+      import geopandas as gpd
+
+      # 1. Cargar capas espaciales
+      estaciones = gpd.read_file("estaciones.geojson")
+      municipios = gpd.read_file("municipios.gpkg")
+
+      print("CRS Estaciones:", estaciones.crs)
+      print("CRS Municipios:", municipios.crs)
+
+      # 2. Reproyectar estaciones a EPSG:9377 (MAGNA-SIRGAS Origen Nacional)
+      estaciones_proj = estaciones.to_crs(epsg=9377)
+
+      # 3. Joins espaciales (sjoin)
+      resultado = gpd.sjoin(estaciones_proj, municipios, how="inner", predicate="within")
+
+      # 4. Exportar a GeoPackage
+      resultado.to_file("estaciones_por_municipio.gpkg", driver="GPKG")
+      print(f"Procesadas {len(resultado)} estaciones en el territorio.")
+    resultadoEsperado: "Nuevo GeoPackage con atributos de estaciones y municipios fusionados en EPSG:9377."
+  - paso: 5
+    fase: "RESULTADO"
+    titulo: "Verificación de Integridad Posicional"
+    descripcion: "Comprobación de que no haya desplazamiento (shift) en la superposición de capas tras la transformación geodésica."
+  - paso: 6
+    fase: "INTERPRETACIÓN"
+    titulo: "Importancia de los Códigos EPSG"
+    descripcion: "El EPSG es la clave única internacional para identificar datums, elipsoides y proyecciones en desarrollo de software."
+preguntasAnalisis:
+  - pregunta: "¿Por qué el cálculo `.area` sobre un GeoDataFrame en EPSG:4326 retorna valores incorrectos?"
+    orientacion: "En EPSG:4326 las unidades son grados decimales; por ende `.area` calcula 'grados cuadrados', una unidad astronómica sin significado físico para áreas de terreno."
+reto:
+  titulo: "Reto: Generar Matriz de Distancias a Capitales"
+  descripcion: "Calcular la distancia en kilómetros desde cada estación ambiental hasta la capital departamental más cercana usando `.distance()`."
+  pistas:
+    - "Asegúrate de que ambos GeoDataFrames estén en el mismo CRS métrico antes de invocar `.distance()`."
+erroresComunes:
+  - error: "Asignar un CRS con `.set_crs()` cuando la capa ya tenía coordenadas grabadas en otro sistema."
+    solucion: "Usa `.set_crs()` solo para definir un CRS faltante. Para convertir coordenadas, usa siempre `.to_crs()`."
+---
+
+Este laboratorio aborda la reproyección cartográfica y el geoprocesamiento automatizado con **Python y GeoPandas**.

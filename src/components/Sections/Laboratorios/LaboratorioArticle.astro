@@ -1,0 +1,333 @@
+---
+// src/components/Sections/Laboratorios/LaboratorioArticle.astro — Vista detallada de laboratorio computacional.
+import { PixelIcon } from "@components/svg/pixel-icons";
+import { Badge } from "@components/ui/badge";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@components/ui/breadcrumb";
+import { PixelPanel } from "@components/ui/pixel-panel";
+import { type AdjacentLabLink, dificultadBadgeMeta, faseBadgeMeta } from "@js/laboratoriosData";
+import { estadoBadgeMeta } from "@js/semanasData";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  lab: CollectionEntry<"laboratorios">["data"];
+  prev?: AdjacentLabLink;
+  next?: AdjacentLabLink;
+}
+
+const { lab, prev, next } = Astro.props as Props;
+const {
+  numero,
+  titulo,
+  subtitulo,
+  descripcion,
+  modulo,
+  dificultad,
+  estado,
+  semanaAsociada,
+  duracionEstimada,
+  problema,
+  fundamentoTeorico,
+  objetivo,
+  datosEntrada,
+  pasos,
+  preguntasAnalisis,
+  reto,
+  erroresComunes,
+} = lab;
+
+const numFormatted = String(numero).padStart(2, "0");
+const { label: badgeEstado, variant: variantEstado } = estadoBadgeMeta(estado);
+const { label: badgeDif, variant: variantDif } = dificultadBadgeMeta(dificultad);
+---
+
+<div class="flex flex-col gap-8">
+  <!-- Breadcrumbs -->
+  <Breadcrumb>
+    <BreadcrumbItem><BreadcrumbLink href="/">Inicio</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem
+      ><BreadcrumbLink href="/laboratorios/">Laboratorios</BreadcrumbLink></BreadcrumbItem
+    >
+    <BreadcrumbSeparator />
+    <BreadcrumbItem><BreadcrumbPage>Lab {numFormatted}</BreadcrumbPage></BreadcrumbItem>
+  </Breadcrumb>
+
+  <!-- Hero Header Panel del Laboratorio -->
+  <PixelPanel as="header" elevated class="flex flex-col gap-6 p-6 sm:p-8">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="font-display text-info text-sm uppercase">LABORATORIO {numFormatted}</span>
+        <Badge pixel variant={variantDif}>{badgeDif}</Badge>
+        <Badge pixel variant={variantEstado}>{badgeEstado}</Badge>
+      </div>
+      <div class="flex items-center gap-3 text-xs font-bold uppercase">
+        <span class="text-info">{modulo}</span>
+        <span class="text-muted-foreground">· Semana {String(semanaAsociada).padStart(2, "0")}</span
+        >
+        {duracionEstimada && <span class="text-muted-foreground">· {duracionEstimada}</span>}
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <h1 class="h1 text-foreground text-balance">{titulo}</h1>
+      <p class="text-secondary font-display text-xs uppercase sm:text-sm">{subtitulo}</p>
+    </div>
+
+    <p class="text-muted-foreground text-base leading-relaxed">{descripcion}</p>
+  </PixelPanel>
+
+  <!-- Panel de Problema de Ingeniería & Fundamentos -->
+  <div class="grid gap-6 lg:grid-cols-2">
+    <!-- Problema de Ingeniería -->
+    <PixelPanel class="border-warning flex flex-col gap-4 p-6 sm:p-8">
+      <div class="flex items-center gap-3">
+        <PixelIcon name="server" class="text-warning size-6" />
+        <h2 class="h3 text-warning">Problema de Ingeniería</h2>
+      </div>
+      <p class="text-foreground text-sm leading-relaxed">{problema}</p>
+    </PixelPanel>
+
+    <!-- Fundamento Teórico y Objetivo -->
+    <PixelPanel class="border-info flex flex-col gap-4 p-6 sm:p-8">
+      <div class="flex items-center gap-3">
+        <PixelIcon name="component" class="text-info size-6" />
+        <h2 class="h3 text-info">Fundamento y Objetivo</h2>
+      </div>
+      <div class="flex flex-col gap-3">
+        <p class="text-muted-foreground text-xs leading-relaxed">
+          <strong>Fundamento:</strong>
+          {fundamentoTeorico}
+        </p>
+        <div class="border-border bg-accent border-2 p-3">
+          <span class="font-display text-success text-[10px] uppercase">Objetivo Técnico:</span>
+          <p class="text-foreground mt-1 text-xs leading-relaxed font-semibold">{objetivo}</p>
+        </div>
+      </div>
+    </PixelPanel>
+  </div>
+
+  <!-- Panel de Datos de Entrada -->
+  {
+    datosEntrada && datosEntrada.length > 0 && (
+      <PixelPanel class="flex flex-col gap-4 p-6">
+        <div class="flex items-center gap-3">
+          <PixelIcon name="package" class="text-info size-5" />
+          <h2 class="h3 text-foreground">Datos de Entrada del Laboratorio</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {datosEntrada.map((dato) => (
+            <div class="bg-accent border-border flex flex-col justify-between gap-2 border-2 p-4">
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center justify-between">
+                  <Badge pixel variant="primary">
+                    {dato.formato}
+                  </Badge>
+                </div>
+                <h3 class="font-display text-foreground mt-2 text-xs uppercase">{dato.nombre}</h3>
+                <p class="text-muted-foreground text-xs">{dato.descripcion}</p>
+              </div>
+              {dato.url && (
+                <a
+                  href={dato.url}
+                  download
+                  class="pixel-btn pixel-btn--blue mt-2 text-center text-[10px] uppercase"
+                >
+                  Descargar Dataset ⬇
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </PixelPanel>
+    )
+  }
+
+  <!-- Secuencia Pedagógica Paso a Paso (CONCEPTO -> CÓDIGO -> INTERPRETACIÓN) -->
+  {
+    pasos && pasos.length > 0 && (
+      <PixelPanel class="flex flex-col gap-6 p-6 sm:p-8">
+        <div class="border-border flex flex-wrap items-center justify-between gap-3 border-b-4 pb-4">
+          <div class="flex items-center gap-3">
+            <PixelIcon name="code" class="text-success size-6" />
+            <h2 class="h2 text-foreground uppercase">Secuencia Pedagógica de Ejecución</h2>
+          </div>
+          <span class="font-display text-info text-xs uppercase">
+            {pasos.length} Fases Consecutivas
+          </span>
+        </div>
+
+        <div class="flex flex-col gap-8">
+          {pasos.map((item) => {
+            const { label: labelFase, variant: variantFase } = faseBadgeMeta(item.fase);
+
+            return (
+              <div class="bg-accent border-border flex flex-col gap-4 border-2 p-6">
+                <div class="border-border flex flex-wrap items-center justify-between gap-2 border-b-2 pb-3">
+                  <div class="flex items-center gap-3">
+                    <span class="font-display text-info text-xs font-bold">FASE {item.paso}</span>
+                    <Badge pixel variant={variantFase}>
+                      {labelFase}
+                    </Badge>
+                  </div>
+                  <h3 class="font-display text-foreground text-xs uppercase">{item.titulo}</h3>
+                </div>
+
+                <p class="text-muted-foreground text-xs leading-relaxed sm:text-sm">
+                  {item.descripcion}
+                </p>
+
+                {item.codigo && (
+                  <div class="border-border bg-background flex flex-col gap-2 border-2 p-4">
+                    <div class="border-border flex items-center justify-between border-b pb-2">
+                      <span class="font-display text-secondary text-[10px] uppercase">
+                        Consola / Script ({item.lenguaje || "código"})
+                      </span>
+                      <span class="text-muted-foreground text-[10px]">Copiar sintaxis</span>
+                    </div>
+                    <pre class="text-foreground bg-accent/50 border-border overflow-x-auto border p-2 font-mono text-xs leading-relaxed">
+                      <code>{item.codigo}</code>
+                    </pre>
+                  </div>
+                )}
+
+                {item.resultadoEsperado && (
+                  <div class="border-success/50 bg-success/10 flex items-start gap-3 border-2 p-3">
+                    <PixelIcon name="component" class="text-success mt-0.5 size-5 shrink-0" />
+                    <div>
+                      <span class="font-display text-success text-[10px] uppercase">
+                        Resultado Esperado:
+                      </span>
+                      <p class="text-foreground mt-0.5 text-xs leading-relaxed">
+                        {item.resultadoEsperado}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </PixelPanel>
+    )
+  }
+
+  <!-- Desarrollo Teórico y Contenido MDX Libre -->
+  <PixelPanel class="flex flex-col gap-4 p-6 sm:p-8">
+    <h2 class="h3 text-secondary-700 dark:text-secondary">Guía Detallada de Laboratorio</h2>
+    <div class="blog-prose">
+      <slot />
+    </div>
+  </PixelPanel>
+
+  <!-- Preguntas de Análisis -->
+  {
+    preguntasAnalisis && preguntasAnalisis.length > 0 && (
+      <PixelPanel class="flex flex-col gap-6 p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <PixelIcon name="code" class="text-info size-6" />
+          <h2 class="h3 text-secondary-700 dark:text-secondary">Preguntas de Análisis</h2>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          {preguntasAnalisis.map((item) => (
+            <div class="bg-accent border-border flex flex-col gap-3 border-2 p-4">
+              <h3 class="font-display text-foreground text-xs uppercase">{item.pregunta}</h3>
+              <p class="text-muted-foreground text-xs leading-relaxed">
+                <strong>Orientación Técnica:</strong> {item.orientacion}
+              </p>
+            </div>
+          ))}
+        </div>
+      </PixelPanel>
+    )
+  }
+
+  <!-- Reto del Laboratorio -->
+  {
+    reto && (
+      <PixelPanel class="border-warning flex flex-col gap-4 p-6 sm:p-8">
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <PixelIcon name="server" class="text-warning size-6" />
+            <h2 class="h3 text-warning">Reto del Laboratorio</h2>
+          </div>
+          <Badge pixel variant="warning">
+            Reto Práctico
+          </Badge>
+        </div>
+        <h3 class="font-display text-foreground text-sm uppercase">{reto.titulo}</h3>
+        <p class="text-muted-foreground text-xs leading-relaxed sm:text-sm">{reto.descripcion}</p>
+
+        {reto.pistas && reto.pistas.length > 0 && (
+          <div class="border-border bg-accent flex flex-col gap-2 border-2 p-4">
+            <span class="font-display text-warning text-[10px] uppercase">Pistas de Solución:</span>
+            <ul class="flex flex-col gap-1.5">
+              {reto.pistas.map((pista) => (
+                <li class="text-muted-foreground text-xs leading-relaxed">· {pista}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </PixelPanel>
+    )
+  }
+
+  <!-- Errores Comunes & Soluciones -->
+  {
+    erroresComunes && erroresComunes.length > 0 && (
+      <PixelPanel class="border-secondary flex flex-col gap-4 p-6 sm:p-8">
+        <div class="flex items-center gap-3">
+          <PixelIcon name="type" class="text-secondary size-6" />
+          <h2 class="h3 text-secondary">Errores Comunes y Soluciones</h2>
+        </div>
+        <div class="flex flex-col gap-4">
+          {erroresComunes.map((err) => (
+            <div class="bg-accent border-border flex flex-col gap-2 border-2 p-4">
+              <span class="font-display text-destructive text-xs uppercase">
+                ❌ Error: {err.error}
+              </span>
+              <p class="text-muted-foreground text-xs leading-relaxed">
+                <strong>✔ Solución:</strong> {err.solucion}
+              </p>
+            </div>
+          ))}
+        </div>
+      </PixelPanel>
+    )
+  }
+
+  <!-- Navegación al pie de página -->
+  <PixelPanel as="footer" class="flex flex-wrap items-center justify-between gap-4 p-6">
+    {
+      prev ? (
+        <a
+          href={prev.href}
+          rel="prev"
+          class="primary-focus text-info hover:text-success inline-flex items-center gap-2 text-xs font-bold uppercase transition-colors"
+        >
+          <PixelIcon name="arrow-left" class="size-4" />
+          Lab {String(prev.numero).padStart(2, "0")}: {prev.title}
+        </a>
+      ) : (
+        <span />
+      )
+    }
+
+    {
+      next && (
+        <a
+          href={next.href}
+          rel="next"
+          class="pixel-btn pixel-btn--blue ml-auto px-5 py-3 text-xs uppercase sm:text-sm"
+        >
+          Continuar a Lab {String(next.numero).padStart(2, "0")} ➔
+        </a>
+      )
+    }
+  </PixelPanel>
+</div>

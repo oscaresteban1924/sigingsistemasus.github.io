@@ -3,12 +3,7 @@ import type { CollectionEntry } from "astro:content";
 
 export type LabDificultad = "Principiante" | "Intermedio" | "Avanzado";
 export type LabFase =
-  | "CONCEPTO"
-  | "REPRESENTACIÓN"
-  | "ALGORITMO"
-  | "CÓDIGO"
-  | "RESULTADO"
-  | "INTERPRETACIÓN";
+  "CONCEPTO" | "REPRESENTACIÓN" | "ALGORITMO" | "CÓDIGO" | "RESULTADO" | "INTERPRETACIÓN";
 
 /**
  * Map lab dificultad to badge variant & label.

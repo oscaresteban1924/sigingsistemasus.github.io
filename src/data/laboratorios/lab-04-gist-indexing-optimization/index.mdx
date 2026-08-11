@@ -1,0 +1,20 @@
+---
+numero: 4
+titulo: "Indización R-Tree y Optimización de Consultas SQL Espaciales"
+subtitulo: "Indexación espacial GiST R-Tree y análisis de planes de ejecución"
+descripcion: "Optimización de consultas espaciales masivas mediante la creación de índices GiST R-Tree y filtrado jerárquico por Bounding Boxes (MBR)."
+modulo: "MOD-04_OPTIMIZATION"
+dificultad: "Avanzado"
+estado: "Próximamente"
+semanaAsociada: 4
+duracionEstimada: "3 horas"
+problema: "Una consulta sobre 2.000.000 de predios urbanos tarda más de 45 segundos en responder. Se requiere optimizar el plan de ejecución a menos de 50 milisegundos mediante índices GiST R-Tree."
+fundamentoTeorico: "Los índices R-Tree agrupan geometrías cercanas en rectángulos envolventes mínimos (MBR) organizados en árboles B-Tree multinivel (GiST en PostgreSQL)."
+objetivo: "Construir índices GiST y analizar planes de ejecución con EXPLAIN ANALYZE."
+datosEntrada:
+  - nombre: "predios_nacionales"
+    formato: "PostGIS Table"
+    descripcion: "Capa predial masiva."
+---
+
+Laboratorio avanzado sobre **Indexación R-Tree e Índices GiST en PostGIS**.

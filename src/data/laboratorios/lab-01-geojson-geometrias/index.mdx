@@ -1,0 +1,99 @@
+---
+numero: 1
+titulo: "Representación y Estructuras GeoJSON (Simple Features)"
+subtitulo: "De la entidad física a los objetos JSON geométricos en el cliente"
+descripcion: "Construcción manual e inspección de geometrías vectoriales (Puntos, LineStrings, Polígonos y MultiPolígonos) usando la especificación OGC Simple Features y la norma RFC 7946."
+modulo: "MOD-01_FUNDAMENTOS"
+dificultad: "Principiante"
+estado: "Disponible"
+semanaAsociada: 1
+duracionEstimada: "2 horas"
+problema: "Un municipio requiere registrar los elementos de infraestructura escolar (colegios, vías de acceso y zonas prediales) en un formato abierto basado en JSON para consumo directo por visores web sin depender de software propietario."
+fundamentoTeorico: "El estándar GeoJSON (RFC 7946) codifica objetos geográficos mediante la especificación Simple Features de la OGC. Define tipos primarios (Point, LineString, Polygon) organizados en estructuras Feature y FeatureCollection con coordenadas [Longitud, Latitud]."
+objetivo: "Crear una FeatureCollection GeoJSON válida con atributos alfanuméricos y topología de cierre adecuada."
+datosEntrada:
+  - nombre: "Coordenadas_Campus.csv"
+    formato: "CSV"
+    descripcion: "Listado de vértices geográficos [X, Y] del campus escolar."
+pasos:
+  - paso: 1
+    fase: "CONCEPTO"
+    titulo: "Abstracción Geométrica"
+    descripcion: "Identificar la dimensionalidad de las entidades: Puntos (0D) para colegios, LineStrings (1D) para vías de acceso y Polígonos (2D) para zonas prediales."
+  - paso: 2
+    fase: "REPRESENTACIÓN"
+    titulo: "Definición del Esquema GeoJSON"
+    descripcion: "Estructurar la colección mediante 'type': 'FeatureCollection' y un arreglo 'features' conteniendo la geometría y las propiedades alfanuméricas."
+  - paso: 3
+    fase: "ALGORITMO"
+    titulo: "Regla de Cierre de Polígonos"
+    descripcion: "Para geometrías de tipo Polygon, el primer vértice y el último vértice del anillo exterior deben ser exactamente idénticos para garantizar una superficie cerrada."
+  - paso: 4
+    fase: "CÓDIGO"
+    titulo: "Construcción de la FeatureCollection"
+    descripcion: "Definición del documento GeoJSON con un punto (Colegio) y un polígono (Predio)."
+    lenguaje: "json"
+    codigo: |
+      {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [-76.5312, 3.4411]
+            },
+            "properties": {
+              "id": "SCH-001",
+              "nombre": "Institución Educativa Central",
+              "estudiantes": 520,
+              "tipo": "Oficial"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-76.5320, 3.4405],
+                  [-76.5300, 3.4405],
+                  [-76.5300, 3.4420],
+                  [-76.5320, 3.4420],
+                  [-76.5320, 3.4405]
+                ]
+              ]
+            },
+            "properties": {
+              "id": "PRD-102",
+              "area_m2": 15400.5,
+              "uso": "Educativo"
+            }
+          }
+        ]
+      }
+    resultadoEsperado: "JSON sintácticamente válido que renderiza un marcador puntual y un rectángulo predial delimitado."
+  - paso: 5
+    fase: "RESULTADO"
+    titulo: "Inspección de Atributos"
+    descripcion: "Verificación de las propiedades alfanuméricas vinculadas a cada objeto geométrico en el inspector de atributos."
+  - paso: 6
+    fase: "INTERPRETACIÓN"
+    titulo: "Evaluación de Coordenadas [X, Y]"
+    descripcion: "En GeoJSON, las coordenadas SIEMPRE se expresan en orden [Longitud, Latitud] (X, Y), nunca [Latitud, Longitud]."
+preguntasAnalisis:
+  - pregunta: "¿Por qué el estándar GeoJSON especifica el orden [Longitud, Latitud] en lugar del tradicional [Latitud, Longitud] de la cartografía?"
+    orientacion: "En ciencias de la computación y geometría cartesiana bidimensional, el eje X horizontal corresponde a la Longitud y el eje Y vertical a la Latitud."
+  - pregunta: "¿Qué sucede si el último par de coordenadas de un Polygon difiere del primero?"
+    orientacion: "Los motores de renderizado espacial no podrán calcular el área ni realizar intersecciones topológicas debido a un polígono no cerrado (abierto)."
+reto:
+  titulo: "Reto: Modelar una Cancha Deportiva Interna (Donut Polygon)"
+  descripcion: "Modifica el documento GeoJSON para incluir una zona verde interior no construida dentro del predio (un hueco o anillo interior)."
+  pistas:
+    - "El tipo Polygon acepta un arreglo de anillos: el primer arreglo es el perímetro exterior y los siguientes son agujeros interiores."
+erroresComunes:
+  - error: "Inversión de coordenadas [Lat, Lon] ubicando la entidad en el océano o en la Antártida."
+    solucion: "Confirma siempre que X (Longitud, en Colombia ~ -75°) vaya primero que Y (Latitud, en Colombia ~ 3° a 11°)."
+---
+
+Este laboratorio computacional permite a los estudiantes de Ingeniería de Sistemas dominar la especificación **GeoJSON (RFC 7946)** de la Open Geospatial Consortium (OGC).

@@ -1,12 +1,13 @@
 import assert from "node:assert/strict";
-import type { CollectionEntry } from "astro:content";
-import {
-  dificultadBadgeMeta,
-  faseBadgeMeta,
-  getAdjacentLaboratorios,
-} from "./laboratoriosData.ts";
 
-assert.deepEqual(dificultadBadgeMeta("Principiante"), { label: "[Principiante]", variant: "success" });
+import type { CollectionEntry } from "astro:content";
+
+import { dificultadBadgeMeta, faseBadgeMeta, getAdjacentLaboratorios } from "./laboratoriosData.ts";
+
+assert.deepEqual(dificultadBadgeMeta("Principiante"), {
+  label: "[Principiante]",
+  variant: "success",
+});
 assert.deepEqual(dificultadBadgeMeta("Intermedio"), { label: "[Intermedio]", variant: "warning" });
 assert.deepEqual(dificultadBadgeMeta("Avanzado"), { label: "[Avanzado]", variant: "secondary" });
 

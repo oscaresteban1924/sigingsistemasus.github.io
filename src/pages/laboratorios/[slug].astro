@@ -1,0 +1,36 @@
+---
+// Detail route shell for a laboratory entry (/laboratorios/<slug>/).
+import LaboratorioArticle from "@components/Sections/Laboratorios/LaboratorioArticle.astro";
+import siteData from "@config/siteData.json";
+import { getAdjacentLaboratorios, getSortedLaboratorios } from "@js/laboratoriosData";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { type CollectionEntry, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const sorted = await getSortedLaboratorios();
+  return sorted.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry, sorted },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"laboratorios">;
+  sorted: CollectionEntry<"laboratorios">[];
+}
+
+const { entry, sorted } = Astro.props as Props;
+const { Content } = await render(entry);
+const { prev, next } = getAdjacentLaboratorios(sorted, entry.id);
+
+const numFormatted = String(entry.data.numero).padStart(2, "0");
+const title = `Lab ${numFormatted}: ${entry.data.titulo} — ${siteData.name}`;
+---
+
+<BaseLayout title={title} description={entry.data.descripcion}>
+  <div class="site-container py-8 md:py-12">
+    <LaboratorioArticle lab={entry.data} prev={prev} next={next}>
+      <Content />
+    </LaboratorioArticle>
+  </div>
+</BaseLayout>

@@ -1,0 +1,79 @@
+---
+numero: 2
+titulo: "Modelado Relacional Espacial y Consultas Topológicas en PostGIS"
+subtitulo: "Spatial SQL, predicados topológicos e índices espacialmente optimizados"
+descripcion: "Diseño de tablas relacionales con columnas de geometría espacial (ST_Geometry), construcción de consultas topológicas complejas con ST_Intersects, ST_Contains y ST_Buffer."
+modulo: "MOD-02_SPATIAL_SQL"
+dificultad: "Intermedio"
+estado: "Disponible"
+semanaAsociada: 2
+duracionEstimada: "3 horas"
+problema: "Determinar cuáles rutas de transporte público pasan a menos de 200 metros de zonas escolares y calcular el número de estudiantes potencialmente expuestos a ruido ambiental."
+fundamentoTeorico: "PostGIS añade tipos abstractos de datos (ADT) espacial a PostgreSQL. Las operaciones topológicas evalúan relaciones del modelo de 9 intersecciones de Egenhofer (DE-9IM) mediante funciones estandarizadas OGC."
+objetivo: "Escribir consultas Spatial SQL optimizadas utilizando funciones de extensión PostGIS."
+datosEntrada:
+  - nombre: "rutas_buses"
+    formato: "PostGIS Table (LineString)"
+    descripcion: "Ejes viales de rutas urbanas."
+  - nombre: "escuelas"
+    formato: "PostGIS Table (Point)"
+    descripcion: "Ubicación de instituciones educativas."
+pasos:
+  - paso: 1
+    fase: "CONCEPTO"
+    titulo: "Modelado de Columna Espacial"
+    descripcion: "Adicionar una columna de geometría con tipo estricto Point en sistema de coordenadas plano proyectado MAGNA-SIRGAS (SRID 3116)."
+  - paso: 2
+    fase: "REPRESENTACIÓN"
+    titulo: "Creación de Tabla con Geometry(Point, 3116)"
+    descripcion: "Establecer la restricción de tipo de geometría y sistema de referencia espacial."
+  - paso: 3
+    fase: "ALGORITMO"
+    titulo: "Cálculo de Zona de Influencia (ST_Buffer) e Intersección (ST_Intersects)"
+    descripcion: "Generar un polígono de amortiguamiento de 200 metros alrededor de cada escuela e intersectarlo con las líneas viales de transporte."
+  - paso: 4
+    fase: "CÓDIGO"
+    titulo: "Consulta SQL Espacial Interoperable"
+    descripcion: "Consulta SQL completa en PostGIS."
+    lenguaje: "sql"
+    codigo: |
+      -- Crear tabla espacial de escuelas con SRID 3116 (Metros)
+      CREATE TABLE escuelas (
+          id SERIAL PRIMARY KEY,
+          nombre VARCHAR(100),
+          capacidad INT,
+          geom GEOMETRY(Point, 3116)
+      );
+
+      -- Consulta topológica de proximidad a 200 metros
+      SELECT 
+          e.nombre AS escuela,
+          r.nombre_ruta AS ruta_transporte,
+          ST_Distance(e.geom, r.geom) AS distancia_metros
+      FROM escuelas e
+      JOIN rutas_buses r
+        ON ST_DWithin(e.geom, r.geom, 200)
+      ORDER BY distancia_metros ASC;
+    resultadoEsperado: "Tabla con los pares (Escuela, Ruta) que están a menos de 200 metros."
+  - paso: 5
+    fase: "RESULTADO"
+    titulo: "Inspección de Distancias Métricas"
+    descripcion: "Verificación de los resultados de distancia utilizando unidades reales en metros gracias al sistema proyectado SRID 3116."
+  - paso: 6
+    fase: "INTERPRETACIÓN"
+    titulo: "Diferencia entre ST_Distance y ST_DWithin"
+    descripcion: "ST_DWithin utiliza el índice espacial GiST R-Tree para descartar rápidamente entidades fuera del Bounding Box antes de calcular la distancia exacta."
+preguntasAnalisis:
+  - pregunta: "¿Por qué ST_DWithin es significativamente más rápido que escribir WHERE ST_Distance(a, b) < 200?"
+    orientacion: "ST_DWithin aprovecha el índice espacial R-Tree para filtrar por caja envolvente (MBR) primero, reduciendo la complejidad de O(N^2) a O(N log N)."
+reto:
+  titulo: "Reto: Resumen de Capacidad Estudiantil Expuesta"
+  descripcion: "Agrega una agregación GROUP BY para calcular la capacidad total de estudiantes expuestos por cada ruta de bus."
+  pistas:
+    - "Usa SUM(e.capacidad) agrupado por r.nombre_ruta."
+erroresComunes:
+  - error: "Ejecutar ST_Buffer(geom, 200) sobre datos en grados decimales (SRID 4326/WGS84)."
+    solucion: "En EPSG:4326 el número 200 se interpreta como 200 grados (~22.000 km). Transformar a SRID 3116 usando ST_Transform(geom, 3116) antes de operar en metros."
+---
+
+Este laboratorio explora el diseño de bases de datos relacionales espaciales con **PostgreSQL y PostGIS**.
