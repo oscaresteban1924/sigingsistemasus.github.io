@@ -93,10 +93,10 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
     preguntaDetonante && (
       <PixelPanel class="border-info flex flex-col gap-4 p-6 sm:p-8">
         <div class="flex items-center gap-3">
-          <PixelIcon name="help" class="text-info size-6" />
+          <PixelIcon name="code" class="text-info size-6" />
           <h2 class="font-display text-info text-sm uppercase">¿Qué vamos a resolver?</h2>
         </div>
-        <blockquote class="text-foreground text-base font-semibold italic leading-relaxed sm:text-lg">
+        <blockquote class="text-foreground text-base leading-relaxed font-semibold italic sm:text-lg">
           "{preguntaDetonante}"
         </blockquote>
       </PixelPanel>
@@ -108,7 +108,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
     objetivos && objetivos.length > 0 && (
       <PixelPanel class="flex flex-col gap-6 p-6 sm:p-8">
         <div class="flex items-center gap-3">
-          <PixelIcon name="check-square" class="text-success size-6" />
+          <PixelIcon name="component" class="text-success size-6" />
           <h2 class="h3 text-secondary-700 dark:text-secondary">Resultados de Aprendizaje</h2>
         </div>
         <div class="grid gap-4 sm:grid-cols-2">
@@ -128,7 +128,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
     rutaAprendizaje && rutaAprendizaje.length > 0 && (
       <PixelPanel class="flex flex-col gap-6 p-6 sm:p-8">
         <div class="flex items-center gap-3">
-          <PixelIcon name="layers" class="text-info size-6" />
+          <PixelIcon name="component" class="text-info size-6" />
           <h2 class="h3 text-secondary-700 dark:text-secondary">Ruta de Aprendizaje</h2>
         </div>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -151,7 +151,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
       antesDeComenzar && antesDeComenzar.length > 0 && (
         <PixelPanel class="flex flex-col gap-4 p-6">
           <div class="flex items-center gap-3">
-            <PixelIcon name="info" class="text-warning size-5" />
+            <PixelIcon name="type" class="text-warning size-5" />
             <h2 class="h3 text-foreground">Antes de comenzar</h2>
           </div>
           <p class="text-muted-foreground text-xs">
@@ -186,9 +186,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
                       {mat.tipo}
                     </Badge>
                     {mat.tamano && (
-                      <span class="text-muted-foreground text-[10px] font-bold">
-                        {mat.tamano}
-                      </span>
+                      <span class="text-muted-foreground text-[10px] font-bold">{mat.tamano}</span>
                     )}
                   </div>
                   <h3 class="font-display text-foreground text-xs uppercase">{mat.nombre}</h3>
@@ -228,7 +226,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
     preguntasParaPensar && preguntasParaPensar.length > 0 && (
       <PixelPanel class="flex flex-col gap-6 p-6 sm:p-8">
         <div class="flex items-center gap-3">
-          <PixelIcon name="help" class="text-info size-6" />
+          <PixelIcon name="code" class="text-info size-6" />
           <h2 class="h3 text-secondary-700 dark:text-secondary">Preguntas para Pensar</h2>
         </div>
         <div class="grid gap-4 md:grid-cols-2">
@@ -256,7 +254,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
         <div class="grid gap-6 md:grid-cols-2">
           {conceptosDetallados.map((item) => (
             <div class="bg-accent border-border flex flex-col gap-3 border-2 p-5">
-              <div class="flex items-center justify-between border-b-2 border-border pb-2">
+              <div class="border-border flex items-center justify-between border-b-2 pb-2">
                 <h3 class="font-display text-info text-xs uppercase">{item.concepto}</h3>
                 <Badge pixel variant="secondary">
                   Sistemas
@@ -272,7 +270,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
                 <span class="font-display text-success text-[10px] uppercase">
                   En Ingeniería de Sistemas:
                 </span>
-                <p class="text-muted-foreground text-xs leading-relaxed mt-1">
+                <p class="text-muted-foreground mt-1 text-xs leading-relaxed">
                   {item.relacionIngSistemas}
                 </p>
               </div>
@@ -288,7 +286,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
     importanciaIngSistemas && importanciaIngSistemas.length > 0 && (
       <PixelPanel class="border-success flex flex-col gap-6 p-6 sm:p-8">
         <div class="flex items-center gap-3">
-          <PixelIcon name="terminal" class="text-success size-6" />
+          <PixelIcon name="code" class="text-success size-6" />
           <h2 class="h3 text-success">¿Por qué esto importa en Ingeniería de Sistemas?</h2>
         </div>
         <p class="text-muted-foreground text-xs sm:text-sm">
@@ -314,7 +312,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
       <PixelPanel class="border-warning flex flex-col gap-4 p-6 sm:p-8">
         <div class="flex items-center justify-between gap-3">
           <div class="flex items-center gap-3">
-            <PixelIcon name="cpu" class="text-warning size-6" />
+            <PixelIcon name="server" class="text-warning size-6" />
             <h2 class="h3 text-warning">Reto de la Semana</h2>
           </div>
           <Badge pixel variant="warning">
@@ -322,7 +320,7 @@ const { label: badgeLabel, variant: badgeVariant } = estadoBadgeMeta(estado);
           </Badge>
         </div>
         <h3 class="font-display text-foreground text-sm uppercase">{reto.titulo}</h3>
-        <p class="text-muted-foreground text-xs sm:text-sm leading-relaxed">{reto.descripcion}</p>
+        <p class="text-muted-foreground text-xs leading-relaxed sm:text-sm">{reto.descripcion}</p>
       </PixelPanel>
     )
   }

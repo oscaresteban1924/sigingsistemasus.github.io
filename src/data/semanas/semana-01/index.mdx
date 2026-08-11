@@ -1,30 +1,99 @@
 ---
 numero: 1
-titulo: "Introducción y Fundamentos de los Sistemas de Información Geográfica"
-descripcion: "Conceptos fundamentales de los SIG, arquitectura computacional de datos espaciales, modelo de objetos y campos en el territorio."
-objetivos:
-  - "Comprender la dimensión espacial en los sistemas de información computacionales."
-  - "Diferenciar entre atributos alfanuméricos y geometrías espaciales de primer nivel."
-  - "Identificar la arquitectura general de un laboratorio computacional SIG."
-conceptosClave:
-  - "SIG"
-  - "Geometría Computacional"
-  - "Interoperabilidad OGC"
-  - "Atributos Espaciales"
-  - "Abstracción Territorial"
+titulo: "Introducción y Fundamentos SIG: Del Fenómeno Físico a la Arquitectura Geoespacial"
+descripcion: "Conceptos fundamentales de los Sistemas de Información Geográfica desde la perspectiva de la Ingeniería de Sistemas. Naturaleza del dato espacial, relaciones topológicas, arquitectura de 3 capas, modelo de madurez e ingeniería de requisitos espaciales."
 estado: "Disponible"
 duracionEstimada: "6 horas"
+preguntaDetonante: "Necesitamos construir una nueva escuela para 500 niños. ¿Tenemos el presupuesto? ¿Hacemos el mapa? ¿Luego el proyecto? ¿Por qué la localización, las relaciones espaciales y el contexto geográfico cambian radicalmente la respuesta?"
+objetivos:
+  - "Diferenciar la naturaleza de un problema espacial frente a problemas informáticos convencionales resueltos con tablas relacionales simples o hojas de cálculo."
+  - "Descomponer el 'ADN' del dato espacial: Localización, Geometría, Atributos Alfanuméricos, Contexto y Topología."
+  - "Diseñar la arquitectura de 3 capas de un sistema geoespacial empresarial (Persistencia PostGIS, Servidor de Servicios OGC GeoServer y Clientes de Consumo Web/Desktop)."
+  - "Evaluar el modelo de madurez GIS (desde archivos locales Shapefile hasta arquitecturas Cloud/Distributed GIS escalables)."
+  - "Clasificar y formular preguntas espaciales basadas en operadores de localización, proximidad, superposición (overlay), conectividad, clustering y series temporales."
+  - "Estructurar un problema geográfico mediante el 'Stack Geográfico' (Pregunta, Escala, Variables, Actores, Fenómeno, Territorio)."
+conceptosClave:
+  - "SIG"
+  - "ADN Dato Espacial"
+  - "Topología"
+  - "Arquitectura 3 Capas"
+  - "PostGIS"
+  - "Servicios OGC"
+  - "Modelo de Madurez"
+antesDeComenzar:
+  - "¿Qué información adicional requiere un dato informático cuando deja de ser una simple dirección textual y se convierte en una entidad espacial?"
+  - "Si tu aplicación ya guarda coordenadas latitude y longitude en una tabla MySQL/PostgreSQL, ¿ya estás utilizando un Sistema de Información Geográfica?"
+  - "¿Por qué el contexto geográfico puede cambiar radicalmente la viabilidad técnica o financiera de un proyecto de ingeniería de software?"
+preguntasParaPensar:
+  - pregunta: "¿Todo problema que tiene una dirección o coordenadas necesita un SIG?"
+    respuestaContextual: "No. Según la regla de oro del diseño espacial (Slide 23), si tu problema se puede resolver ordenando una tabla de Excel por código postal o consultando un ID único alfanumérico, NO necesitas un sistema SIG complejo. Exiges un SIG únicamente cuando la solución cambia drásticamente por la coordenada X, Y, la topología de red o la intersección multivariable."
+  - pregunta: "¿Qué diferencia una base de datos espacial de una base de datos relacional convencional?"
+    respuestaContextual: "Una base de datos convencional almacena atributos planos en 1D indexados por B-Tree. Una base de datos espacial (como PostGIS) almacena objetos geométricos complejos (puntos, líneas, polígonos) indexados en 2D/3D mediante R-Tree/GiST y permite ejecutar funciones topológicas como ST_Intersects, ST_Buffer y ST_Dijkstra."
+  - pregunta: "¿Por qué un mapa no es, por sí mismo, un SIG?"
+    respuestaContextual: "El mapa es únicamente una interfaz visual de salida (View) o un reporte gráfico. El SIG es el ecosistema completo compuesto por la base de datos espacial (Persistencia), las reglas de negocio topológicas (Servicios/APIs), la lógica analítica y los usuarios."
+  - pregunta: "¿Cuál es el anti-patrón del novato frente a la mentalidad del Arquitecto Espacial?"
+    respuestaContextual: "El novato comete el error de pedir prematuramente la interfaz visual ('Queremos un dashboard con pines de colores' o 'Pongamos esta tabla en Google Maps'). El Arquitecto Espacial se centra en el modelo analítico computacional ('Entender por qué caen las ventas en zonas de alta densidad vehicular' o 'Optimizar rutas para reducir tiempos en 15%')."
+rutaAprendizaje:
+  - paso: 1
+    titulo: "Pensar Espacialmente y Definición de SIG"
+    descripcion: "Deconstrucción del concepto SIG: Sistema, Geográfico e Información. La gran confusión: qué es y qué NO es un SIG."
+  - paso: 2
+    titulo: "El ADN del Dato Espacial"
+    descripcion: "Paso del fenómeno físico al conocimiento. Localización, geometría, atributos alfanuméricos, contexto y relaciones topológicas."
+  - paso: 3
+    titulo: "Arquitectura Geoespacial y Modelo de Madurez"
+    descripcion: "La pila tecnológica de 3 capas (PostGIS, GeoServer, OpenLayers/QGIS). Escala de madurez desde Shapefiles locales hasta Cloud GIS."
+  - paso: 4
+    titulo: "Análisis Espacial vs Visualización"
+    descripcion: "Diferencia entre proyectar datos en pantalla y aplicar matemáticas/topología para resolver problemas. Operadores de proximidad y superposición."
+  - paso: 5
+    titulo: "Formulación del Problema Geográfico (El Stack)"
+    descripcion: "Estructura de 6 niveles: Territorio, Fenómeno, Actores, Variables, Escala y Pregunta detonante de negocio."
+  - paso: 6
+    titulo: "Diseño y Reto Colaborativo"
+    descripcion: "Matriz de adquisición de datos (trade-offs), selección de interfaz de salida y reto de diseño de arquitectura de sistemas."
+conceptosDetallados:
+  - concepto: "Dato Espacial & ADN Geoespacial"
+    definicion: "Información georreferenciada constituida por coordenadas absolutas (X, Y, Z), geometría física, atributos descriptivos, contexto ambiental y topología."
+    contexto: "Permite modelar entidades del mundo real combinando dimensiones físicas con datos tabulares."
+    relacionIngSistemas: "Requiere tipos de datos nativos de primer nivel (GEOMETRY, GEOGRAPHY) en el motor de persistencia y soporte de índices métricos espacialmente optimizados (GiST)."
+  - concepto: "Topología y Relaciones Espaciales"
+    definicion: "Propiedades geométricas que permanecen invariantes ante transformaciones continuas, definiendo adyacencia, contención, intersección y conectividad."
+    contexto: "Permite saber si un poste está dentro de un barrio, si dos redes eléctricas se cruzan o si un río bordea una propiedad."
+    relacionIngSistemas: "Son las reglas de negocio espaciales de la aplicación. Se evalúan mediante motores de cálculo topológico y predicados de SQL Espacial (ST_Contains, ST_Touches)."
+  - concepto: "Arquitectura Geoespacial de 3 Capas"
+    definicion: "Patrón de diseño donde se separan los Clientes de Consumo (Capa 1), los Servidores de Aplicaciones y Mapas OGC (Capa 2) y la Base de Datos Espacial (Capa 3)."
+    contexto: "Asegura interoperabilidad, seguridad y consumo concurrente sobre estándares abiertos (WMS/WFS)."
+    relacionIngSistemas: "Aplica el principio de desacoplamiento de software de tres capas (MVC/Clean Architecture) especializado para streaming de mapas y datos vectoriales."
+  - concepto: "Modelo de Madurez GIS"
+    definicion: "Escala evolutiva de infraestructura que va desde archivos aislados (Shapefiles/CAD) hasta Geodatabases relacionales, Servidores OGC, Web GIS y Cloud/Distributed GIS."
+    contexto: "Mide el nivel de escalabilidad y gobernanza de la información geográfica de una organización."
+    relacionIngSistemas: "Equivale a la migración de aplicaciones monolíticas heredadas basadas en archivos planos hacia arquitecturas de microservicios y SaaS escalables en la nube."
+importanciaIngSistemas:
+  - concepto: "El Mapa como Interfaz (View)"
+    aplicacion: "El mapa es únicamente la representación gráfica de salida para el usuario final. La verdadera lógica de negocio reside en el modelo analítico computacional en backend."
+  - concepto: "SQL Espacial & Persistencia"
+    aplicacion: "Uso de bases de datos avanzadas como PostgreSQL + PostGIS, donde la geometría es un tipo abstracto de dato (ADT) indexado por GiST / R-Tree."
+  - concepto: "Servicios y Estándares OGC"
+    aplicacion: "Exposición de servicios web desacoplados basados en protocolos de la Open Geospatial Consortium (WMS para imágenes, WFS para geometrías vectoriales)."
+  - concepto: "Motores ETL & Pipelines Espaciales"
+    aplicacion: "Ingesta masiva y transformación continua de datos provenientes de redes de sensores (IoT), telemetría GPS en tiempo real e imágenes satelitales."
+  - concepto: "Algoritmos de Geometría Computacional"
+    aplicacion: "Implementación de algoritmos de optimización de rutas (Dijkstra/A*), cálculo de búferes de proximidad y análisis de densidad espacial."
+reto:
+  titulo: "Reto de Arquitectura Colaborativa (System Design)"
+  descripcion: "En equipos de ingeniería, diseñen la arquitectura lógica para un nuevo sistema geoespacial formulando: 1) Problema geográfico mediante el Stack de 6 niveles, 2) Justificación técnica de por qué requiere un SIG y no un RDBMS tradicional, 3) Definición de roles de usuarios, 4) Dos preguntas espaciales complejas, 5) Modelo de datos con 3 datasets (especificando fuente, formato y atributos), y 6) Justificación de la interfaz tecnológica de salida."
 materiales:
-  - nombre: "Presentación Oficial Semana 1"
+  - nombre: "Presentación de clase"
     tipo: "PPTX"
     url: "/insumos/Semana 1.pptx"
     tamano: "45.3 MB"
-    descripcion: "Diapositivas oficiales de clase sobre introducción a los SIG y modelo territorial."
+    descripcion: "Diapositivas oficiales de la lección presencial (32 diapositivas con explicaciones de arquitectura y casos de estudio)."
   - nombre: "Texto Guía General SIG"
     tipo: "PDF"
     url: "/insumos/Sistemas.de.Informacion.Geografica.pdf"
     tamano: "47.4 MB"
-    descripcion: "Libro de texto y referencia transversal del curso."
+    descripcion: "Capítulo 1: ¿Qué es un SIG? (Víctor Olaya, 2020)."
 laboratorios:
   - titulo: "Lab 1: Entorno QGIS y Datos Vectoriales"
     slug: "realtime-chat"
@@ -33,17 +102,85 @@ recursos:
   - nombre: "Especificación OGC Simple Features Schema"
     url: "https://www.ogc.org/standards/sfa"
     descripcion: "Estándar oficial del Open Geospatial Consortium para geometrías."
-reto:
-  titulo: "Reto 1: Identificación de Capas Espaciales"
-  descripcion: "Clasificar tres entidades del campus en modelos discretos vs campos continuos."
 ---
 
-Un Sistema de Información Geográfica (SIG) desde la perspectiva de la Ingeniería de Sistemas no es simplemente un software cartográfico, sino un sistema de información distribuido diseñado para la captura, almacenamiento, manipulación, análisis y representación de datos espacialmente referenciados.
+Un Sistema de Información Geográfica (SIG) desde la perspectiva de la Ingeniería de Sistemas no es simplemente un software cartográfico de escritorio ni una aplicación para ver mapas. Es un **ecosistema de software distribuido** compuesto por bases de datos relacionales espaciales, reglas topológicas de negocio, servidores de mapas interoperables y clientes de visualización.
 
-## La Dimensión Espacial en la Computación
+---
 
-A diferencia de los sistemas de información tradicionales donde los atributos son alfa-numéricos, los SIG introducen la geometría y la topología como tipos de datos primarios de primer nivel.
+## 1. Deconstrucción del Concepto SIG
 
-- **Representación Geométrica:** Puntos, líneas, polígonos y mallas tridimensionales.
-- **Relaciones Topológicas:** Adyacencia, contención, intersección y conectividad.
-- **Interoperabilidad de Datos:** Estándares OGC para intercambio abierto de información.
+El término **SIG** integra tres dimensiones fundamentales:
+
+- **SISTEMA:** Gestión de bases de datos relacionales, infraestructura tecnológica, tuberías ETL de datos y procesos organizacionales.
+- **INFORMACIÓN:** Transformación progresiva del fenómeno físico en datos estructurados, análisis numérico y generación de conocimiento para la toma de decisiones.
+- **GEOGRÁFICO:** Datos anclados a sistemas de coordenadas terrestres (CRS/EPSG), representaciones topológicas y modelos del mundo real.
+
+### La Gran Confusión: Qué es y qué NO es un SIG
+
+| Lo que NO es un SIG                                                                                          | Lo que SÍ es un SIG                                                                                                   |
+| :----------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| **No es solo un mapa impreso o digital:** El mapa es apenas un visor de consumo o un reporte estático.       | **Una infraestructura robusta de datos:** Una red interactiva desacoplada (Base de Datos + Analítica + Presentación). |
+| **No es solo Google Maps o Waze:** Estos son visores finales de consumo con motores de ruteo específicos.    | **Un marco científico e informático:** Un ecosistema para la resolución de problemas espaciales complejos.            |
+| **No es solo un software de escritorio:** ArcGIS Pro o QGIS son herramientas de cliente, no todo el sistema. | **Una arquitectura empresarial de 3 capas:** Motor relacional espacial, servicios web OGC y aplicaciones de usuario.  |
+
+---
+
+## 2. El "ADN" del Dato Espacial
+
+Para un ingeniero de sistemas, un dato alfanumérico convencional posee un identificador y campos de texto o numéricos. En cambio, el **dato espacial** posee cinco componentes indisociables:
+
+1. **Localización:** Coordenadas absolutas georreferenciadas ($X, Y, Z$). ¿Dónde está posicionado en el planeta?
+2. **Geometría:** Dimensionalidad espacial explícita (Punto 0D, Línea 1D, Polígono 2D o Malla 3D).
+3. **Atributos Alfanuméricos:** Cualidades descriptivas puras (Nombre, Capacidad, Estado, Tipo de Material, Costo).
+4. **Contexto:** Entorno demográfico, físico y socioeconómico que envuelve al dato.
+5. **Topología (Relaciones Espaciales):** Reglas matemáticas de conectividad, adyacencia, contención e intersección con otras entidades.
+
+---
+
+## 3. Arquitectura Geoespacial de 3 Capas
+
+La arquitectura tecnológica de un SIG corporativo sigue el patrón de desacoplamiento de software empresarial:
+
+```text
+┌────────────────────────────────────────────────────────┐
+│             CAPA 1: PRESENTACIÓN (CLIENTE)             │
+│   Visores Web (MapLibre/Leaflet), Desktop GIS, Mobile  │
+└───────────────────────────┬────────────────────────────┘
+                            │ (Peticiones HTTP WMS/WFS)
+┌───────────────────────────▼────────────────────────────┐
+│          CAPA 2: LÓGICA Y SERVICIOS OGC (SERVIDOR)     │
+│       GeoServer / ArcGIS Enterprise (WMS, WFS, WCS)     │
+└───────────────────────────┬────────────────────────────┘
+                            │ (SQL Espacial & GiST/R-Tree)
+┌───────────────────────────▼────────────────────────────┐
+│          CAPA 3: PERSISTENCIA (SPATIAL DBMS)           │
+│           PostgreSQL + Extensión PostGIS               │
+└────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 4. El "Stack" del Problema Geográfico
+
+Para evitar la trampa de diseñar un sistema comenzando por la interfaz visual (_"Queremos un mapa interactivo"_), el Arquitecto Espacial descompone el problema en 6 capas metodológicas:
+
+1. **L6: PREGUNTA (El Objetivo):** La duda central de negocio o investigación que detona el sistema.
+2. **L5: ESCALA (La Resolución):** Nivel de detalle espacial requerido (ej. Manzana censal, municipio, cuenca hidrográfica).
+3. **L4: VARIABLES (Los Datos):** Atributos medibles alfanuméricos y espaciales (ej. Niveles de $CO_2$, densidad poblacional).
+4. **L3: ACTORES (Los Agentes):** Quiénes generan, sufren o gestionan el fenómeno (ej. Ciudadanos, autoridades ambientales).
+5. **L2: FENÓMENO (El Evento):** Lo que ocurre o cambia en el territorio (ej. Contaminación atmosférica, dispersión de enfermedades).
+6. **L1: TERRITORIO (El Contenedor):** El marco geográfico y las fronteras físicas de análisis (ej. Municipio de Popayán, Comuna 4).
+
+---
+
+## 5. Clasificación de Consultas Espaciales (Query Types)
+
+Un motor SIG procesa seis tipos principales de operaciones espaciales:
+
+- **Localización (¿Dónde está?):** Inventario y posición absoluta de entidades.
+- **Distribución / Clustering (¿Cuál es el patrón?):** Agrupamiento espacial o dispersión.
+- **Proximidad (¿Qué está cerca?):** Polígonos de amortiguamiento (_Buffer_) y cálculo de distancias.
+- **Conectividad (¿Cómo se relacionan?):** Algoritmos de redes y rutas óptimas (_Dijkstra_).
+- **Superposición / Overlay (¿Qué coincide?):** Intersección booleana de capas temáticas ($A \cap B$).
+- **Cambio Temporal (¿Cómo evoluciona?):** Series de tiempo espacializadas ($T_1 \rightarrow T_2 \rightarrow T_3$).
